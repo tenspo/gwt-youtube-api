@@ -7,12 +7,32 @@
 	<packaging>jar</packaging>
 	<name>GWT-youtube-api</name>
 
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<compilerArgument>-proc:none</compilerArgument>
+				</configuration>
+			</plugin>
+    		</plugins>
+	</build>
+	
 	<dependencies>
 		<!-- Color picker dependency -->
 		<dependency>
 			<groupId>net.auroris</groupId>
 			<artifactId>colorpicker</artifactId>
 			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.auroris</groupId>
+			<artifactId>colorpicker</artifactId>
+			<version>1.0.0</version>
+			<classifier>sources</classifier>
 		</dependency>
 		
 		<!-- GWT dependencies -->

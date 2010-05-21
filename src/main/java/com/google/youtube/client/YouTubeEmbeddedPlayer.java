@@ -1,4 +1,4 @@
-package sk.seges.synapso.client.component.movie;
+package com.google.youtube.client;
 
 import net.auroris.ColorPicker.client.Color;
 
@@ -330,12 +330,20 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		this.videoId = videoId;
 	}
 
+	private boolean embeded = false;
+	
+	public void embed() {
+		if (!embeded) {
+			appendMovieParameter();
+			appendEmbedElement();
+			appendRelatedParameters();
+		}
+	}
+	
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-		appendMovieParameter();
-		appendEmbedElement();
-		appendRelatedParameters();
+		embed();
 	}
 
 	private void appendRelatedParameters() {

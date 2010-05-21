@@ -1,0 +1,3 @@
+<module>
+	<inherits name="net.auroris.ColorPicker.client" />
+</module>

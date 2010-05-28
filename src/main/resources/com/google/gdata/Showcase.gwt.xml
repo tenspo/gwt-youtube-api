@@ -1,0 +1,7 @@
+<module>
+	<inherits name="com.google.gdata.YouTubeAPI" />
+	<inherits name="com.google.youtube.Player" />
+	
+	<entry-point class="com.google.gdata.client.Site"/>
+	
+</module>

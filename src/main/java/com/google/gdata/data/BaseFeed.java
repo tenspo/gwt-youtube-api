@@ -5,12 +5,13 @@ import java.util.List;
 
 import com.google.gdata.client.Query;
 import com.google.gdata.client.Service;
+import com.google.gdata.json.JsonObject;
 
 public abstract class BaseFeed<F extends BaseFeed, E extends BaseEntry> extends Source implements IFeed {
 
 	/**
 	 * The FeedState class provides a simple structure that encapsulates the attributes of an Atom feed that should be
-	 * shared with a shallow copy if the feed is adapted to a more specific BaseFeed {@link Kind.Adaptor} subtypes.
+	 * shared with a shallow copy if the feed is adapted to a more specific BaseFeed subtypes.
 	 * <p>
 	 * <b>Note: Feed entries are not part of feed shared state, because the entry lists will need to be typed
 	 * differently for adapted instances.</b> This means that entries that are created, updated, or deleted in an
@@ -19,7 +20,8 @@ public abstract class BaseFeed<F extends BaseFeed, E extends BaseEntry> extends 
 	 * 
 	 * @see BaseFeed#BaseFeed(Class, BaseFeed)
 	 */
-	protected static class FeedState implements IJSONData {
+	@JsonObject
+	protected static class FeedState {
 
 		/** Service associated with the feed. */
 		public Service service;
@@ -69,7 +71,7 @@ public abstract class BaseFeed<F extends BaseFeed, E extends BaseEntry> extends 
 
 	/**
 	 * Copy constructor that initializes a new BaseFeed instance to have identical contents to another instance, using a
-	 * shared reference to the same {@link FeedState}. {@link Kind.Adaptor} subclasses of {@code BaseFeed} can use this
+	 * shared reference to the same {@link FeedState}. subclasses of {@code BaseFeed} can use this
 	 * constructor to create adaptor instances of an entry that share state with the original.
 	 * 
 	 * @param entryClass
@@ -82,7 +84,7 @@ public abstract class BaseFeed<F extends BaseFeed, E extends BaseEntry> extends 
 
 	/**
 	 * Copy constructor that initializes a new BaseFeed instance to have identical contents to another instance, using a
-	 * shared reference to the same {@link FeedState}. {@link Kind.Adaptor} subclasses of {@code BaseFeed} can use this
+	 * shared reference to the same {@link FeedState}. Subclasses of {@code BaseFeed} can use this
 	 * constructor to create adaptor instances of a feed that share state with the original.
 	 */
 	protected BaseFeed(Class<? extends E> entryClass, BaseFeed<?, ?> sourceFeed) {

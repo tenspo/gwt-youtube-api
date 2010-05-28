@@ -9,59 +9,62 @@ import java.util.Set;
 
 import org.gwttime.time.DateTime;
 
-import com.google.gdata.annotation.JSONData;
+import com.google.gdata.json.DateTimePattern;
+import com.google.gdata.json.Field;
+import com.google.gdata.json.JsonObject;
 import com.google.gwt.json.client.JSONObject;
 
 public class Source extends JSON implements IJSONProcessor {
 
-	protected static class SourceState implements IJSONData {
+	@JsonObject
+	protected static class SourceState {
 
 		/** Feed ID. */
-		@JSONData
+		@Field
 		public String id;
 
 		/** Last updated timestamp. */
-		@JSONData(datePattern=UPDATED_DATE_PATTERN)
+		@DateTimePattern(UPDATED_DATE_PATTERN)
 		public DateTime updated;
 
 		/** Categories. */
-		@JSONData
+		@Field
 		public HashSet<Category> categories = new HashSet<Category>();
 
 		/** Title. */
-		@JSONData
+		@Field
 		public TextConstruct title;
 
 		/** Subtitle. */
-		@JSONData
+		@Field
 		public TextConstruct subtitle;
 
 		/** Rights. */
-		@JSONData
+		@Field
 		public TextConstruct rights;
 
 		/** Icon URI. */
-		@JSONData
+		@Field
 		public String icon;
 
 		/** Logo image URI. */
-		@JSONData
+		@Field
 		public String logo;
 
 		/** Links. */
-		@JSONData
+		@Field
 		public LinkedList<Link> links = new LinkedList<Link>();
 
 		/** Authors. */
-		@JSONData
+		@Field
 		public LinkedList<Person> authors = new LinkedList<Person>();
 
 		/** Contributors. */
-		@JSONData
+		@Field
 		public LinkedList<Person> contributors = new LinkedList<Person>();
 
 		/** Generator. */
-		@JSONData
+		@Field
 		public Generator generator;
 	}
 

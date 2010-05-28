@@ -53,11 +53,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-gdata</artifactId>
-			<version>2.2.1</version>
-		</dependency>
-		<dependency>
 			<groupId>com.google.code.gwtx</groupId>
 			<artifactId>gwtx</artifactId>
 			<version>1.5.3</version>

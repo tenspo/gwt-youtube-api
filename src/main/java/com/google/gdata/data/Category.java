@@ -153,6 +153,6 @@ public class Category extends JSON implements ICategory, IJSONProcessor {
 	
 	@Override
 	public void get(JSONObject jsonObject) {
-		term = getString(jsonObject, ID_ATTRIBUTE);
+		term = getString(jsonObject, TERM_ATTRIBUTE);
 	}
 }

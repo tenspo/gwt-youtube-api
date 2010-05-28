@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.gwttime.time.DateTime;
+
 import com.google.gdata.data.ICategory;
 import com.google.gdata.util.common.base.CharEscapers;
-import com.google.gwt.gdata.client.DateTime;
 
 /* Copyright (c) 2008 Google Inc.
  *

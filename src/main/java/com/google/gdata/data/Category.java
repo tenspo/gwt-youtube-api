@@ -15,7 +15,8 @@
 
 package com.google.gdata.data;
 
-import com.google.gwt.json.client.JSONObject;
+import sk.seges.acris.json.client.annotation.Field;
+import sk.seges.acris.json.client.annotation.JsonObject;
 
 /**
  * Category type.
@@ -25,7 +26,8 @@ import com.google.gwt.json.client.JSONObject;
  * 
  * 
  */
-public class Category extends JSON implements ICategory, IJSONProcessor {
+@JsonObject
+public class Category extends JSON implements ICategory {
 
 	/**
 	 * The character used to prefix any (optional) scheme in the compound scheme+term Category format.
@@ -60,6 +62,7 @@ public class Category extends JSON implements ICategory, IJSONProcessor {
 	}
 
 	/** Scheme (domain). */
+	@Field
 	protected String scheme;
 
 	public String getScheme() {
@@ -71,6 +74,7 @@ public class Category extends JSON implements ICategory, IJSONProcessor {
 	}
 
 	/** Term. */
+	@Field
 	protected String term;
 
 	public String getTerm() {
@@ -82,6 +86,7 @@ public class Category extends JSON implements ICategory, IJSONProcessor {
 	}
 
 	/** Human-readable label. */
+	@Field
 	protected String label;
 
 	public String getLabel() {
@@ -93,6 +98,7 @@ public class Category extends JSON implements ICategory, IJSONProcessor {
 	}
 
 	/** Language. */
+	@Field
 	protected String labelLang;
 
 	public String getLabelLang() {
@@ -145,14 +151,5 @@ public class Category extends JSON implements ICategory, IJSONProcessor {
 		result = 37 * result + term.hashCode();
 		result = 37 * result + ((label != null) ? label.hashCode() : 0);
 		return result;
-	}
-
-	private static final String TERM_ATTRIBUTE = "term";
-	private static final String SCHEME_ATTRIBUTE = "scheme";
-	private static final String LABEL_ATTRIBUTE = "label";
-	
-	@Override
-	public void get(JSONObject jsonObject) {
-		term = getString(jsonObject, TERM_ATTRIBUTE);
 	}
 }

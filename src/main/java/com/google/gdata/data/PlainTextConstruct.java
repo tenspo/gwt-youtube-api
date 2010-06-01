@@ -49,7 +49,6 @@ public class PlainTextConstruct extends TextConstruct {
 	}
 
 	@Override
-	/** @return {@code true} if this text construct has no contents */
 	public boolean isEmpty() {
 		return getText() == null;
 	}

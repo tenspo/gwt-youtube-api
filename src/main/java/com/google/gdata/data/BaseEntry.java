@@ -9,8 +9,11 @@ import java.util.Set;
 
 import org.gwttime.time.DateTime;
 
+import sk.seges.acris.json.client.annotation.DateTimePattern;
+import sk.seges.acris.json.client.annotation.Field;
+import sk.seges.acris.json.client.annotation.JsonObject;
+
 import com.google.gdata.client.Service;
-import com.google.gwt.json.client.JSONObject;
 
 /**
  * The BaseEntry class is an abstract base class that defines the in-memory object model for GData entries.
@@ -18,17 +21,17 @@ import com.google.gwt.json.client.JSONObject;
  * It is capable of parsing the Atom XML for an {@code <atom:entry>} element as well as any contained Extension
  * elements. It can generate both Atom and RSS 2.0 representations of the entry from the object model.
  * <p>
- * The BaseEntry class implements the {@link Kind.Adaptable} interface, meaning it is possible to create new
- * {@link Kind.Adaptor} subtypes that defines a custom extension model (and associated convenience APIs) for a BaseEntry
+ * The BaseEntry class implements the Kind.Adaptable interface, meaning it is possible to create new
+ * Kind.Adaptor subtypes that defines a custom extension model (and associated convenience APIs) for a BaseEntry
  * subtypes that use Atom/RSS extensions to extend the content model for a particular type of data.
  * <p>
- * An {@link Kind.Adaptor} subclass of BaseEntry should do the following:
+ * An Kind.Adaptor subclass of BaseEntry should do the following:
  * <ul>
- * <li>Include a {@link Kind.Term} annotation on the class declaration that defines the {@link Category} term value for
+ * <li>Include a Kind.Term annotation on the class declaration that defines the {@link Category} term value for
  * the GData kind handled by the adaptor.</li>
  * <li>Provide a constructor that takes a single BaseEntry parameter as an argument that is used when adapting a generic
  * entry type to a more specific one.</li>
- * <li>Implement the {@link Kind.Adaptor#declareExtensions(ExtensionProfile)} method and use it to declare the extension
+ * <li>Implement the Kind.Adaptor#declareExtensions(ExtensionProfile) method and use it to declare the extension
  * model for the adapted instance within the profile passed as a parameter. This is used to auto-extend an extension
  * profile when kind Category tags are found during parsing of content.</li>
  * <li>Expose convenience APIs to retrieve and set extension attributes, with an implementions that delegates to
@@ -58,22 +61,21 @@ import com.google.gwt.json.client.JSONObject;
  * 
  * @param <E>
  *            the entry type associated with the bound subtype.
- * @see Kind.Adaptor
- * @see Kind.Adaptable
- * 
  * 
  * 
  */
 public abstract class BaseEntry<E extends BaseEntry> implements IEntry {
 	/**
 	 * The EntryState class provides a simple structure that encapsulates the attributes of an Atom entry that should be
-	 * shared with a shallow copy if the entry is adapted to a more specific BaseEntry {@link Kind.Adaptor} subtypes.
+	 * shared with a shallow copy if the entry is adapted to a more specific BaseEntry Kind.Adaptor subtypes.
 	 * 
 	 * @see BaseEntry#BaseEntry(BaseEntry)
 	 */
-	protected static class EntryState {
+	@JsonObject
+	public static class EntryState {
 
 		/** Entry id. */
+		@Field
 		public String id;
 
 		/**
@@ -86,60 +88,79 @@ public abstract class BaseEntry<E extends BaseEntry> implements IEntry {
 		 * This property is only used for services to communicate the current version ID back to the servlet. It is NOT
 		 * set when entries are parsed (either from requests or from arbitrary XML).
 		 */
+		@Field
 		public String versionId;
 
 		/**
 		 * Etag. See RFC 2616, Section 3.11. If there is no entity tag, this variable is null. Etags are provided not
 		 * only on top-level entries, but also on entries within feeds (in the form of a gd:etag attribute).
 		 */
+		@Field
 		public String etag;
 
 		/**
 		 * gd:fields. This is the field selection associated with this entry. If not {@code null} then this entry
 		 * represents a partial entry.
 		 */
+		@Field
 		public String fields;
 
 		/**
 		 * gd:kind. This is the kind attribute for this entry. If there is no kind attribute for this entry, this
 		 * variable is null.
 		 */
+		@Field
 		public String kind;
 
 		/** Creation timestamp. Ignored on updates. */
+		@Field
+		@DateTimePattern(Source.DATE_TIME_PATTERN)
 		public DateTime published;
 
 		/** Last updated timestamp. */
+		@Field
+		@DateTimePattern(Source.DATE_TIME_PATTERN)
 		public DateTime updated;
 
 		/** Last edit timestamp */
+		@Field
+		@DateTimePattern(Source.DATE_TIME_PATTERN)
 		public DateTime edited;
 
 		/** Categories of entry. */
+		@Field
 		public HashSet<Category> categories = new HashSet<Category>();
 
 		/** Title of entry. */
+		@Field
 		public TextConstruct title;
 
 		/** Summary of entry. */
+		@Field
 		public TextConstruct summary;
 
 		/** Rights of entry. */
+		@Field
 		public TextConstruct rights;
 
 		/** Content of entry. */
+		//@Field
 		public Content content;
 
 		/** Links of entry. */
+		@Field
 		public LinkedList<Link> links = new LinkedList<Link>();
 
 		/** Authors of entry. */
+		@Field
 		public LinkedList<Person> authors = new LinkedList<Person>();
 
 		/** Contributors of entry. */
+		@Field
 		public LinkedList<Person> contributors = new LinkedList<Person>();
 
 		/** Source. */
+		@Field
 		public Source source;
 
 		/** Service. */
@@ -165,7 +186,7 @@ public abstract class BaseEntry<E extends BaseEntry> implements IEntry {
 
 	/**
 	 * Copy constructor that initializes a new BaseEntry instance to have identical contents to another instance, using
-	 * a shared reference to the same {@link EntryState}. {@link Kind.Adaptor} subclasses of {@code BaseEntry} can use
+	 * a shared reference to the same {@link EntryState}. Kind.Adaptor subclasses of {@code BaseEntry} can use
 	 * this constructor to create adaptor instances of an entry that share state with the original.
 	 */
 	protected BaseEntry(BaseEntry<?> sourceEntry) {
@@ -488,9 +509,5 @@ public abstract class BaseEntry<E extends BaseEntry> implements IEntry {
 	public Link getHtmlLink() {
 		Link htmlLink = getLink(Link.Rel.ALTERNATE, Link.Type.HTML);
 		return htmlLink;
-	}
-
-	@Override
-	public void get(JSONObject jsonObject) {
 	}
 }

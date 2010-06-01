@@ -15,9 +15,13 @@
 
 package com.google.gdata.data;
 
+import sk.seges.acris.json.client.annotation.Field;
+import sk.seges.acris.json.client.annotation.JsonObject;
+
 /**
  * External link type.
  */
+@JsonObject
 public class Link /*extends ExtensionPoint*/ implements ILink {
 
 	public Link() {
@@ -32,6 +36,7 @@ public class Link /*extends ExtensionPoint*/ implements ILink {
 	/**
 	 * Link relation type. Possible values include {@code self}, {@code prev}, {@code next}, {@code enclosure}, etc.
 	 */
+	@Field
 	protected String rel;
 
 	public String getRel() {
@@ -43,6 +48,7 @@ public class Link /*extends ExtensionPoint*/ implements ILink {
 	}
 
 	/** MIME type of the link target. */
+	@Field
 	protected String type;
 
 	public String getType() {
@@ -54,6 +60,7 @@ public class Link /*extends ExtensionPoint*/ implements ILink {
 	}
 
 	/** Link URI. */
+	@Field
 	protected String href;
 
 	public String getHref() {
@@ -65,6 +72,7 @@ public class Link /*extends ExtensionPoint*/ implements ILink {
 	}
 
 	/** Language of resource pointed to by href. */
+	@Field
 	protected String hrefLang;
 
 	public String getHrefLang() {
@@ -76,6 +84,7 @@ public class Link /*extends ExtensionPoint*/ implements ILink {
 	}
 
 	/** Link title. */
+	@Field
 	protected String title;
 
 	public String getTitle() {
@@ -87,6 +96,7 @@ public class Link /*extends ExtensionPoint*/ implements ILink {
 	}
 
 	/** Language of link title. */
+	@Field
 	protected String titleLang;
 
 	public String getTitleLang() {
@@ -120,6 +130,7 @@ public class Link /*extends ExtensionPoint*/ implements ILink {
 	}
 
 	/** Etag of linked resource, or {@code null} if unknown */
+	@Field
 	protected String etag = null;
 
 	public String getEtag() {

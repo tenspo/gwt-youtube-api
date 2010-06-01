@@ -3,6 +3,8 @@ package com.google.gdata.data;
 import java.util.LinkedList;
 import java.util.List;
 
+import sk.seges.acris.json.client.annotation.Field;
+
 import com.google.gdata.client.Query;
 import com.google.gdata.client.Service;
 import com.google.gdata.json.JsonObject;
@@ -47,12 +49,15 @@ public abstract class BaseFeed<F extends BaseFeed, E extends BaseEntry> extends 
 		 * gd:fields. This is the field selection associated with this feed. If fields attribute is present, the feed is
 		 * a partial feed.
 		 */
+		@Field
 		public String fields;
 
 		/** gd:kind. This is the kind attribute for this entry. */
+		@Field
 		public String kind;
 
 		/** Resource version id to use when generating etag. */
+		@Field
 		public String versionId;
 	}
 

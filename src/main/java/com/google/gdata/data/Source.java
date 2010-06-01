@@ -9,22 +9,24 @@ import java.util.Set;
 
 import org.gwttime.time.DateTime;
 
-import com.google.gdata.json.DateTimePattern;
-import com.google.gdata.json.Field;
-import com.google.gdata.json.JsonObject;
-import com.google.gwt.json.client.JSONObject;
+import sk.seges.acris.json.client.annotation.DateTimePattern;
+import sk.seges.acris.json.client.annotation.Field;
+import sk.seges.acris.json.client.annotation.JsonObject;
 
-public class Source extends JSON implements IJSONProcessor {
+public class Source extends JSON {
 
+	public static final String DATE_TIME_PATTERN = "y-M-d'T'H:m:s.SSSZ";
+	
 	@JsonObject
-	protected static class SourceState {
+	public static class SourceState {
 
 		/** Feed ID. */
 		@Field
 		public String id;
 
 		/** Last updated timestamp. */
-		@DateTimePattern(UPDATED_DATE_PATTERN)
+		@Field
+		@DateTimePattern(Source.DATE_TIME_PATTERN)
 		public DateTime updated;
 
 		/** Categories. */
@@ -286,42 +288,4 @@ public class Source extends JSON implements IJSONProcessor {
 		Link htmlLink = getLink(Link.Rel.ALTERNATE, Link.Type.HTML);
 		return htmlLink;
 	}
-
-	private static final String ID_ATTRIBUTE = "id";
-	private static final String UPDATED_ATTRIBUTE = "updated";
-	private static final String UPDATED_DATE_PATTERN = "y-M-d'T'H:m:s.SSSZ";
-	//yyyy-MM-ddTHH:mm:ss.SSSZZ
-	private static final String TITLE_ATTRIBUTE = "title";
-	private static final String SUBTITLE_ATTRIBUTE = "subtitle";
-	private static final String RIGHTS_ATTRIBUTE = "rights";
-	private static final String ICON_ATTRIBUTE = "icon";
-	private static final String LOGO_ATTRIBUTE = "logo";
-	
-	@Override
-	public void get(JSONObject jsonObject) {
-		
-		srcState.id = getString(jsonObject, ID_ATTRIBUTE);
-		srcState.updated = getDateTime(jsonObject, UPDATED_ATTRIBUTE, UPDATED_DATE_PATTERN);
-		
-//		public HashSet<Category> categories = new HashSet<Category>();
-
-		srcState.title = getText(jsonObject, TITLE_ATTRIBUTE);
-		srcState.subtitle = getText(jsonObject, SUBTITLE_ATTRIBUTE);
-		srcState.rights = getText(jsonObject, RIGHTS_ATTRIBUTE);
-		srcState.icon = getString(jsonObject, ICON_ATTRIBUTE);
-		srcState.logo = getString(jsonObject, LOGO_ATTRIBUTE);
-//
-//		/** Links. */
-//		public LinkedList<Link> links = new LinkedList<Link>();
-//
-//		/** Authors. */
-//		public LinkedList<Person> authors = new LinkedList<Person>();
-//
-//		/** Contributors. */
-//		public LinkedList<Person> contributors = new LinkedList<Person>();
-//
-//		/** Generator. */
-//		public Generator generator;	
-		}
-
 }

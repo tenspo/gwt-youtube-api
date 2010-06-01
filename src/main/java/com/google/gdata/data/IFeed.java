@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.gdata.client.Query;
 
-public interface IFeed extends IJSON, IJSONProcessor {
+public interface IFeed extends IJSON {
 
 	  /**
 	   * Returns the value of the atom:logo element.

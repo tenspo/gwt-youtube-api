@@ -23,7 +23,7 @@ import org.gwttime.time.DateTime;
  *
  * 
  */
-public interface IEntry extends IJSON, IJSONProcessor {
+public interface IEntry extends IJSON {
 
   /**
    * Get a {@link DateTime} instance representing the last time this entry was

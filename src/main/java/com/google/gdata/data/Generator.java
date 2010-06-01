@@ -15,14 +15,19 @@
 
 package com.google.gdata.data;
 
+import sk.seges.acris.json.client.annotation.Field;
+import sk.seges.acris.json.client.annotation.JsonObject;
+
 /**
  * Atom generator type.
  * 
  * 
  */
+@JsonObject
 public class Generator implements IGenerator {
 
 	/** Version. */
+	@Field
 	protected String version;
 
 	public String getVersion() {
@@ -34,6 +39,7 @@ public class Generator implements IGenerator {
 	}
 
 	/** URI. */
+	@Field
 	protected String uri;
 
 	public String getUri() {
@@ -49,6 +55,7 @@ public class Generator implements IGenerator {
 	}
 
 	/** Generator name. */
+	@Field
 	protected String name;
 
 	public String getName() {

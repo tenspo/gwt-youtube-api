@@ -15,11 +15,15 @@
 
 package com.google.gdata.data;
 
+import sk.seges.acris.json.client.annotation.Field;
+import sk.seges.acris.json.client.annotation.JsonObject;
+
 /**
  * Person type used for feed and entry authors and contributors. It may also be used by services' custom elements.
  * 
  * 
  */
+@JsonObject
 public class Person implements IPerson {
 
 	/**
@@ -47,6 +51,7 @@ public class Person implements IPerson {
 	}
 
 	/** Human-readable name. */
+	@Field
 	protected String name;
 
 	public String getName() {
@@ -58,6 +63,7 @@ public class Person implements IPerson {
 	}
 
 	/** Language of name. Derived from the current state of {@code xml:lang}. */
+	@Field
 	protected String nameLang;
 
 	public String getNameLang() {
@@ -69,6 +75,7 @@ public class Person implements IPerson {
 	}
 
 	/** URI associated with the person. */
+	@Field
 	protected String uri;
 
 	public String getUri() {
@@ -80,6 +87,7 @@ public class Person implements IPerson {
 	}
 
 	/** Email address. */
+	@Field
 	protected String email;
 
 	public String getEmail() {

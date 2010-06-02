@@ -12,6 +12,7 @@ import org.gwttime.time.DateTime;
 import sk.seges.acris.json.client.annotation.DateTimePattern;
 import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
+import sk.seges.acris.json.client.extension.ExtensionPoint;
 
 import com.google.gdata.client.Service;
 
@@ -64,7 +65,7 @@ import com.google.gdata.client.Service;
  * 
  * 
  */
-public abstract class BaseEntry<E extends BaseEntry> implements IEntry {
+public abstract class BaseEntry extends ExtensionPoint implements IEntry {
 	/**
 	 * The EntryState class provides a simple structure that encapsulates the attributes of an Atom entry that should be
 	 * shared with a shallow copy if the entry is adapted to a more specific BaseEntry Kind.Adaptor subtypes.
@@ -128,7 +129,7 @@ public abstract class BaseEntry<E extends BaseEntry> implements IEntry {
 		public DateTime edited;
 
 		/** Categories of entry. */
-		@Field
+		@Field("category")
 		public HashSet<Category> categories = new HashSet<Category>();
 
 		/** Title of entry. */
@@ -144,23 +145,23 @@ public abstract class BaseEntry<E extends BaseEntry> implements IEntry {
 		public TextConstruct rights;
 
 		/** Content of entry. */
+		//TODO
 		//@Field
 		public Content content;
 
 		/** Links of entry. */
-		@Field
+		@Field("link")
 		public LinkedList<Link> links = new LinkedList<Link>();
 
 		/** Authors of entry. */
-		@Field
+		@Field("author")
 		public LinkedList<Person> authors = new LinkedList<Person>();
 
 		/** Contributors of entry. */
-		@Field
+		@Field("contributor")
 		public LinkedList<Person> contributors = new LinkedList<Person>();
 
 		/** Source. */
-		@Field
 		public Source source;
 
 		/** Service. */
@@ -189,7 +190,7 @@ public abstract class BaseEntry<E extends BaseEntry> implements IEntry {
 	 * a shared reference to the same {@link EntryState}. Kind.Adaptor subclasses of {@code BaseEntry} can use
 	 * this constructor to create adaptor instances of an entry that share state with the original.
 	 */
-	protected BaseEntry(BaseEntry<?> sourceEntry) {
+	protected BaseEntry(BaseEntry sourceEntry) {
 		state = sourceEntry.state;
 	}
 

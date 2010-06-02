@@ -11,16 +11,14 @@ import com.google.gwt.json.client.JSONObject;
 
 public abstract class YouTubeJSONRequestHandler extends JSONRequestHandler {
 
-	private static final String FEED_ATTRIBUTE = "feed";
-	
 	@Override
 	public void onRequestComplete(JSONObject json) {
 		GoogleJsonizerBuilder jsonizerBuilder = new GoogleJsonizerBuilder();
 		jsonizerBuilder.registerDeserializer(Source.class, new SourceDeserializer());
-		IJsonizer<Source> jsonnizer = jsonizerBuilder.create();
-		Source source = jsonnizer.fromJson(json.get(FEED_ATTRIBUTE), Source.class);
+		IJsonizer jsonnizer = jsonizerBuilder.create();
+		VideoFeed videoFeed = jsonnizer.fromJson(json, VideoFeed.class);
 
-		VideoFeed videoFeed = new VideoFeed();
+//		VideoFeed videoFeed = new VideoFeed();
 //		videoFeed.get(json.get(FEED_ATTRIBUTE).isObject());
 		onRequestComplete(videoFeed);
 	}

@@ -15,15 +15,35 @@
 
 package com.google.gdata.data.youtube;
 
+import com.google.gdata.data.BaseEntry;
 import com.google.gdata.data.IEntry;
 import com.google.gdata.data.media.MediaEntry;
-
 
 /**
  * Video entry for the youtube feeds.
  * 
  * 
  */
-public class VideoEntry extends MediaEntry<VideoEntry> implements IEntry {
+public class VideoEntry extends MediaEntry implements IEntry {
 
+	/**
+	 * Creates an empty video entry.
+	 */
+	public VideoEntry() {
+	}
+
+	/** Creates a copy of another entry. */
+	public VideoEntry(BaseEntry original) {
+		super(original);
+	}
+
+	/**
+	 * Creates a new video entry and initializes it.
+	 * 
+	 * ` * @param id entry atom/rss id
+	 */
+	public VideoEntry(String id) {
+		this();
+		setId(id);
+	}
 }

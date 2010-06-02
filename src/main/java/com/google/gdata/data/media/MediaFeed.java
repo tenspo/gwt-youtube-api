@@ -28,13 +28,13 @@ import com.google.gdata.data.BaseFeed;
  *            the entry class associated with the bound subtype.
  * 
  */
-public abstract class MediaFeed<F extends BaseFeed, E extends BaseEntry> extends BaseFeed<F, E> {
+public abstract class MediaFeed<F extends BaseFeed<E>, E extends BaseEntry> extends BaseFeed<E> {
 
 	protected MediaFeed(Class<? extends E> entryClass) {
 		super(entryClass);
 	}
 
-	protected MediaFeed(Class<? extends E> entryClass, BaseFeed<?, ?> sourceFeed) {
+	protected MediaFeed(Class<? extends E> entryClass, BaseFeed<E> sourceFeed) {
 		super(entryClass, sourceFeed);
 	}
 

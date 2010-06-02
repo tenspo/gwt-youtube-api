@@ -30,7 +30,7 @@ public class Source extends JSON {
 		public DateTime updated;
 
 		/** Categories. */
-		@Field
+		@Field("category")
 		public HashSet<Category> categories = new HashSet<Category>();
 
 		/** Title. */
@@ -54,15 +54,15 @@ public class Source extends JSON {
 		public String logo;
 
 		/** Links. */
-		@Field
+		@Field("link")
 		public LinkedList<Link> links = new LinkedList<Link>();
 
 		/** Authors. */
-		@Field
+		@Field("author")
 		public LinkedList<Person> authors = new LinkedList<Person>();
 
 		/** Contributors. */
-		@Field
+		@Field("contributor")
 		public LinkedList<Person> contributors = new LinkedList<Person>();
 
 		/** Generator. */

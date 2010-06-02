@@ -6,7 +6,7 @@ import com.google.gdata.data.Link;
 import com.google.gdata.data.MediaContent;
 import com.google.gdata.util.ContentType;
 
-public abstract class MediaEntry<E extends BaseEntry<E>> extends BaseEntry<E> implements IMediaEntry {
+public abstract class MediaEntry extends BaseEntry implements IMediaEntry {
 	/**
 	 * Constructs a new BaseEntry instance.
 	 */
@@ -19,7 +19,7 @@ public abstract class MediaEntry<E extends BaseEntry<E>> extends BaseEntry<E> im
 	 * a shared reference to the same entry state. {@link com.google.gdata.data.Kind.Adaptor} subclasses of {@code
 	 * BaseEntry} can use this constructor to create adaptor instances of an entry that share state with the original.
 	 */
-	protected MediaEntry(BaseEntry<?> sourceEntry) {
+	protected MediaEntry(BaseEntry sourceEntry) {
 		super(sourceEntry);
 	}
 

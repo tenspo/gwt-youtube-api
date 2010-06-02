@@ -4,12 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import sk.seges.acris.json.client.annotation.Field;
+import sk.seges.acris.json.client.annotation.JsonObject;
 
 import com.google.gdata.client.Query;
 import com.google.gdata.client.Service;
-import com.google.gdata.json.JsonObject;
 
-public abstract class BaseFeed<F extends BaseFeed, E extends BaseEntry> extends Source implements IFeed {
+public abstract class BaseFeed<E extends BaseEntry> extends Source implements IFeed {
 
 	/**
 	 * The FeedState class provides a simple structure that encapsulates the attributes of an Atom feed that should be
@@ -23,7 +23,7 @@ public abstract class BaseFeed<F extends BaseFeed, E extends BaseEntry> extends 
 	 * @see BaseFeed#BaseFeed(Class, BaseFeed)
 	 */
 	@JsonObject
-	protected static class FeedState {
+	public static class FeedState {
 
 		/** Service associated with the feed. */
 		public Service service;
@@ -92,7 +92,7 @@ public abstract class BaseFeed<F extends BaseFeed, E extends BaseEntry> extends 
 	 * shared reference to the same {@link FeedState}. Subclasses of {@code BaseFeed} can use this
 	 * constructor to create adaptor instances of a feed that share state with the original.
 	 */
-	protected BaseFeed(Class<? extends E> entryClass, BaseFeed<?, ?> sourceFeed) {
+	protected BaseFeed(Class<? extends E> entryClass, BaseFeed<?> sourceFeed) {
 
 		super(sourceFeed);
 		feedState = sourceFeed.feedState;

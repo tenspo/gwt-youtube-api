@@ -21,13 +21,13 @@ import com.google.gdata.data.IFeed;
 /**
  * Video feed returned by the feed providers.
  */
-public class VideoFeed extends BaseFeed implements IFeed {
+public class VideoFeed extends BaseFeed<VideoEntry> implements IFeed {
 
 	public VideoFeed() {
 		super(VideoEntry.class);
 	}
 
-	public VideoFeed(BaseFeed<?, ?> base) {
+	public VideoFeed(BaseFeed<?> base) {
 		super(VideoEntry.class, base);
 	}
 

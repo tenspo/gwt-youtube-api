@@ -55,7 +55,7 @@ public class Generator implements IGenerator {
 	}
 
 	/** Generator name. */
-	@Field
+	@Field("$t")
 	protected String name;
 
 	public String getName() {

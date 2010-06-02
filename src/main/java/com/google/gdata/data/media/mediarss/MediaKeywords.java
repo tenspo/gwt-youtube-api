@@ -15,53 +15,40 @@
 
 package com.google.gdata.data.media.mediarss;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.Extension;
+import sk.seges.acris.json.client.extension.ExtensionDescription;
 
-@JsonObject(group = MediaRssNamespace.PREFIX, value = "category")
-public class MediaCategory implements Extension {
-
-	@Field
-	private String scheme;
+@JsonObject(group = MediaRssNamespace.PREFIX, value = "keywords")
+public class MediaKeywords implements Extension {
 
 	@Field
-	private String label;
+	private final List<String> keywords = new ArrayList<String>();
 
-	@Field("$t")
-	private String content;
-
-	/** Creates an empty category tag. */
-	public MediaCategory() {
+	/** Describes the tag to an {@link com.google.gdata.data.ExtensionProfile}. */
+	public static ExtensionDescription getDefaultDescription() {
+		return ExtensionDescription.getDefaultDescription(MediaKeywords.class);
 	}
 
-	public String getContent() {
-		return content;
+	public List<String> getKeywords() {
+		return keywords;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void addKeyword(String keyword) {
+		keywords.add(keyword);
 	}
 
-	/** Creates an initializes a category tag. */
-	public MediaCategory(String scheme, String content) {
-		this.scheme = scheme;
-		setContent(content);
+	public void addKeywords(Collection<String> keywords) {
+		this.keywords.addAll(keywords);
 	}
 
-	public String getLabel() {
-		return label;
+	public void clearKeywords() {
+		keywords.clear();
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getScheme() {
-		return scheme;
-	}
-
-	public void setScheme(String scheme) {
-		this.scheme = scheme;
-	}
 }

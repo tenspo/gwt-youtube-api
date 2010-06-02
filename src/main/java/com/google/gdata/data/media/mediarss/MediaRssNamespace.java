@@ -13,60 +13,58 @@
  * limitations under the License.
  */
 
-
 package com.google.gdata.data.media.mediarss;
 
+import sk.seges.acris.json.client.extension.ExtensionDescription;
+import sk.seges.acris.json.client.extension.ExtensionProfile;
+
+import com.google.gdata.data.BaseEntry;
+import com.google.gdata.data.BaseFeed;
+
 /**
- * GData definitions for the
- * <a href="http://search.yahoo.com/mrss">Yahoo media: namespace</a>.
- *
+ * GData definitions for the <a href="http://search.yahoo.com/mrss">Yahoo media: namespace</a>.
+ * 
  * 
  */
 public class MediaRssNamespace {
 
-  /** Standard namespace prefix. */
-  public static final String PREFIX = "media";
+	/** Standard namespace prefix. */
+	public static final String PREFIX = "media";
 
-  
-//  /**
-//   * Description of extensions that can be used inside feed,
-//   * extension and media:group tags.
-//   */
-//  private static final ExtensionDescription[] STANDARD_EXTENSIONS = {
-//      ExtensionDescription.getDefaultDescription(MediaRating.class),
-//      ExtensionDescription.getDefaultDescription(MediaTitle.class),
-//      ExtensionDescription.getDefaultDescription(MediaDescription.class),
-//      MediaKeywords.getDefaultDescription(),
-//      MediaThumbnail.getDefaultDescription(),
-//      ExtensionDescription.getDefaultDescription(MediaCategory.class),
-//      ExtensionDescription.getDefaultDescription(MediaHash.class),
-//      MediaPlayer.getDefaultDescription(),
-//      ExtensionDescription.getDefaultDescription(MediaCredit.class),
-//      ExtensionDescription.getDefaultDescription(MediaCopyright.class),
-//          ExtensionDescription.getDefaultDescription(MediaText.class),
-//      ExtensionDescription.getDefaultDescription(MediaRestriction.class),
-//  };
-//
-//  /**
-//   * Extends given profile with Yahoo media RSS extensions.
-//   *
-//   * @param profile the profile to be extended
-//   */
-//  public static void declareAll(ExtensionProfile profile) {
-//    profile.declareAdditionalNamespace(NS);
-//
-//    // Register some extensions that require special treatment
-//    profile.declare(BaseEntry.class, MediaGroup.getDefaultDescription());
-//    profile.declare(BaseEntry.class, MediaContent.getDefaultDescription(false));
-//    profile.declare(MediaGroup.class, MediaContent.getDefaultDescription(true));
-//
-//    // Register all standard extension everywhere, including in the aggregators
-//    // declared above (MediaGroup and MediaContent)
-//    for (ExtensionDescription desc : STANDARD_EXTENSIONS) {
-//      profile.declare(BaseEntry.class, desc);
-//      profile.declare(BaseFeed.class, desc);
-//      profile.declare(MediaGroup.class, desc);
-//      profile.declare(MediaContent.class, desc);
-//    }
-//  }
+	/**
+	 * Description of extensions that can be used inside feed, extension and media:group tags.
+	 */
+	private static final ExtensionDescription[] STANDARD_EXTENSIONS = {
+			ExtensionDescription.getDefaultDescription(MediaRating.class),
+			ExtensionDescription.getDefaultDescription(MediaTitle.class),
+			ExtensionDescription.getDefaultDescription(MediaDescription.class), MediaKeywords.getDefaultDescription(),
+			MediaThumbnail.getDefaultDescription(), ExtensionDescription.getDefaultDescription(MediaCategory.class),
+			ExtensionDescription.getDefaultDescription(MediaHash.class), MediaPlayer.getDefaultDescription(),
+			ExtensionDescription.getDefaultDescription(MediaCredit.class),
+			ExtensionDescription.getDefaultDescription(MediaCopyright.class),
+			ExtensionDescription.getDefaultDescription(MediaText.class),
+			ExtensionDescription.getDefaultDescription(MediaRestriction.class), };
+
+	/**
+	 * Extends given profile with Yahoo media RSS extensions.
+	 * 
+	 * @param profile
+	 *            the profile to be extended
+	 */
+	public static void declareAll(ExtensionProfile profile) {
+
+		// Register some extensions that require special treatment
+		profile.declare(BaseEntry.class, MediaGroup.getDefaultDescription());
+		profile.declare(BaseEntry.class, MediaContent.getDefaultDescription(false));
+		profile.declare(MediaGroup.class, MediaContent.getDefaultDescription(true));
+
+		// Register all standard extension everywhere, including in the aggregators
+		// declared above (MediaGroup and MediaContent)
+		for (ExtensionDescription desc : STANDARD_EXTENSIONS) {
+			profile.declare(BaseEntry.class, desc);
+			profile.declare(BaseFeed.class, desc);
+			profile.declare(MediaGroup.class, desc);
+			profile.declare(MediaContent.class, desc);
+		}
+	}
 }

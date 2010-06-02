@@ -17,12 +17,13 @@ package com.google.gdata.data;
 
 import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
+import sk.seges.acris.json.client.extension.ExtensionPoint;
 
 /**
  * External link type.
  */
 @JsonObject
-public class Link /*extends ExtensionPoint*/ implements ILink {
+public class Link extends ExtensionPoint implements ILink {
 
 	public Link() {
 	}

@@ -17,44 +17,29 @@ package com.google.gdata.data.media.mediarss;
 
 import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
-import sk.seges.acris.json.client.extension.Extension;
 
-@JsonObject(group = MediaRssNamespace.PREFIX, value = "category")
-public class MediaCategory implements Extension {
+@JsonObject(group = MediaRssNamespace.PREFIX, value = "credit")
+public class MediaCredit extends AbstractElementWithContent {
+
+	/**
+	 * Default scheme, as defined on http://search.yahoo.com/mrss.
+	 * 
+	 * European Broadcasting Union codes: http://www.ebu.ch/en/technical/metadata/specifications/role_codes.php
+	 */
+	public static final String DEFAULT_SCHEME = "urn:ebu";
+
+	@Field
+	private String role;
 
 	@Field
 	private String scheme;
 
-	@Field
-	private String label;
-
-	@Field("$t")
-	private String content;
-
-	/** Creates an empty category tag. */
-	public MediaCategory() {
+	public String getRole() {
+		return role;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	/** Creates an initializes a category tag. */
-	public MediaCategory(String scheme, String content) {
-		this.scheme = scheme;
-		setContent(content);
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getScheme() {

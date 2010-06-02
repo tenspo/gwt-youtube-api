@@ -15,24 +15,12 @@
 
 package com.google.gdata.data.media.mediarss;
 
-import sk.seges.acris.json.client.annotation.Field;
-import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.Extension;
 
-@JsonObject(group = MediaRssNamespace.PREFIX, value = "category")
-public class MediaCategory implements Extension {
-
-	@Field
-	private String scheme;
-
-	@Field
-	private String label;
-
-	@Field("$t")
+abstract class AbstractElementWithContent implements Extension {
 	private String content;
 
-	/** Creates an empty category tag. */
-	public MediaCategory() {
+	AbstractElementWithContent() {
 	}
 
 	public String getContent() {
@@ -41,27 +29,5 @@ public class MediaCategory implements Extension {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	/** Creates an initializes a category tag. */
-	public MediaCategory(String scheme, String content) {
-		this.scheme = scheme;
-		setContent(content);
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getScheme() {
-		return scheme;
-	}
-
-	public void setScheme(String scheme) {
-		this.scheme = scheme;
 	}
 }

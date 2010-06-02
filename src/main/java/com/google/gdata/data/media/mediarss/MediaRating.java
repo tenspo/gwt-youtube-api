@@ -19,43 +19,11 @@ import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.Extension;
 
-@JsonObject(group = MediaRssNamespace.PREFIX, value = "category")
-public class MediaCategory implements Extension {
+@JsonObject(group = MediaRssNamespace.PREFIX, value = "rating")
+public class MediaRating implements Extension {
 
 	@Field
 	private String scheme;
-
-	@Field
-	private String label;
-
-	@Field("$t")
-	private String content;
-
-	/** Creates an empty category tag. */
-	public MediaCategory() {
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	/** Creates an initializes a category tag. */
-	public MediaCategory(String scheme, String content) {
-		this.scheme = scheme;
-		setContent(content);
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
 
 	public String getScheme() {
 		return scheme;
@@ -64,4 +32,5 @@ public class MediaCategory implements Extension {
 	public void setScheme(String scheme) {
 		this.scheme = scheme;
 	}
+
 }

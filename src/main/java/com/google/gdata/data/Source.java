@@ -12,8 +12,9 @@ import org.gwttime.time.DateTime;
 import sk.seges.acris.json.client.annotation.DateTimePattern;
 import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
+import sk.seges.acris.json.client.extension.ExtensionPoint;
 
-public class Source extends JSON {
+public class Source extends ExtensionPoint {
 
 	public static final String DATE_TIME_PATTERN = "y-M-d'T'H:m:s.SSSZ";
 	

@@ -13,55 +13,37 @@
  * limitations under the License.
  */
 
-package com.google.gdata.data.media.mediarss;
+package com.google.gdata.data.youtube;
 
 import sk.seges.acris.json.client.annotation.Field;
-import sk.seges.acris.json.client.annotation.JsonObject;
-import sk.seges.acris.json.client.extension.Extension;
+import sk.seges.acris.json.client.extension.ExtensionPoint;
 
-@JsonObject(group = MediaRssNamespace.PREFIX, value = "category")
-public class MediaCategory implements Extension {
+public abstract class AbstractFreeTextExtension extends ExtensionPoint {
 
 	@Field
-	private String scheme;
-
-	@Field
-	private String label;
-
-	@Field("$t")
 	private String content;
 
-	/** Creates an empty category tag. */
-	public MediaCategory() {
+	/** Creates an empty tag. */
+	protected AbstractFreeTextExtension() {
 	}
 
+	/**
+	 * Creates a tag and initializes its content.
+	 * 
+	 * @param content
+	 */
+	protected AbstractFreeTextExtension(String content) {
+		this.content = content;
+	}
+
+	/** Gets the content string. */
 	public String getContent() {
 		return content;
 	}
 
+	/** Sets the content string. */
 	public void setContent(String content) {
 		this.content = content;
 	}
 
-	/** Creates an initializes a category tag. */
-	public MediaCategory(String scheme, String content) {
-		this.scheme = scheme;
-		setContent(content);
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getScheme() {
-		return scheme;
-	}
-
-	public void setScheme(String scheme) {
-		this.scheme = scheme;
-	}
 }

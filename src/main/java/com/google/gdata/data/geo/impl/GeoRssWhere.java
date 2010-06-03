@@ -97,14 +97,14 @@ public class GeoRssWhere extends ExtensionPoint implements Point, Box {
 	 * Get the latitude by pulling it from the gml:Point element (if it exists).
 	 */
 	public Double getLatitude() {
-		return point != null ? point.getLatitude() : null;
+		return point != null ? point.getLat() : null;
 	}
 
 	/*
 	 * Get the longitude by pulling it from the gml:Point element (if it exists).
 	 */
 	public Double getLongitude() {
-		return point != null ? point.getLongitude() : null;
+		return point != null ? point.getLon() : null;
 	}
 
 	/*
@@ -217,5 +217,15 @@ public class GeoRssWhere extends ExtensionPoint implements Point, Box {
 		new GmlEnvelope().declareExtensions(extProfile);
 
 		super.declareExtensions(extProfile);
+	}
+
+	@Override
+	public Double getLat() {
+		return getLatitude();
+	}
+
+	@Override
+	public Double getLon() {
+		return getLongitude();
 	}
 }

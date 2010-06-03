@@ -28,12 +28,12 @@ public interface Point extends Extension {
 	/**
 	 * @return the value of latitude coordinate of this Point.
 	 */
-	public Double getLatitude();
+	public Double getLat();
 
 	/**
 	 * @return the value of the longitude coordinate of this Point.
 	 */
-	public Double getLongitude();
+	public Double getLon();
 
 	/**
 	 * Sets the latitude and longitude coordinates of this Point. Either both

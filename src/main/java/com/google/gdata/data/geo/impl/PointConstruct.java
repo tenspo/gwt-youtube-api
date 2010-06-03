@@ -36,6 +36,14 @@ public abstract class PointConstruct extends ValueConstruct implements Point {
 	@Field
 	private Double lon;
 
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
+
+	public void setLon(Double lon) {
+		this.lon = lon;
+	}
+
 	/**
 	 * Constructor to create an empty point object.
 	 */
@@ -62,21 +70,21 @@ public abstract class PointConstruct extends ValueConstruct implements Point {
 	 * Copy constructor to create a point from another point.
 	 */
 	public PointConstruct(String name, Point copyFrom) {
-		this(name, copyFrom == null ? null : copyFrom.getLatitude(),
-				copyFrom == null ? null : copyFrom.getLongitude());
+		this(name, copyFrom == null ? null : copyFrom.getLat(),
+				copyFrom == null ? null : copyFrom.getLon());
 	}
 
 	/*
 	 * Just returns the stored latitude.
 	 */
-	public Double getLatitude() {
+	public Double getLat() {
 		return lat;
 	}
 
 	/*
 	 * Just returns the stored longitude.
 	 */
-	public Double getLongitude() {
+	public Double getLon() {
 		return lon;
 	}
 

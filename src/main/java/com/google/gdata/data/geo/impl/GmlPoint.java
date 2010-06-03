@@ -88,7 +88,7 @@ public class GmlPoint extends ExtensionPoint implements Point {
 	 */
 	public Double getLatitude() {
 		GmlPos coord = getExtension(GmlPos.class);
-		return coord != null ? coord.getLatitude() : null;
+		return coord != null ? coord.getLat() : null;
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class GmlPoint extends ExtensionPoint implements Point {
 	 */
 	public Double getLongitude() {
 		GmlPos coord = getExtension(GmlPos.class);
-		return coord != null ? coord.getLongitude() : null;
+		return coord != null ? coord.getLon() : null;
 	}
 
 	/**
@@ -121,6 +121,16 @@ public class GmlPoint extends ExtensionPoint implements Point {
 			setExtension(point);
 			point.setGeoLocation(lat, lon);
 		}
+	}
+
+	@Override
+	public Double getLat() {
+		return getLatitude();
+	}
+
+	@Override
+	public Double getLon() {
+		return getLongitude();
 	}
 
 }

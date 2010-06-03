@@ -32,6 +32,10 @@ public abstract class AbstractTextElement implements Extension {
 	@Field
 	private TextConstruct content;
 
+	public void setContent(TextConstruct content) {
+		this.content = content;
+	}
+
 	public boolean isEmpty() {
 		return content.isEmpty();
 	}

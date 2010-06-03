@@ -15,6 +15,7 @@
 
 package com.google.gdata.data.youtube;
 
+import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
@@ -26,6 +27,7 @@ public class YtRelationship extends ExtensionPoint {
 		SINGLE, TAKEN, OPEN;
 	}
 
+	@Field
 	private Status status;
 
 	/** Creates an empty tag. */

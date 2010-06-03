@@ -36,7 +36,7 @@ public class YtAspectRatio extends ExtensionPoint {
 		}
 	}
 
-	@Field
+	@Field("$t")
 	private Value value;
 
 	public YtAspectRatio() {

@@ -15,6 +15,8 @@
 
 package com.google.gdata.data.geo.impl;
 
+import sk.seges.acris.json.client.annotation.Field;
+
 import com.google.gdata.data.ValueConstruct;
 import com.google.gdata.data.geo.GeoLat;
 import com.google.gdata.data.geo.GeoLong;
@@ -28,7 +30,10 @@ import com.google.gdata.data.geo.Point;
  */
 public abstract class PointConstruct extends ValueConstruct implements Point {
 
+	@Field
 	private Double lat;
+	
+	@Field
 	private Double lon;
 
 	/**

@@ -15,12 +15,15 @@
 
 package com.google.gdata.data.youtube;
 
+import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
 @JsonObject(group = YouTubeNamespace.PREFIX, value = "statistics")
 public class YtStatistics extends ExtensionPoint {
+	@Field
 	private long viewCount;
+	@Field
 	private long favoriteCount;
 
 	/** Gets view count, 0 by default. */

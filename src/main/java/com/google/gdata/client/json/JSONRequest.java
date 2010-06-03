@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public class JSONRequest {
 
-	protected HashMap<Integer, Object> callbacks = new HashMap<Integer, Object>();
+	protected static HashMap<Integer, Object> callbacks = new HashMap<Integer, Object>();
 
-	protected int curIndex = 0;
+	protected static int curIndex = 0;
 
 	public native void setup(JSONRequestHandler obj, String callback) /*-{
 		window[callback] = function(data) {

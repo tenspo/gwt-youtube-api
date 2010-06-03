@@ -15,11 +15,13 @@
 
 package com.google.gdata.data.geo.impl;
 
+import sk.seges.acris.json.client.extension.ExtensionDescription;
+
+import com.google.gdata.data.geo.Namespaces;
 import com.google.gdata.data.geo.Point;
 
 /**
- * A GML Coordinate which is just a space-separated pair of lat/lon.
- * &lt;gml:pos&gt;45.256 -71.92&lt;/gml:pos&gt;
+ * A GML Coordinate which is just a space-separated pair of lat/lon. &lt;gml:pos&gt;45.256 -71.92&lt;/gml:pos&gt;
  * 
  * 
  */
@@ -42,11 +44,28 @@ public class GmlPos extends PointConstruct {
 	}
 
 	/**
-	 * Constructs a gml:pos element by copying the lat/long values out of the
-	 * supplied point. If the point is null then an empy gml:pos will be
-	 * created.
+	 * Constructs a gml:pos element by copying the lat/long values out of the supplied point. If the point is null then
+	 * an empy gml:pos will be created.
 	 */
 	public GmlPos(Point copyFrom) {
 		super(NAME, copyFrom);
+	}
+
+	/**
+	 * Returns the suggested extension description with configurable repeatability.
+	 */
+	public static ExtensionDescription getDefaultDescription(boolean repeatable) {
+		ExtensionDescription desc = new ExtensionDescription();
+		desc.setExtensionClass(GmlPos.class);
+		desc.setPointName(Namespaces.GML_NAMESPACE + "$" + NAME);
+		desc.setRepeatable(repeatable);
+		return desc;
+	}
+
+	/**
+	 * Returns the suggested extension description and is repeatable.
+	 */
+	public static ExtensionDescription getDefaultDescription() {
+		return getDefaultDescription(true);
 	}
 }

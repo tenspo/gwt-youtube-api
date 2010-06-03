@@ -15,15 +15,19 @@
 
 package com.google.gdata.data.extensions;
 
+import sk.seges.acris.json.client.annotation.Field;
+import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.Extension;
 import sk.seges.acris.json.client.extension.ExtensionDescription;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
 import com.google.gdata.util.Namespaces;
 
+@JsonObject
 public class Comments extends ExtensionPoint implements Extension {
 
 	/** Comments feed link. */
+	@Field
 	protected FeedLink<?> feedLink;
 
 	public FeedLink<?> getFeedLink() {
@@ -38,7 +42,7 @@ public class Comments extends ExtensionPoint implements Extension {
 	public static ExtensionDescription getDefaultDescription() {
 		ExtensionDescription desc = new ExtensionDescription();
 		desc.setExtensionClass(Comments.class);
-		desc.setPointName(Namespaces.gNs + "$comments");
+		desc.setPointName(Namespaces.gAlias + "$comments");
 		desc.setRepeatable(false);
 		return desc;
 	}

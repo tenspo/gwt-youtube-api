@@ -262,11 +262,6 @@ public final class Namespaces {
   public static final String gPrefix = g + "#";
   public static final String gAlias = "gd";
 
-  /** Google data XML namespace. */
-  public static final XmlNamespace gNs =
-    new XmlNamespace(gAlias, g);
-
-
   /** Google data runtime namespace. */
   public static final String gr = gPrefix + "runtime";
 

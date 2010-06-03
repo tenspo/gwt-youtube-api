@@ -15,6 +15,7 @@
 
 package com.google.gdata.data.youtube;
 
+import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
@@ -49,9 +50,13 @@ public class YtPublicationState extends ExtensionPoint {
 		RESTRICTED, ;
 	}
 
+	@Field
 	private State state;
+	@Field
 	private String reasonCode;
+	@Field
 	private String helpUrl;
+	@Field
 	private String description;
 
 	public YtPublicationState() {

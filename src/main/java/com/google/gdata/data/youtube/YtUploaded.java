@@ -18,11 +18,18 @@ package com.google.gdata.data.youtube;
 
 import org.gwttime.time.DateTime;
 
+import sk.seges.acris.json.client.annotation.DateTimePattern;
+import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
+import com.google.gdata.data.Source;
+
 @JsonObject(group = YouTubeNamespace.PREFIX, value = "statistics")
 public class YtUploaded extends ExtensionPoint {
+	
+	@Field("$t")
+	@DateTimePattern(Source.DATE_TIME_PATTERN)
 	private DateTime dateTime;
 
 	public YtUploaded() {

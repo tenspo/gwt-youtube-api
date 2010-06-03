@@ -15,11 +15,14 @@
 
 package com.google.gdata.data.youtube;
 
+import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
 @JsonObject(group = YouTubeNamespace.PREFIX, value = "videoid")
 public class YtVideoId extends ExtensionPoint {
+	
+	@Field("$t")
 	private String videoId;
 
 	/** Creates an empty video ID tag. */

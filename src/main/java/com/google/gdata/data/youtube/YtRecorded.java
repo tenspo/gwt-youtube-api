@@ -17,11 +17,16 @@ package com.google.gdata.data.youtube;
 
 import org.gwttime.time.DateTime;
 
+import sk.seges.acris.json.client.annotation.DateTimePattern;
+import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
 @JsonObject(group = YouTubeNamespace.PREFIX, value = "recorded")
 public class YtRecorded extends ExtensionPoint {
+
+	@Field
+	@DateTimePattern("YYYY-MM-DD")
 	private DateTime date;
 
 	public YtRecorded() {
@@ -38,8 +43,8 @@ public class YtRecorded extends ExtensionPoint {
 	 *            a {@link DateTime} that contains only a date. See {@link DateTime#setDateOnly}.
 	 */
 	public void setDate(DateTime date) {
-		if (date != null && !date.isDateOnly()) {
-			throw new IllegalStateException("Object should be only a date, not a date and a time");
+		if (date != null) {
+			throw new IllegalStateException("Date object was not specified");
 		}
 		this.date = date;
 	}

@@ -29,20 +29,25 @@ public abstract class BaseFeed<E extends BaseEntry> extends Source implements IF
 		public Service service;
 
 		/** Specifies whether the feed can be posted to. */
+		@Field
 		public boolean canPost = true;
 
 		/** OpenSearch: number of search results (feed entries). */
+		@Field
 		public int totalResults = Query.UNDEFINED;
 
 		/** OpenSearch: start index. */
+		@Field
 		public int startIndex = Query.UNDEFINED;
 
 		/** OpenSearch: items per page. */
+		@Field
 		public int itemsPerPage = Query.UNDEFINED;
 
 		/**
 		 * Etag. Etag. See RFC 2616, Section 3.11. If there is no entity tag, this variable is null.
 		 */
+		@Field
 		public String etag;
 
 		/**

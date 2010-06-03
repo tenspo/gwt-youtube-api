@@ -123,7 +123,7 @@ public class Rating extends ExtensionPoint {
 	public static ExtensionDescription getDefaultDescription(boolean repeatable) {
 		ExtensionDescription desc = new ExtensionDescription();
 		desc.setExtensionClass(Rating.class);
-		desc.setPointName(Namespaces.gNs + "$rating");
+		desc.setPointName(Namespaces.gAlias + "$rating");
 		desc.setRepeatable(repeatable);
 		return desc;
 	}

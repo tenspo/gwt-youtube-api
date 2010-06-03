@@ -12,7 +12,7 @@ public class VideoEntryDeserializer extends MediaEntryDeserializer<VideoEntry> {
 		return new VideoEntry() {
 			public VideoEntry fromJson(JSONValue s, DeserializationContext context) {
 				VideoEntryDeserializer.this.fromJson(this.state, s, context);
-				return this;
+				return (VideoEntry)this;
 			};
 		}.fromJson(s, context);
 	}

@@ -15,13 +15,15 @@
 
 package com.google.gdata.data.geo;
 
+import sk.seges.acris.json.client.extension.Extension;
+
 /**
  * Interface for specifying a point that describes some geographic location.
  * Each point should have a latitude and longitude coordinate
  * 
  * 
  */
-public interface Point {
+public interface Point extends Extension {
 
 	/**
 	 * @return the value of latitude coordinate of this Point.

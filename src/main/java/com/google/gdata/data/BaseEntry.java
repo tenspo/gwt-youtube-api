@@ -22,19 +22,19 @@ import com.google.gdata.client.Service;
  * It is capable of parsing the Atom XML for an {@code <atom:entry>} element as well as any contained Extension
  * elements. It can generate both Atom and RSS 2.0 representations of the entry from the object model.
  * <p>
- * The BaseEntry class implements the Kind.Adaptable interface, meaning it is possible to create new
- * Kind.Adaptor subtypes that defines a custom extension model (and associated convenience APIs) for a BaseEntry
- * subtypes that use Atom/RSS extensions to extend the content model for a particular type of data.
+ * The BaseEntry class implements the Kind.Adaptable interface, meaning it is possible to create new Kind.Adaptor
+ * subtypes that defines a custom extension model (and associated convenience APIs) for a BaseEntry subtypes that use
+ * Atom/RSS extensions to extend the content model for a particular type of data.
  * <p>
  * An Kind.Adaptor subclass of BaseEntry should do the following:
  * <ul>
- * <li>Include a Kind.Term annotation on the class declaration that defines the {@link Category} term value for
- * the GData kind handled by the adaptor.</li>
+ * <li>Include a Kind.Term annotation on the class declaration that defines the {@link Category} term value for the
+ * GData kind handled by the adaptor.</li>
  * <li>Provide a constructor that takes a single BaseEntry parameter as an argument that is used when adapting a generic
  * entry type to a more specific one.</li>
- * <li>Implement the Kind.Adaptor#declareExtensions(ExtensionProfile) method and use it to declare the extension
- * model for the adapted instance within the profile passed as a parameter. This is used to auto-extend an extension
- * profile when kind Category tags are found during parsing of content.</li>
+ * <li>Implement the Kind.Adaptor#declareExtensions(ExtensionProfile) method and use it to declare the extension model
+ * for the adapted instance within the profile passed as a parameter. This is used to auto-extend an extension profile
+ * when kind Category tags are found during parsing of content.</li>
  * <li>Expose convenience APIs to retrieve and set extension attributes, with an implementions that delegates to
  * {@link ExtensionPoint} methods to store/retrieve the extension data.
  * </ul>
@@ -145,8 +145,8 @@ public abstract class BaseEntry extends ExtensionPoint implements IEntry {
 		public TextConstruct rights;
 
 		/** Content of entry. */
-		//TODO
-		//@Field
+		// TODO
+		// @Field
 		public Content content;
 
 		/** Links of entry. */
@@ -160,6 +160,11 @@ public abstract class BaseEntry extends ExtensionPoint implements IEntry {
 		/** Contributors of entry. */
 		@Field("contributor")
 		public LinkedList<Person> contributors = new LinkedList<Person>();
+
+	    /**
+	     * Atom publication control status, which contains the draft status.
+	     */
+	    public PubControl pubControl;
 
 		/** Source. */
 		public Source source;
@@ -187,8 +192,8 @@ public abstract class BaseEntry extends ExtensionPoint implements IEntry {
 
 	/**
 	 * Copy constructor that initializes a new BaseEntry instance to have identical contents to another instance, using
-	 * a shared reference to the same {@link EntryState}. Kind.Adaptor subclasses of {@code BaseEntry} can use
-	 * this constructor to create adaptor instances of an entry that share state with the original.
+	 * a shared reference to the same {@link EntryState}. Kind.Adaptor subclasses of {@code BaseEntry} can use this
+	 * constructor to create adaptor instances of an entry that share state with the original.
 	 */
 	protected BaseEntry(BaseEntry sourceEntry) {
 		state = sourceEntry.state;
@@ -242,6 +247,51 @@ public abstract class BaseEntry extends ExtensionPoint implements IEntry {
 	 */
 	public void setSelectedFields(String v) {
 		state.fields = v;
+	}
+
+	/**
+	 * Set draft status. Passing a null value means unsetting the draft status.
+	 * 
+	 * @param v
+	 *            Draft status, or null to unset.
+	 */
+	public void setDraft(Boolean v) {
+		if (state.pubControl == null) {
+			if (!Boolean.TRUE.equals(v)) {
+				// No need to create a PubControl entry for that
+				return;
+			}
+			state.pubControl = new PubControl();
+		}
+		state.pubControl.setDraft(v);
+	}
+
+	/**
+	 * Draft status.
+	 * 
+	 * @return True if draft status is set and equals true.
+	 */
+	public boolean isDraft() {
+		return state.pubControl != null ? state.pubControl.isDraft() : false;
+	}
+
+	/**
+	 * Gets the app:control tag.
+	 * 
+	 * @return pub control tag or null if unset
+	 */
+	public PubControl getPubControl() {
+		return state.pubControl;
+	}
+
+	/**
+	 * Sets the app:control tag, which usually contains app:draft.
+	 * 
+	 * @param value
+	 *            PubControl the new object or null
+	 */
+	public void setPubControl(PubControl value) {
+		state.pubControl = value;
 	}
 
 	public String getKind() {

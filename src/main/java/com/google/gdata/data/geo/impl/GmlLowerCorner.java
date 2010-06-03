@@ -15,6 +15,10 @@
 
 package com.google.gdata.data.geo.impl;
 
+import sk.seges.acris.json.client.annotation.JsonObject;
+import sk.seges.acris.json.client.extension.ExtensionDescription;
+
+import com.google.gdata.data.geo.Namespaces;
 import com.google.gdata.data.geo.Point;
 
 /**
@@ -22,6 +26,7 @@ import com.google.gdata.data.geo.Point;
  * 
  * 
  */
+@JsonObject
 public class GmlLowerCorner extends PointConstruct {
 
 	static final String NAME = "lowerCorner";
@@ -41,10 +46,28 @@ public class GmlLowerCorner extends PointConstruct {
 	}
 
 	/**
-	 * Constructs a gml:lowerCorner element by copying the data from the given
-	 * point. If the given point is null an empy corner will be created.
+	 * Constructs a gml:lowerCorner element by copying the data from the given point. If the given point is null an empy
+	 * corner will be created.
 	 */
 	public GmlLowerCorner(Point copyFrom) {
 		super(NAME, copyFrom);
+	}
+
+	/**
+	 * Returns the suggested extension description with configurable repeatability.
+	 */
+	public static ExtensionDescription getDefaultDescription(boolean repeatable) {
+		ExtensionDescription desc = new ExtensionDescription();
+		desc.setExtensionClass(GmlLowerCorner.class);
+		desc.setPointName(Namespaces.GML_NAMESPACE + "$" + NAME);
+		desc.setRepeatable(repeatable);
+		return desc;
+	}
+
+	/**
+	 * Returns the suggested extension description and is repeatable.
+	 */
+	public static ExtensionDescription getDefaultDescription() {
+		return getDefaultDescription(true);
 	}
 }

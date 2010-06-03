@@ -15,11 +15,14 @@
 
 package com.google.gdata.data.youtube;
 
+import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
 @JsonObject(group = YouTubeNamespace.PREFIX, value = "duration")
 public class YtDuration extends ExtensionPoint {
+	
+	@Field
 	private long seconds;
 
 	/** Creates an empty duration tag. */

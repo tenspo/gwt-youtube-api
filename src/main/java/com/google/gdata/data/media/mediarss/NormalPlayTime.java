@@ -16,6 +16,7 @@
 package com.google.gdata.data.media.mediarss;
 
 import com.google.gdata.util.ParseException;
+import com.google.gwt.i18n.client.NumberFormat;
 
 /**
  * Time specification object which tries to conform to section 3.6 of RFC 2326 (Normal Play Time).
@@ -104,7 +105,7 @@ public class NormalPlayTime {
 		if (fraction == 0) {
 			return Long.toString(seconds);
 		}
-		return String.format("%1$d.%2$03d", seconds, fraction);
+		return NumberFormat.getFormat("00").format(seconds) + "." + NumberFormat.getFormat("000").format(fraction);
 	}
 
 	/**
@@ -124,9 +125,12 @@ public class NormalPlayTime {
 		long minutes = totalminutes % 60l;
 		long hours = totalminutes / 60l;
 		if (fraction > 0) {
-			return String.format("%1$02d:%2$02d:%3$02d.%4$03d", hours, minutes, seconds, fraction);
+			return NumberFormat.getFormat("00").format(hours) + ":" + NumberFormat.getFormat("00").format(minutes)
+					+ ":" + NumberFormat.getFormat("00").format(seconds) + "."
+					+ NumberFormat.getFormat("000").format(fraction);
 		} else {
-			return String.format("%1$02d:%2$02d:%3$02d", hours, minutes, seconds);
+			return NumberFormat.getFormat("00").format(hours) + ":" + NumberFormat.getFormat("000").format(minutes)
+					+ ":" + NumberFormat.getFormat("000").format(seconds);
 		}
 	}
 

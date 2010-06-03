@@ -17,17 +17,29 @@ package com.google.gdata.data.youtube;
 
 import org.gwttime.time.DateTime;
 
+import sk.seges.acris.json.client.annotation.DateTimePattern;
+import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
+
+import com.google.gdata.data.Source;
 
 @JsonObject(group = YouTubeNamespace.PREFIX, value = "statistics")
 public class YtUserProfileStatistics extends ExtensionPoint {
 	/**
 	 * How many time the users profile has been viewed? On the web site this field is called "channel views".
 	 */
+	@Field
 	private long viewCount;
+	
+	@Field
 	private long videoWatchCount;
+	
+	@Field
 	private long subscriberCount;
+	
+	@Field
+	@DateTimePattern(Source.DATE_TIME_PATTERN)
 	private DateTime lastWebAccess;
 
 	/**

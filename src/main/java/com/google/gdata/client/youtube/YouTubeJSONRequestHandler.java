@@ -17,7 +17,7 @@ public abstract class YouTubeJSONRequestHandler extends JSONRequestHandler {
 		jsonizerBuilder.registerDeserializer(Source.class, new SourceDeserializer());
 		IJsonizer jsonnizer = jsonizerBuilder.create();
 		VideoFeed videoFeed = jsonnizer.fromJson(json, VideoFeed.class);
-
+		
 //		VideoFeed videoFeed = new VideoFeed();
 //		videoFeed.get(json.get(FEED_ATTRIBUTE).isObject());
 		onRequestComplete(videoFeed);

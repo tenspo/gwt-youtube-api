@@ -16,6 +16,8 @@
 
 package com.google.gdata.data.geo;
 
+import sk.seges.acris.json.client.extension.Extension;
+
 
 /**
  * Interface for specifying a box that describes a rectangular geographic
@@ -24,7 +26,7 @@ package com.google.gdata.data.geo;
  *
  * 
  */
-public interface Box {
+public interface Box extends Extension {
 
   /**
    * @return the point that represents the lower-left coordinate of the box.

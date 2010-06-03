@@ -15,23 +15,25 @@
 
 package com.google.gdata.data.geo.impl;
 
+import sk.seges.acris.json.client.annotation.JsonObject;
+import sk.seges.acris.json.client.extension.ExtensionDescription;
+import sk.seges.acris.json.client.extension.ExtensionPoint;
+import sk.seges.acris.json.client.extension.ExtensionProfile;
+
 import com.google.gdata.data.geo.Box;
+import com.google.gdata.data.geo.Namespaces;
 import com.google.gdata.data.geo.Point;
 
 /**
- * A gml:Envelope element, this is used to describe a box using the gml version
- * of our geographic information language. An envelope contains an upper and a
- * lower corner.
+ * A gml:Envelope element, this is used to describe a box using the gml version of our geographic information language.
+ * An envelope contains an upper and a lower corner.
  * 
  * 
  */
-public class GmlEnvelope implements Box {
+@JsonObject(group = Namespaces.GML_ALIAS, value = GmlEnvelope.NAME)
+public class GmlEnvelope extends ExtensionPoint implements Box {
 
 	static final String NAME = "Envelope";
-
-	private GmlLowerCorner gmlLowerCorner;
-
-	private GmlUpperCorner gmlUpperCorner;
 
 	/**
 	 * Constructs an empty gml:Envelope element.
@@ -42,80 +44,106 @@ public class GmlEnvelope implements Box {
 	/**
 	 * Constructs a gml:Envelope with the given coordinates.
 	 */
-	public GmlEnvelope(Double lowerLat, Double lowerLon, Double upperLat,
-			Double upperLon) {
-		this(new GmlLowerCorner(lowerLat, lowerLon), new GmlUpperCorner(
-				upperLat, upperLon));
+	public GmlEnvelope(Double lowerLat, Double lowerLon, Double upperLat, Double upperLon) {
+		this(new GmlLowerCorner(lowerLat, lowerLon), new GmlUpperCorner(upperLat, upperLon));
 	}
 
 	/**
-	 * Constructs a gml:Envelope with the given lower and upper values. If the
-	 * given values are already a GmlLowerCorner and a GmlUpperCorner, they will
-	 * be used direclty as the extensions, otherwise they will be copied. If
-	 * both points are null an empty point will be created, otherwise if one of
-	 * them is null then an IllegalArgumentException will be thrown.
+	 * Constructs a gml:Envelope with the given lower and upper values. If the given values are already a GmlLowerCorner
+	 * and a GmlUpperCorner, they will be used direclty as the extensions, otherwise they will be copied. If both points
+	 * are null an empty point will be created, otherwise if one of them is null then an IllegalArgumentException will
+	 * be thrown.
 	 */
 	public GmlEnvelope(Point lower, Point upper) {
 		setGeoLocation(lower, upper);
 	}
 
 	/**
-	 * Constructs a gml:Envelope by copying from the given box. This calls the
-	 * {@link #GmlEnvelope(Point, Point)} constructor with the points in the
-	 * box, or with nulls if the box itself is null.
+	 * Constructs a gml:Envelope by copying from the given box. This calls the {@link #GmlEnvelope(Point, Point)}
+	 * constructor with the points in the box, or with nulls if the box itself is null.
 	 */
 	public GmlEnvelope(Box box) {
-		this(box == null ? null : box.getLowerLeft(), box == null ? null : box
-				.getUpperRight());
+		this(box == null ? null : box.getLowerLeft(), box == null ? null : box.getUpperRight());
+	}
+
+	/**
+	 * Returns the suggested extension description with configurable repeatability.
+	 */
+	public static ExtensionDescription getDefaultDescription(boolean repeatable) {
+		ExtensionDescription desc = new ExtensionDescription();
+		desc.setExtensionClass(GmlEnvelope.class);
+		desc.setPointName(Namespaces.GML_NAMESPACE + "$" + NAME);
+		desc.setRepeatable(repeatable);
+		return desc;
+	}
+
+	/**
+	 * Returns the suggested extension description and is repeatable.
+	 */
+	public static ExtensionDescription getDefaultDescription() {
+		return getDefaultDescription(true);
+	}
+
+	/*
+	 * Declare the extensions for gml envelope. This contains two elements with the coordinates for the lower and upper
+	 * corners.
+	 */
+	@Override
+	public void declareExtensions(ExtensionProfile extProfile) {
+		// Declare the gml:lowerCorner and gml:upperCorner elements.
+		extProfile.declare(GmlEnvelope.class, GmlLowerCorner.getDefaultDescription(false));
+		extProfile.declare(GmlEnvelope.class, GmlUpperCorner.getDefaultDescription(false));
+		super.declareExtensions(extProfile);
 	}
 
 	/*
 	 * Get the lower corner extension element.
 	 */
 	public GmlLowerCorner getLowerLeft() {
-		return gmlLowerCorner;
+		return getExtension(GmlLowerCorner.class);
 	}
 
 	/*
 	 * Get the upper corner extension element.
 	 */
 	public GmlUpperCorner getUpperRight() {
-		return gmlUpperCorner;
+		return getExtension(GmlUpperCorner.class);
 	}
 
 	/*
-	 * Sets the geo location of this envelope. If the passed in points are not
-	 * GmlLowerCorner and GmlUpperCorner, they will get converted. Either both
-	 * must be null or both non null or an IllegalArgumentException is thrown.
+	 * Sets the geo location of this envelope. If the passed in points are not GmlLowerCorner and GmlUpperCorner, they
+	 * will get converted. Either both must be null or both non null or an IllegalArgumentException is thrown.
 	 */
 	public void setGeoLocation(Point lowerLeft, Point upperRight) {
 		if (lowerLeft != null && upperRight != null) {
 			if (!(lowerLeft instanceof GmlLowerCorner)) {
-				gmlLowerCorner = new GmlLowerCorner(lowerLeft);
+				lowerLeft = new GmlLowerCorner(lowerLeft);
 			}
 			if (!(upperRight instanceof GmlUpperCorner)) {
-				gmlUpperCorner = new GmlUpperCorner(upperRight);
+				upperRight = new GmlUpperCorner(upperRight);
 			}
+			setExtension(lowerLeft);
+			setExtension(upperRight);
 		} else if (lowerLeft != null || upperRight != null) {
-			throw new IllegalArgumentException(
-					"'lower' and 'upper' must either both be null or non-null.");
+			throw new IllegalArgumentException("'lower' and 'upper' must either both be null or non-null.");
 		} else {
-			gmlLowerCorner = null;
-			gmlUpperCorner = null;
+			removeExtension(GmlLowerCorner.class);
+			removeExtension(GmlUpperCorner.class);
 		}
 	}
 
 	/*
-	 * Set the upper extension element. If the passed in Point is not a
-	 * GmlUpperCorner it will get converted to one.
+	 * Set the upper extension element. If the passed in Point is not a GmlUpperCorner it will get converted to one.
 	 */
 	public void setUpperRight(Point upperRight) {
 		if (upperRight == null) {
-			gmlUpperCorner = null;
+			removeExtension(GmlUpperCorner.class);
 		} else {
 			if (!(upperRight instanceof GmlUpperCorner)) {
-				gmlUpperCorner = new GmlUpperCorner(upperRight);
+				upperRight = new GmlUpperCorner(upperRight);
 			}
+
+			setExtension(upperRight);
 		}
 	}
 

@@ -15,6 +15,12 @@
 
 package com.google.gdata.data.geo.impl;
 
+import sk.seges.acris.json.client.annotation.JsonObject;
+import sk.seges.acris.json.client.extension.ExtensionDescription;
+import sk.seges.acris.json.client.extension.ExtensionPoint;
+import sk.seges.acris.json.client.extension.ExtensionProfile;
+
+import com.google.gdata.data.geo.Namespaces;
 import com.google.gdata.data.geo.Point;
 
 /**
@@ -22,11 +28,10 @@ import com.google.gdata.data.geo.Point;
  * 
  * 
  */
-public class GmlPoint implements Point {
+@JsonObject(group = Namespaces.GML_ALIAS, value = GmlPoint.NAME)
+public class GmlPoint extends ExtensionPoint implements Point {
 
 	static final String NAME = "Point";
-
-	private GmlPos gmlPos;
 
 	/**
 	 * Constructs an empty gml:Point element.
@@ -35,45 +40,68 @@ public class GmlPoint implements Point {
 	}
 
 	/**
-	 * Constructs a gml:Point element out of the given lat and lon values. This
-	 * will construct a gml:pos element to hold the actual values. If the values
-	 * are null then an empty gml:pos element will be created.
+	 * Constructs a gml:Point element out of the given lat and lon values. This will construct a gml:pos element to hold
+	 * the actual values. If the values are null then an empty gml:pos element will be created.
 	 */
 	public GmlPoint(Double lat, Double lon) {
 		this(new GmlPos(lat, lon));
 	}
 
 	/**
-	 * Constructs a gml:Point element using the given Point coordinates for the
-	 * nested gml:pos element. If the point is already a gml:pos, then it will
-	 * be used directly as the extension, otherwise a gml:pos element will be
-	 * created as a copy of the given point.
+	 * Constructs a gml:Point element using the given Point coordinates for the nested gml:pos element. If the point is
+	 * already a gml:pos, then it will be used directly as the extension, otherwise a gml:pos element will be created as
+	 * a copy of the given point.
 	 */
 	public GmlPoint(Point point) {
 		if (point != null) {
 			if (!(point instanceof GmlPos)) {
-				gmlPos = new GmlPos(point);
+				point = new GmlPos(point);
 			}
+			setExtension(point);
 		}
+	}
+
+	/**
+	 * Returns the suggested extension description with configurable repeatability.
+	 */
+	public static ExtensionDescription getDefaultDescription(boolean repeatable) {
+		ExtensionDescription desc = new ExtensionDescription();
+		desc.setExtensionClass(GmlPoint.class);
+		desc.setPointName(Namespaces.GML_NAMESPACE + "$" + NAME);
+		desc.setRepeatable(repeatable);
+		return desc;
+	}
+
+	/*
+	 * Declare the extensions for gml point. This contains a single element with the coordinate which is the actual
+	 * point. This is for extensibility I believe, but it ends up just being an extra level of wrapping.
+	 */
+	@Override
+	public void declareExtensions(ExtensionProfile extProfile) {
+		// Declare the gml:pos extension.
+		extProfile.declare(GmlPoint.class, GmlPos.getDefaultDescription(false));
+		super.declareExtensions(extProfile);
 	}
 
 	/**
 	 * @return the value of the gml:pos element within this Point.
 	 */
 	public Double getLatitude() {
-		return gmlPos != null ? gmlPos.getLatitude() : null;
+		GmlPos coord = getExtension(GmlPos.class);
+		return coord != null ? coord.getLatitude() : null;
 	}
 
 	/**
 	 * @return the value of the gml:pos element's longitude within this Point.
 	 */
 	public Double getLongitude() {
-		return gmlPos != null ? gmlPos.getLongitude() : null;
+		GmlPos coord = getExtension(GmlPos.class);
+		return coord != null ? coord.getLongitude() : null;
 	}
 
 	/**
-	 * Sets the latitude and longitude of the gml:pos element of this Point to
-	 * the latitude and longitude coordinates specified.
+	 * Sets the latitude and longitude of the gml:pos element of this Point to the latitude and longitude coordinates
+	 * specified.
 	 * 
 	 * @param lat
 	 *            The latitude coordinate of this point.
@@ -81,15 +109,18 @@ public class GmlPoint implements Point {
 	 *            the longitude coordinate of this point.
 	 */
 	public void setGeoLocation(Double lat, Double lon) {
-		if (gmlPos != null) {
+		GmlPos point = getExtension(GmlPos.class);
+		if (point != null) {
 			if (lat == null && lon == null) {
-				gmlPos = null;
+				removeExtension(point);
 			} else {
-				gmlPos.setGeoLocation(lat, lon);
+				point.setGeoLocation(lat, lon);
 			}
 		} else if (lat != null || lon != null) {
-			gmlPos = new GmlPos();
-			gmlPos.setGeoLocation(lat, lon);
+			point = new GmlPos();
+			setExtension(point);
+			point.setGeoLocation(lat, lon);
 		}
 	}
+
 }

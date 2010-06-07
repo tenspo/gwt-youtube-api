@@ -5,6 +5,8 @@ import java.util.List;
 import org.gwttime.time.format.DateTimeFormat;
 
 import com.google.gdata.client.youtube.YouTubeManager;
+import com.google.gdata.client.youtube.ui.YouTubeSearchResultPanel;
+import com.google.gdata.client.youtube.ui.YouTubeVideoPanel;
 import com.google.gdata.data.media.mediarss.MediaThumbnail;
 import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gdata.data.youtube.YouTubeMediaGroup;
@@ -15,7 +17,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -24,11 +25,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.youtube.client.YouTubeEmbeddedPlayer;
 
 public class Site implements EntryPoint {
-
-	private VerticalPanel vp = new VerticalPanel();
 
 	private HorizontalPanel createHeader() {
 		HorizontalPanel hp = new HorizontalPanel();
@@ -47,7 +45,7 @@ public class Site implements EntryPoint {
 		DOM.setStyleAttribute(textBox.getElement(), "marginTop", "15px");
 		DOM.setStyleAttribute(textBox.getElement(), "marginRight", "10px");
 		hp.add(textBox);
-		textBox.setText("NKoNu4_7P_I");
+		textBox.setText("vQQuRvFR0TM");
 
 		Button search = new Button();
 		search.setText("Search");
@@ -57,9 +55,15 @@ public class Site implements EntryPoint {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				vp.clear();
-				YouTubeEmbeddedPlayer youTubeEmbeddedPlayer = new YouTubeEmbeddedPlayer(textBox.getValue());
-				vp.add(youTubeEmbeddedPlayer);
+				RootPanel.get().clear();
+				RootPanel.get().add(createHeader());
+				YouTubeSearchResultPanel youTubeSearchResultPanel = new YouTubeSearchResultPanel();
+				DOM.setStyleAttribute(youTubeSearchResultPanel.getElement(), "marginTop", "15px");
+				DOM.setStyleAttribute(youTubeSearchResultPanel.getElement(), "marginLeft", "150px");
+				RootPanel.get().add(youTubeSearchResultPanel);
+				youTubeSearchResultPanel.showResults(textBox.getValue());
+//				YouTubeEmbeddedPlayer youTubeEmbeddedPlayer = new YouTubeEmbeddedPlayer(textBox.getValue());
+//				vp.add(youTubeEmbeddedPlayer);
 			}
 		});
 
@@ -87,7 +91,6 @@ public class Site implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		RootPanel.get().add(createHeader());
-		RootPanel.get().add(vp);
 
 		Label label = new Label();
 		label.setText("Recommended for You");
@@ -121,14 +124,19 @@ public class Site implements EntryPoint {
 	private void playVideo(String id) {
 		RootPanel.get().clear();
 		RootPanel.get().add(createHeader());
-		FlowPanel fp = new FlowPanel();
-		YouTubeEmbeddedPlayer youTubeEmbeddedPlayer = new YouTubeEmbeddedPlayer(id);
-		youTubeEmbeddedPlayer.setWidth("640px");
-		youTubeEmbeddedPlayer.setHeight("480px");
-		fp.add(youTubeEmbeddedPlayer);
-		RootPanel.get().add(fp);
-		DOM.setStyleAttribute(fp.getElement(), "marginLeft", "150px");
-		DOM.setStyleAttribute(fp.getElement(), "marginTop", "50px");
+		YouTubeVideoPanel videoPanel = new YouTubeVideoPanel();
+		videoPanel.setStyleName(YouTubeVideoPanel.PLAYER_STYLE);
+		videoPanel.playVideo(id, 640, 480);
+		RootPanel.get().add(videoPanel);
+		
+//		FlowPanel fp = new FlowPanel();
+//		YouTubeEmbeddedPlayer youTubeEmbeddedPlayer = new YouTubeEmbeddedPlayer(id);
+//		youTubeEmbeddedPlayer.setWidth("640px");
+//		youTubeEmbeddedPlayer.setHeight("480px");
+//		fp.add(youTubeEmbeddedPlayer);
+//		RootPanel.get().add(fp);
+//		DOM.setStyleAttribute(fp.getElement(), "marginLeft", "150px");
+//		DOM.setStyleAttribute(fp.getElement(), "marginTop", "50px");
 	}
 	
 	private void fillVideoGrid(final Grid grid, boolean mostRecent) {

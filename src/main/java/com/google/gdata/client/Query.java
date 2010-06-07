@@ -491,6 +491,18 @@ public class Query {
 	public int getMaxResults() {
 		return this.maxResults;
 	}
+	
+	/**
+	 * Sets the maximum number of results and start index for query results. See setMaxResuls and setStartIndex for
+	 * more details
+	 * @param queryPage
+	 * 			data structure for holding max results and start query index
+	 */
+	public void setQueryPage(QueryPage queryPage) {
+		setMaxResults(queryPage.getMaxResults());
+		setStartIndex(queryPage.getStartIndex());
+	}
+	
 
 	/**
 	 * Sets the expected query result format.

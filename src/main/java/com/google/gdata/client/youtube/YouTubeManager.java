@@ -2,6 +2,7 @@ package com.google.gdata.client.youtube;
 
 import java.util.List;
 
+import com.google.gdata.client.QueryPage;
 import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gdata.data.youtube.VideoFeed;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -17,19 +18,23 @@ public class YouTubeManager {
 	public YouTubeManager() {
 	}
 
-	public void retrieveVideo(String videoID, AsyncCallback<List<VideoEntry>> callback) {
-		retrieveVideos(VIDEO_FEED_URL, videoID, -1, false, callback);
+	public void retrieveVideo(String textQuery, AsyncCallback<List<VideoEntry>> callback) {
+		retrieveVideos(VIDEO_FEED_URL, textQuery, null, callback);
+	}
+
+	public void retrieveVideo(String textQuery, QueryPage queryPage, AsyncCallback<List<VideoEntry>> callback) {
+		retrieveVideos(VIDEO_FEED_URL, textQuery, queryPage, callback);
 	}
 
 	public void retrieveTopRated(AsyncCallback<List<VideoEntry>> callback) {
-		retrieveVideos(TOP_RATED_FEED_URL, null, -1, false, callback);
+		retrieveVideos(TOP_RATED_FEED_URL, null, null, callback);
 	}
 
 	public void retrieveMostRecent(AsyncCallback<List<VideoEntry>> callback) {
-		retrieveVideos(MOST_RECENT_FEED_URL, null, -1, false, callback);
+		retrieveVideos(MOST_RECENT_FEED_URL, null, null, callback);
 	}
 
-	private void retrieveVideos(String url, String textQuery, int maxResults, boolean filter,
+	private void retrieveVideos(String url, String textQuery, QueryPage queryPage,
 			final AsyncCallback<List<VideoEntry>> callback) {
 
 		YouTubeService service = new YouTubeService();
@@ -41,8 +46,8 @@ public class YouTubeManager {
 			query.setFullTextQuery(textQuery);
 		}
 		query.setSafeSearch(YouTubeQuery.SafeSearch.NONE);
-		if (maxResults != -1) {
-			query.setMaxResults(maxResults);
+		if (queryPage != null) {
+			query.setQueryPage(queryPage);
 		}
 
 		service.query(query, VideoFeed.class, new YouTubeJSONRequestHandler() {

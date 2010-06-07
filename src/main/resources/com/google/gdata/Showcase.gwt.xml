@@ -1,6 +1,8 @@
 <module>
 	<inherits name="com.google.gdata.YouTubeAPI" />
 	<inherits name="com.google.youtube.Player" />
+
+	<stylesheet src="styles/youtube-gwt.css" />
 	
 	<entry-point class="com.google.gdata.client.Site"/>
 	

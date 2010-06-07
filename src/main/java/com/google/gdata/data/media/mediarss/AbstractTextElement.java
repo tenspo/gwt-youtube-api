@@ -29,7 +29,7 @@ import com.google.gdata.data.TextConstruct;
  */
 public abstract class AbstractTextElement implements Extension {
 
-	@Field
+	@Field("$t")
 	private TextConstruct content;
 
 	public void setContent(TextConstruct content) {

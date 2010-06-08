@@ -499,7 +499,7 @@ public class Query {
 	 * 			data structure for holding max results and start query index
 	 */
 	public void setQueryPage(QueryPage queryPage) {
-		setMaxResults(queryPage.getMaxResults());
+		setMaxResults(queryPage.getItemsPerPage());
 		setStartIndex(queryPage.getStartIndex());
 	}
 	

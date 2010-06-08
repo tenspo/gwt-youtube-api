@@ -1,9 +1,6 @@
 package com.google.gdata.client.youtube;
 
-import java.util.List;
-
 import com.google.gdata.client.QueryPage;
-import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gdata.data.youtube.VideoFeed;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -13,29 +10,28 @@ public class YouTubeManager {
 	private static final String STANDARD_FEED_URL = YOUTUBE_URL + "standardfeeds/";
 	private static final String TOP_RATED_FEED_URL = STANDARD_FEED_URL + "top_rated";
 	private static final String MOST_RECENT_FEED_URL = STANDARD_FEED_URL + "most_recent";
-	private static final String YOUTUBE_EMBEDDED_URL = "http://www.youtube.com/v/";
 
 	public YouTubeManager() {
 	}
 
-	public void retrieveVideo(String textQuery, AsyncCallback<List<VideoEntry>> callback) {
+	public void retrieveVideo(String textQuery, AsyncCallback<VideoFeed> callback) {
 		retrieveVideos(VIDEO_FEED_URL, textQuery, null, callback);
 	}
 
-	public void retrieveVideo(String textQuery, QueryPage queryPage, AsyncCallback<List<VideoEntry>> callback) {
+	public void retrieveVideo(String textQuery, QueryPage queryPage, AsyncCallback<VideoFeed> callback) {
 		retrieveVideos(VIDEO_FEED_URL, textQuery, queryPage, callback);
 	}
 
-	public void retrieveTopRated(AsyncCallback<List<VideoEntry>> callback) {
+	public void retrieveTopRated(AsyncCallback<VideoFeed> callback) {
 		retrieveVideos(TOP_RATED_FEED_URL, null, null, callback);
 	}
 
-	public void retrieveMostRecent(AsyncCallback<List<VideoEntry>> callback) {
+	public void retrieveMostRecent(AsyncCallback<VideoFeed> callback) {
 		retrieveVideos(MOST_RECENT_FEED_URL, null, null, callback);
 	}
 
 	private void retrieveVideos(String url, String textQuery, QueryPage queryPage,
-			final AsyncCallback<List<VideoEntry>> callback) {
+			final AsyncCallback<VideoFeed> callback) {
 
 		YouTubeService service = new YouTubeService();
 		// service.setConnectTimeout(timeout); // millis
@@ -54,11 +50,7 @@ public class YouTubeManager {
 			
 			@Override
 			public void onRequestComplete(VideoFeed videoFeed) {
-				if (videoFeed.getEntries() != null && videoFeed.getEntries().size() > 0) {
-					callback.onSuccess(videoFeed.getEntries());
-				} else {
-					callback.onFailure(null);
-				}
+				callback.onSuccess(videoFeed);
 			}
 		});
 	}

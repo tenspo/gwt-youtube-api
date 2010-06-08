@@ -9,6 +9,7 @@ import com.google.gdata.client.youtube.ui.YouTubeSearchResultPanel;
 import com.google.gdata.client.youtube.ui.YouTubeVideoPanel;
 import com.google.gdata.data.media.mediarss.MediaThumbnail;
 import com.google.gdata.data.youtube.VideoEntry;
+import com.google.gdata.data.youtube.VideoFeed;
 import com.google.gdata.data.youtube.YouTubeMediaGroup;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -62,8 +63,6 @@ public class Site implements EntryPoint {
 				DOM.setStyleAttribute(youTubeSearchResultPanel.getElement(), "marginLeft", "150px");
 				RootPanel.get().add(youTubeSearchResultPanel);
 				youTubeSearchResultPanel.showResults(textBox.getValue());
-//				YouTubeEmbeddedPlayer youTubeEmbeddedPlayer = new YouTubeEmbeddedPlayer(textBox.getValue());
-//				vp.add(youTubeEmbeddedPlayer);
 			}
 		});
 
@@ -128,15 +127,6 @@ public class Site implements EntryPoint {
 		videoPanel.setStyleName(YouTubeVideoPanel.PLAYER_STYLE);
 		videoPanel.playVideo(id, 640, 480);
 		RootPanel.get().add(videoPanel);
-		
-//		FlowPanel fp = new FlowPanel();
-//		YouTubeEmbeddedPlayer youTubeEmbeddedPlayer = new YouTubeEmbeddedPlayer(id);
-//		youTubeEmbeddedPlayer.setWidth("640px");
-//		youTubeEmbeddedPlayer.setHeight("480px");
-//		fp.add(youTubeEmbeddedPlayer);
-//		RootPanel.get().add(fp);
-//		DOM.setStyleAttribute(fp.getElement(), "marginLeft", "150px");
-//		DOM.setStyleAttribute(fp.getElement(), "marginTop", "50px");
 	}
 	
 	private void fillVideoGrid(final Grid grid, boolean mostRecent) {
@@ -145,10 +135,16 @@ public class Site implements EntryPoint {
 		DOM.setStyleAttribute(grid.getElement(), "borderTop", "1px solid #666666");
 		DOM.setStyleAttribute(grid.getElement(), "marginLeft", "150px");
 
-		AsyncCallback<List<VideoEntry>> callback = new AsyncCallback<List<VideoEntry>>() {
+		AsyncCallback<VideoFeed> callback = new AsyncCallback<VideoFeed>() {
 
 			@Override
-			public void onSuccess(List<VideoEntry> result) {
+			public void onSuccess(VideoFeed feed) {
+				
+				if (feed == null || feed.getEntries() == null) {
+					return;
+				}
+				List<VideoEntry> result = feed.getEntries();
+				
 				int maxColumns = 4;
 
 				int index = 0;

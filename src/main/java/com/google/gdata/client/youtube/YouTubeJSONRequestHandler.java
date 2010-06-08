@@ -7,6 +7,7 @@ import com.google.gdata.client.deserialize.SourceDeserializer;
 import com.google.gdata.client.json.JSONRequestHandler;
 import com.google.gdata.data.Source;
 import com.google.gdata.data.youtube.VideoFeed;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.json.client.JSONObject;
 
 public abstract class YouTubeJSONRequestHandler extends JSONRequestHandler {
@@ -16,10 +17,8 @@ public abstract class YouTubeJSONRequestHandler extends JSONRequestHandler {
 		GoogleJsonizerBuilder jsonizerBuilder = new GoogleJsonizerBuilder();
 		jsonizerBuilder.registerDeserializer(Source.class, new SourceDeserializer());
 		IJsonizer jsonnizer = jsonizerBuilder.create();
+		GWT.log(json.toString(), null);
 		VideoFeed videoFeed = jsonnizer.fromJson(json, VideoFeed.class);
-		
-//		VideoFeed videoFeed = new VideoFeed();
-//		videoFeed.get(json.get(FEED_ATTRIBUTE).isObject());
 		onRequestComplete(videoFeed);
 	}
 

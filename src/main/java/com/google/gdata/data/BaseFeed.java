@@ -33,15 +33,15 @@ public abstract class BaseFeed<E extends BaseEntry> extends Source implements IF
 		public boolean canPost = true;
 
 		/** OpenSearch: number of search results (feed entries). */
-		@Field
+		@Field("openSearch$totalResults")
 		public int totalResults = Query.UNDEFINED;
 
 		/** OpenSearch: start index. */
-		@Field
+		@Field("openSearch$startIndex")
 		public int startIndex = Query.UNDEFINED;
 
 		/** OpenSearch: items per page. */
-		@Field
+		@Field("openSearch$itemsPerPage")
 		public int itemsPerPage = Query.UNDEFINED;
 
 		/**

@@ -3,7 +3,7 @@ package com.google.gdata.client.util;
 import org.gwttime.time.DateTime;
 import org.gwttime.time.DateTimeFieldType;
 
-import com.google.gdata.client.youtube.YouTubeMessages;
+import com.google.gdata.client.youtube.ui.YouTubeMessages;
 import com.google.gwt.core.client.GWT;
 
 public class DateTimeHelper {

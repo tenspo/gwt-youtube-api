@@ -1,4 +1,4 @@
-package com.google.gdata.client.youtube;
+package com.google.gdata.client.youtube.ui;
 
 import com.google.gwt.i18n.client.Messages;
 
@@ -43,4 +43,8 @@ public interface YouTubeMessages extends Messages {
 	String views();
 	
 	String by();
+	
+	String next();
+	
+	String previous();
 }

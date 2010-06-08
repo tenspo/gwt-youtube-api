@@ -32,7 +32,7 @@ public class Site implements EntryPoint {
 	private HorizontalPanel createHeader() {
 		HorizontalPanel hp = new HorizontalPanel();
 
-		Image img = new Image("http://code.google.com/intl/sk/apis/youtube/images/logo.gif");
+		Image img = new Image("http://www.youtube.com/img/pic_youtubelogo_123x63.gif");
 		// img.setWidth("120px");
 		hp.add(img);
 		DOM.setStyleAttribute(img.getElement(), "marginLeft", "150px");

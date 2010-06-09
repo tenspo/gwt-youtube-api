@@ -5,8 +5,10 @@ import java.util.List;
 import org.gwttime.time.format.DateTimeFormat;
 
 import com.google.gdata.client.youtube.YouTubeManager;
+import com.google.gdata.client.youtube.ui.YouTubeSearchPanel;
 import com.google.gdata.client.youtube.ui.YouTubeSearchResultPanel;
 import com.google.gdata.client.youtube.ui.YouTubeVideoPanel;
+import com.google.gdata.client.youtube.ui.YouTubeSearchPanel.SearchEvent;
 import com.google.gdata.data.media.mediarss.MediaThumbnail;
 import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gdata.data.youtube.VideoFeed;
@@ -17,14 +19,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Site implements EntryPoint {
@@ -38,35 +38,22 @@ public class Site implements EntryPoint {
 		DOM.setStyleAttribute(img.getElement(), "marginLeft", "150px");
 		DOM.setStyleAttribute(img.getElement(), "marginRight", "30px");
 
-		final TextBox textBox = new TextBox();
-		textBox.setWidth("300px");
-		DOM.setStyleAttribute(textBox.getElement(), "border", "2px solid #BBDAFD");
-		textBox.setHeight("1.38462em");
-		textBox.setWidth("22em");
-		DOM.setStyleAttribute(textBox.getElement(), "marginTop", "15px");
-		DOM.setStyleAttribute(textBox.getElement(), "marginRight", "10px");
-		hp.add(textBox);
-		textBox.setText("vQQuRvFR0TM");
+		YouTubeSearchPanel youTubeSearchPanel = new YouTubeSearchPanel();
+		youTubeSearchPanel.addPagingHandler(new YouTubeSearchPanel.SearchHandler(){
 
-		Button search = new Button();
-		search.setText("Search");
-		search.setHeight("1.9231em");
-		DOM.setStyleAttribute(search.getElement(), "marginTop", "15px");
-		search.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
+			public void onPage(SearchEvent event) {
 				RootPanel.get().clear();
 				RootPanel.get().add(createHeader());
 				YouTubeSearchResultPanel youTubeSearchResultPanel = new YouTubeSearchResultPanel();
 				DOM.setStyleAttribute(youTubeSearchResultPanel.getElement(), "marginTop", "15px");
 				DOM.setStyleAttribute(youTubeSearchResultPanel.getElement(), "marginLeft", "150px");
 				RootPanel.get().add(youTubeSearchResultPanel);
-				youTubeSearchResultPanel.showResults(textBox.getValue());
+				youTubeSearchResultPanel.showResults(event.getSearch());
 			}
 		});
-
-		hp.add(search);
+		
+		hp.add(youTubeSearchPanel);
+		
 		Label separator = new Label("|");
 		DOM.setStyleAttribute(separator.getElement(), "marginLeft", "10px");
 		DOM.setStyleAttribute(separator.getElement(), "marginTop", "15px");

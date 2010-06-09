@@ -85,3 +85,16 @@
 .youtube-paginator-label:hover {
 	text-decoration: underline;
 }
+
+.youtube-search-box {
+	border: 2px solid #BBDAFD;
+	height: 1.38462em;
+	width: 22em;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+
+.youtube-search-button {
+	height: 1.9231em;
+	margin-top: 15px;
+}

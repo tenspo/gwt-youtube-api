@@ -57,7 +57,7 @@ public class Namespaces {
 
 	public static final XmlNamespace GML_NAMESPACE = new XmlNamespace(
 			GML_ALIAS, GML);
-
+	
 	private Namespaces() {
 	}
 }

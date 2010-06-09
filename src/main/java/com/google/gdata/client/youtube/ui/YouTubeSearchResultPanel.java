@@ -195,7 +195,7 @@ public class YouTubeSearchResultPanel extends Composite {
 
 			@Override
 			public void onSuccess(VideoFeed feed) {
-				showResults(textQuery, pageQuery, feed);
+				showResults(textQuery, new QueryPage(feed.getStartIndex(), feed.getItemsPerPage(), feed.getTotalResults()), feed);
 			}
 		};
 
@@ -307,12 +307,17 @@ public class YouTubeSearchResultPanel extends Composite {
 		return flowPanel;
 	}
 
+	protected void postprocessResult(HorizontalPanel videoPanel) {
+		
+	}
+	
 	protected FlowPanel prepareUI(Set<YouTubeSearchResult> youTubeSearchResults) {
 		FlowPanel flowPanel = new FlowPanel();
 
 		for (YouTubeSearchResult youTubeSearchResult : youTubeSearchResults) {
 			HorizontalPanel videoPanel = new HorizontalPanel();
-
+			postprocessResult(videoPanel);
+			
 			Image img = new Image(youTubeSearchResult.getThumbnailUrl());
 			img.setStyleName(THUMBNAIL_STYLE);
 			videoPanel.add(img);

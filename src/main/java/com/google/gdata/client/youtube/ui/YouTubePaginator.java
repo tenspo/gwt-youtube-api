@@ -110,11 +110,11 @@ public class YouTubePaginator extends Composite {
 	
 	public void showPagingButtons() {
 		
-		int pageIndex = queryPage.getStartIndex() / queryPage.getItemsPerPage() + 1;
+		int pageIndex = ((queryPage.getStartIndex() - 1) / queryPage.getItemsPerPage()) + 1;
 		int maxPageIndex = Query.UNDEFINED;
 		
 		if (queryPage.getTotalResults() != Query.UNDEFINED) {
-			maxPageIndex = queryPage.getTotalResults() / queryPage.getItemsPerPage();
+			maxPageIndex = ((queryPage.getTotalResults() - 1) / queryPage.getItemsPerPage()) + 1;
 		}
 		
 		if (pageIndex > 1) {
@@ -123,7 +123,7 @@ public class YouTubePaginator extends Composite {
 		
 		int min = Math.max(1, pageIndex-MAX_OFFSET);
 		
-		for (int i = min; (i < min + 2 * MAX_OFFSET + 1) && (maxPageIndex == Query.UNDEFINED || i < maxPageIndex); i++) {
+		for (int i = min; (i < min + 2 * MAX_OFFSET + 1) && (maxPageIndex == Query.UNDEFINED || i <= maxPageIndex); i++) {
 			panel.add(addEventHandler(createButton(String.valueOf(i), i == pageIndex), i));
 		}
 

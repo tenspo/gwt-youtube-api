@@ -3,11 +3,13 @@ package com.google.gdata.data;
 import java.util.LinkedList;
 import java.util.List;
 
+import sk.seges.acris.json.client.annotation.ComplexField;
 import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 
 import com.google.gdata.client.Query;
 import com.google.gdata.client.Service;
+import com.google.gdata.util.Namespaces;
 
 public abstract class BaseFeed<E extends BaseEntry> extends Source implements IFeed {
 
@@ -33,15 +35,21 @@ public abstract class BaseFeed<E extends BaseEntry> extends Source implements IF
 		public boolean canPost = true;
 
 		/** OpenSearch: number of search results (feed entries). */
-		@Field("openSearch$totalResults")
+		@ComplexField({
+			@Field(group = Namespaces.OPEN_SEARCH_ALIAS),
+			@Field("$t")})
 		public int totalResults = Query.UNDEFINED;
 
 		/** OpenSearch: start index. */
-		@Field("openSearch$startIndex")
+		@ComplexField({
+			@Field(group = Namespaces.OPEN_SEARCH_ALIAS),
+			@Field("$t")})
 		public int startIndex = Query.UNDEFINED;
 
 		/** OpenSearch: items per page. */
-		@Field("openSearch$itemsPerPage")
+		@ComplexField({
+				@Field(group = Namespaces.OPEN_SEARCH_ALIAS),
+				@Field("$t")})
 		public int itemsPerPage = Query.UNDEFINED;
 
 		/**
@@ -81,8 +89,8 @@ public abstract class BaseFeed<E extends BaseEntry> extends Source implements IF
 
 	/**
 	 * Copy constructor that initializes a new BaseFeed instance to have identical contents to another instance, using a
-	 * shared reference to the same {@link FeedState}. subclasses of {@code BaseFeed} can use this
-	 * constructor to create adaptor instances of an entry that share state with the original.
+	 * shared reference to the same {@link FeedState}. subclasses of {@code BaseFeed} can use this constructor to create
+	 * adaptor instances of an entry that share state with the original.
 	 * 
 	 * @param entryClass
 	 *            Class used to construct new Entry instances for the Feed.
@@ -94,8 +102,8 @@ public abstract class BaseFeed<E extends BaseEntry> extends Source implements IF
 
 	/**
 	 * Copy constructor that initializes a new BaseFeed instance to have identical contents to another instance, using a
-	 * shared reference to the same {@link FeedState}. Subclasses of {@code BaseFeed} can use this
-	 * constructor to create adaptor instances of a feed that share state with the original.
+	 * shared reference to the same {@link FeedState}. Subclasses of {@code BaseFeed} can use this constructor to create
+	 * adaptor instances of a feed that share state with the original.
 	 */
 	protected BaseFeed(Class<? extends E> entryClass, BaseFeed<?> sourceFeed) {
 
@@ -271,49 +279,46 @@ public abstract class BaseFeed<E extends BaseEntry> extends Source implements IF
 
 		return null;
 	}
-	
-	  /** Returns the entry post link for the feed. */
-	  public Link getEntryPostLink() {
-	    Link postLink = getLink(Link.Rel.ENTRY_POST, Link.Type.ATOM);
-	    return postLink;
-	  }
 
-	  /** Returns the self link for the feed. */
-	  public Link getSelfLink() {
-	    Link postLink = getLink(Link.Rel.SELF, Link.Type.ATOM);
-	    return postLink;
-	  }
+	/** Returns the entry post link for the feed. */
+	public Link getEntryPostLink() {
+		Link postLink = getLink(Link.Rel.ENTRY_POST, Link.Type.ATOM);
+		return postLink;
+	}
 
-	  /**
-	   * Returns the link that provides the URI of next page in a paged feed.
-	   *
-	   * @return Link that provides the URI of next page in a paged feed or {@code
-	   *     null} for none.
-	   */
-	  public Link getNextLink() {
-	    return getLink(Link.Rel.NEXT, Link.Type.ATOM);
-	  }
+	/** Returns the self link for the feed. */
+	public Link getSelfLink() {
+		Link postLink = getLink(Link.Rel.SELF, Link.Type.ATOM);
+		return postLink;
+	}
 
-	  /**
-	   * Returns the link that provides the URI of previous page in a paged feed.
-	   *
-	   * @return Link that provides the URI of previous page in a paged feed or
-	   *     {@code null} for none.
-	   */
-	  public Link getPreviousLink() {
-	    return getLink(Link.Rel.PREVIOUS, Link.Type.ATOM);
-	  }
+	/**
+	 * Returns the link that provides the URI of next page in a paged feed.
+	 * 
+	 * @return Link that provides the URI of next page in a paged feed or {@code null} for none.
+	 */
+	public Link getNextLink() {
+		return getLink(Link.Rel.NEXT, Link.Type.ATOM);
+	}
 
-	  /**
-	   * Returns the link that provides the URI that can be used to batch operations
-	   * to query, insert, update and delete entries on this feed.
-	   *
-	   * @return Link that provides the URI that can be used to batch operations to
-	   *     query, insert, update and delete entries on this feed or {@code null}
-	   *     for none.
-	   */
-	  public Link getFeedBatchLink() {
-	    return getLink(Link.Rel.FEED_BATCH, Link.Type.ATOM);
-	  }
+	/**
+	 * Returns the link that provides the URI of previous page in a paged feed.
+	 * 
+	 * @return Link that provides the URI of previous page in a paged feed or {@code null} for none.
+	 */
+	public Link getPreviousLink() {
+		return getLink(Link.Rel.PREVIOUS, Link.Type.ATOM);
+	}
+
+	/**
+	 * Returns the link that provides the URI that can be used to batch operations to query, insert, update and delete
+	 * entries on this feed.
+	 * 
+	 * @return Link that provides the URI that can be used to batch operations to query, insert, update and delete
+	 *         entries on this feed or {@code null} for none.
+	 */
+	public Link getFeedBatchLink() {
+		return getLink(Link.Rel.FEED_BATCH, Link.Type.ATOM);
+	}
 
 }

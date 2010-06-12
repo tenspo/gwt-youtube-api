@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
   <ModulePrefs title="YouTube API for Google Web Toolkit"/> 
-  <Content type="html">
-  <![CDATA[ 
-     <iframe src="http://gwt-youtube-api.appspot.com/com.google.gdata.Showcase/Showcase.html"></iframe> 
-  ]]> 
-  </Content>
+  <Content type="url" href="http://gwt-youtube-api.appspot.com/com.google.gdata.Showcase/Showcase.html"/>
 </Module>

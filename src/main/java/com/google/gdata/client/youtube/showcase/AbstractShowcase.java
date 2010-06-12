@@ -5,6 +5,7 @@ import com.google.gdata.client.QueryPage;
 import com.google.gdata.client.youtube.ui.YouTubeSearchPanel;
 import com.google.gdata.client.youtube.ui.YouTubeSearchResultPanel;
 import com.google.gdata.client.youtube.ui.YouTubeSearchPanel.SearchEvent;
+import com.google.gdata.client.youtube.ui.YouTubeSearchResultPanel.VideoResolution;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -26,6 +27,10 @@ abstract class AbstractShowcase {
 		return createSearchPanel(null);
 	}
 	
+	protected VideoResolution getResultVideoResolution() {
+		return VideoResolution.MEDIUM;
+	}
+
 	protected HorizontalPanel createSearchPanel(String text) {
 		HorizontalPanel hp = new HorizontalPanel();
 
@@ -42,7 +47,11 @@ abstract class AbstractShowcase {
 			public void onPage(SearchEvent event) {
 				RootPanel.get().clear();
 				RootPanel.get().add(createSearchPanel(event.getSearch()));
-				YouTubeSearchResultPanel youTubeSearchResultPanel = new YouTubeSearchResultPanel();
+				YouTubeSearchResultPanel youTubeSearchResultPanel = new YouTubeSearchResultPanel() {
+					protected VideoResolution getVideoResolution() {
+						return getResultVideoResolution();
+					};
+				};
 				youTubeSearchResultPanel.setStyleName(YOUTUBE_SEARCH_PANEL);
 				RootPanel.get().add(youTubeSearchResultPanel);
 				youTubeSearchResultPanel.showResults(event.getSearch(), getDefaultQueryPage());

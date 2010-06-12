@@ -46,7 +46,28 @@ public class YouTubeSearchResultPanel extends Composite {
 
 	private YouTubeMessages messages = GWT.create(YouTubeMessages.class);
 
+	public static enum VideoResolution {
+		SMALL(320, 240), MEDIUM(640, 480);
+		
+		private int width;
+		private int height;
+		
+		VideoResolution(int width, int height) {
+			this.width = width;
+			this.height = height;
+		}
+		
+		public int getWidth() {
+			return width;
+		}
+		
+		public int getHeight() {
+			return height;
+		}
+	}
+	
 	private class YouTubeSearchResult {
+		
 		private String videoId;
 		private String thumbnailUrl;
 		private String title;
@@ -246,10 +267,14 @@ public class YouTubeSearchResultPanel extends Composite {
 		return label;
 	}
 
+	protected VideoResolution getVideoResolution() {
+		return VideoResolution.MEDIUM;
+	}
+	
 	protected void playVideo(String title, String videoId) {
 		final DialogBox dialog = GWT.create(DialogBox.class);
 		YouTubeVideoPanel videoPanel = new YouTubeVideoPanel();
-		videoPanel.playVideo(videoId, 640, 480);
+		videoPanel.playVideo(videoId, getVideoResolution().width, getVideoResolution().height);
 
 		dialog.setText(title);
 		FlowPanel fp = new FlowPanel();
@@ -307,8 +332,8 @@ public class YouTubeSearchResultPanel extends Composite {
 		return flowPanel;
 	}
 
-	protected void postprocessResult(HorizontalPanel videoPanel) {
-		
+	protected HorizontalPanel postprocessResult(HorizontalPanel videoPanel) {
+		return videoPanel;
 	}
 	
 	protected FlowPanel prepareUI(Set<YouTubeSearchResult> youTubeSearchResults) {

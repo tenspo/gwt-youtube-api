@@ -5,6 +5,10 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * @author fat
+ *
+ */
 public class YouTubeEmbeddedPlayer extends Widget {
 
 	/**
@@ -69,7 +73,7 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		this.enablejsapi = enablejsapi;
 	}
 
-	public Boolean isEnableJSAPI() {
+	public boolean isEnableJSAPI() {
 		if (this.enablejsapi == null) {
 			return false;
 		}
@@ -100,7 +104,7 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		this.disablekb = disablekb;
 	}
 
-	public Boolean isDisableKeyboardControls() {
+	public boolean isDisableKeyboardControls() {
 		if (this.disablekb == null) {
 			return false;
 		}
@@ -118,7 +122,7 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		this.egm = egm;
 	}
 
-	public Boolean isEnhancedGenieMenu() {
+	public boolean isEnhancedGenieMenu() {
 		if (this.egm == null) {
 			return false;
 		}
@@ -135,7 +139,7 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		this.border = border;
 	}
 
-	public Boolean isBorder() {
+	public boolean isBorder() {
 		if (this.border == null) {
 			return false;
 		}
@@ -286,6 +290,17 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	 */
 	private Boolean fs;
 
+	public void setFullScreen(Boolean fs) {
+		this.fs = fs;
+	}
+	
+	public boolean isFullScreen() {
+		if (this.fs == null) {
+			return false;
+		}
+		return fs;
+	}
+	
 	/**
 	 * Values: 0 or 1. Default is 0. Setting to 1 enables HD playback by default. This has no effect on the Chromeless
 	 * Player. This also has no effect if an HD version of the video is not available. If you enable this option, keep
@@ -294,6 +309,17 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	 */
 	private Boolean hd;
 
+	public void setHd(Boolean hd) {
+		this.hd = hd;
+	}
+	
+	public boolean isHd() {
+		if (this.hd == null) {
+			return false;
+		}
+		return hd;
+	}
+	
 	/**
 	 * Values: 0 or 1. Default is 1. Setting to 0 disables the search box from displaying when the video is minimized.
 	 * Note that if the rel parameter is set to 0 then the search box will also be disabled, regardless of the value of
@@ -301,17 +327,61 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	 */
 	private Boolean showsearch;
 
+	public void setShowsearch(Boolean showsearch) {
+		this.showsearch = showsearch;
+	}
+	
+	public boolean getShowsearch() {
+		if (showsearch == null) {
+			return true;
+		}
+		return showsearch;
+	}
+	
 	/**
 	 * Values: 0 or 1. Default is 1. Setting to 0 causes the player to not display information like the video title and
 	 * rating before the video starts playing.
 	 */
 	private Boolean showinfo;
 
+	public void setShowinfo(Boolean showinfo) {
+		this.showinfo = showinfo;
+	}
+	
+	public boolean isShowinfo() {
+		return showinfo;
+	}
+	
 	/**
 	 * Values: 1 or 3. Default is 1. Setting to 1 will cause video annotations to be shown by default, whereas setting
 	 * to 3 will cause video annotation to not be shown by default.
 	 */
-	private Boolean iv_load_policy;
+	private VideoAnnotation iv_load_policy;
+
+	public static enum VideoAnnotation {
+		ANNOATIONS_ON(1), ANNOTATIONS_OFF(3);
+		
+		private int value;
+		
+		VideoAnnotation(int value) {
+			this.value = value;
+		}
+		
+		public int getValue() {
+			return value;
+		}
+	}
+
+	public void setVideoAnnotation(VideoAnnotation videoAnnotation) {
+		this.iv_load_policy = videoAnnotation;
+	}
+
+	public VideoAnnotation getVideoAnnotation() {
+		if (iv_load_policy == null) {
+			return VideoAnnotation.ANNOATIONS_ON;
+		}
+		return this.iv_load_policy;
+	}
 
 	/**
 	 * Values: 1. Default is based on user preference. Setting to 1 will cause closed captions to be shown by default,
@@ -319,6 +389,14 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	 */
 	private Boolean cc_load_policy;
 
+	public void setShowCaptions(boolean showCaptions) {
+		this.cc_load_policy = showCaptions;
+	}
+	
+	public boolean getShowCaptions() {
+		return this.cc_load_policy;
+	}
+	
 	private String videoId;
 
 	private Element embedElment;
@@ -411,7 +489,7 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		params = addBooleanParam(hd, "hd", params);
 		params = addBooleanParam(showsearch, "showsearch", params);
 		params = addBooleanParam(showinfo, "showinfo", params);
-		params = addBooleanParam(iv_load_policy, "iv_load_policy", params, "1", "3");
+		params = addIntegerParam(iv_load_policy.getValue(), "iv_load_policy", params);
 		params = addBooleanParam(cc_load_policy, "cc_load_policy", params, "1", "1");
 
 		return params;

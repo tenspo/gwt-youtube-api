@@ -1,7 +1,6 @@
 package com.google.youtube.client;
 
-import net.auroris.ColorPicker.client.Color;
-
+import com.google.gdata.data.Color;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;

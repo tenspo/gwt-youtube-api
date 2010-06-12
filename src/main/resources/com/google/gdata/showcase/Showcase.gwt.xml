@@ -3,7 +3,8 @@
 	<inherits name="com.google.youtube.Player" />
 
 	<stylesheet src="styles/youtube-gwt.css" />
+	<stylesheet src="styles/youtube-showcase.css" />
 	
-	<entry-point class="com.google.gdata.client.Site"/>
+	<entry-point class="com.google.gdata.client.youtube.showcase.YouTube"/>
 	
 </module>

@@ -1,14 +1,11 @@
-package com.google.gdata.client;
+package com.google.gdata.client.youtube.showcase;
 
 import java.util.List;
 
 import org.gwttime.time.format.DateTimeFormat;
 
 import com.google.gdata.client.youtube.YouTubeManager;
-import com.google.gdata.client.youtube.ui.YouTubeSearchPanel;
-import com.google.gdata.client.youtube.ui.YouTubeSearchResultPanel;
 import com.google.gdata.client.youtube.ui.YouTubeVideoPanel;
-import com.google.gdata.client.youtube.ui.YouTubeSearchPanel.SearchEvent;
 import com.google.gdata.data.media.mediarss.MediaThumbnail;
 import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gdata.data.youtube.VideoFeed;
@@ -20,63 +17,16 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class Site implements EntryPoint {
+public class YouTube extends AbstractShowcase implements EntryPoint {
 
-	private HorizontalPanel createHeader() {
-		HorizontalPanel hp = new HorizontalPanel();
-
-		Image img = new Image("http://www.youtube.com/img/pic_youtubelogo_123x63.gif");
-		// img.setWidth("120px");
-		hp.add(img);
-		DOM.setStyleAttribute(img.getElement(), "marginLeft", "150px");
-		DOM.setStyleAttribute(img.getElement(), "marginRight", "30px");
-
-		YouTubeSearchPanel youTubeSearchPanel = new YouTubeSearchPanel();
-		youTubeSearchPanel.addPagingHandler(new YouTubeSearchPanel.SearchHandler(){
-
-			public void onPage(SearchEvent event) {
-				RootPanel.get().clear();
-				RootPanel.get().add(createHeader());
-				YouTubeSearchResultPanel youTubeSearchResultPanel = new YouTubeSearchResultPanel();
-				DOM.setStyleAttribute(youTubeSearchResultPanel.getElement(), "marginTop", "15px");
-				DOM.setStyleAttribute(youTubeSearchResultPanel.getElement(), "marginLeft", "150px");
-				RootPanel.get().add(youTubeSearchResultPanel);
-				youTubeSearchResultPanel.showResults(event.getSearch());
-			}
-		});
-		
-		hp.add(youTubeSearchPanel);
-		
-		Label separator = new Label("|");
-		DOM.setStyleAttribute(separator.getElement(), "marginLeft", "10px");
-		DOM.setStyleAttribute(separator.getElement(), "marginTop", "15px");
-		hp.add(separator);
-		Hyperlink browseLink = new Hyperlink("Browse", "browse");
-		DOM.setStyleAttribute(browseLink.getElement(), "marginLeft", "10px");
-		DOM.setStyleAttribute(browseLink.getElement(), "marginTop", "15px");
-		hp.add(browseLink);
-		separator = new Label("|");
-		DOM.setStyleAttribute(separator.getElement(), "marginLeft", "10px");
-		DOM.setStyleAttribute(separator.getElement(), "marginTop", "15px");
-		hp.add(separator);
-		Hyperlink uploadLink = new Hyperlink("Upload", "upload");
-		DOM.setStyleAttribute(uploadLink.getElement(), "marginLeft", "10px");
-		DOM.setStyleAttribute(uploadLink.getElement(), "marginTop", "15px");
-		hp.add(uploadLink);
-		RootPanel.get().add(hp);
-		return hp;
-	}
-	
 	@Override
 	public void onModuleLoad() {
-		RootPanel.get().add(createHeader());
+		RootPanel.get().add(createSearchPanel());
 
 		Label label = new Label();
 		label.setText("Recommended for You");
@@ -109,7 +59,7 @@ public class Site implements EntryPoint {
 
 	private void playVideo(String id) {
 		RootPanel.get().clear();
-		RootPanel.get().add(createHeader());
+		RootPanel.get().add(createSearchPanel());
 		YouTubeVideoPanel videoPanel = new YouTubeVideoPanel();
 		videoPanel.setStyleName(YouTubeVideoPanel.PLAYER_STYLE);
 		videoPanel.playVideo(id, 640, 480);
@@ -188,7 +138,7 @@ public class Site implements EntryPoint {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				GWT.log("Ojojojojo", caught);
+				GWT.log("Exception occured while trying to display video", caught);
 			}
 		};
 

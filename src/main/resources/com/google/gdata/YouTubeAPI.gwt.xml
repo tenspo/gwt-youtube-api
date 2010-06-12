@@ -1,5 +1,4 @@
 <module>
-	<inherits name="net.auroris.ColorPicker.client" />
 	<inherits name='sk.seges.acris.JSON' />
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name="com.google.gwt.json.JSON" /> 

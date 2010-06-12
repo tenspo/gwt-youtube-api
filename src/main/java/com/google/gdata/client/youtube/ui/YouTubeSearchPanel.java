@@ -20,6 +20,8 @@ public class YouTubeSearchPanel extends Composite {
 
 	private FlowPanel flowPanel;
 
+	private TextBox textBox;
+
 	public static interface SearchHandler extends EventHandler {
 		void onPage(SearchEvent event);
 	}
@@ -71,8 +73,12 @@ public class YouTubeSearchPanel extends Composite {
 		return addHandler(handler, SearchEvent.getType());
 	}
 
+	public void setSearchText(String text) {
+		this.textBox.setText(text);
+	}
+
 	public void prepareUI() {
-		final TextBox textBox = new TextBox();
+		textBox = new TextBox();
 		textBox.setStyleName(SEARCH_BOX_STYLE);
 		flowPanel.add(textBox);
 

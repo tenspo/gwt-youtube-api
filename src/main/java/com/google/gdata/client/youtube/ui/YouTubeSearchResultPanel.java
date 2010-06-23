@@ -25,7 +25,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -33,9 +32,10 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class YouTubeSearchResultPanel extends Composite {
+public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 
 	private static final String FAILURE_LABEL_STYLE = "youtube-search-failure";
+	private static final String RESULT_STYLE = "youtube-video-result-panel";
 	private static final String TITLE_STYLE = "youtube-video-title";
 	private static final String SUMMARY_STYLE = "youtube-video-summary";
 	private static final String AUTHOR_STYLE = "youtube-video-author";
@@ -45,7 +45,7 @@ public class YouTubeSearchResultPanel extends Composite {
 	private static final String THUMBNAIL_STYLE = "youtube-video-thumbnail";
 
 	private YouTubeMessages messages = GWT.create(YouTubeMessages.class);
-
+	
 	public static enum VideoResolution {
 		SMALL(320, 240), MEDIUM(640, 480);
 		
@@ -66,7 +66,7 @@ public class YouTubeSearchResultPanel extends Composite {
 		}
 	}
 	
-	private class YouTubeSearchResult {
+	public static class YouTubeSearchResult {
 		
 		private String videoId;
 		private String thumbnailUrl;
@@ -240,7 +240,7 @@ public class YouTubeSearchResultPanel extends Composite {
 		
 		container.clear();
 		container.add(prepareUI(searchResult));
-		YouTubePaginator youTubePaginator = new YouTubePaginator();
+		YouTubePaginator youTubePaginator = constructPaginator();
 		youTubePaginator.addPagingHandler(new YouTubePaginator.PagingHandler<YouTubePaginator>() {
 			
 			@Override
@@ -254,6 +254,12 @@ public class YouTubeSearchResultPanel extends Composite {
 		container.add(youTubePaginator);
 	}
 	
+	protected YouTubePaginator constructPaginator() {
+		YouTubePaginator youTubePaginator = new YouTubePaginator();
+		youTubePaginator.setUISchemeConstrucor(ensureUIConstructor());
+		return youTubePaginator;
+	}
+		
 	private Label createTitle(final String title, final String videoId) {
 		Label label = new Label(title);
 		label.setStyleName(TITLE_STYLE);
@@ -279,8 +285,7 @@ public class YouTubeSearchResultPanel extends Composite {
 		dialog.setText(title);
 		FlowPanel fp = new FlowPanel();
 		fp.add(videoPanel);
-		Button closeButton = GWT.create(Button.class);
-		closeButton.setText("Close");
+		Button closeButton = ensureUIConstructor().constructButton(messages.close());
 		closeButton.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -332,16 +337,16 @@ public class YouTubeSearchResultPanel extends Composite {
 		return flowPanel;
 	}
 
-	protected HorizontalPanel postprocessResult(HorizontalPanel videoPanel) {
-		return videoPanel;
+	protected HorizontalPanel constructResultPanel(YouTubeSearchResult searchResult) {
+		return new HorizontalPanel();
 	}
 	
 	protected FlowPanel prepareUI(Set<YouTubeSearchResult> youTubeSearchResults) {
 		FlowPanel flowPanel = new FlowPanel();
 
 		for (YouTubeSearchResult youTubeSearchResult : youTubeSearchResults) {
-			HorizontalPanel videoPanel = new HorizontalPanel();
-			postprocessResult(videoPanel);
+			HorizontalPanel videoPanel = constructResultPanel(youTubeSearchResult);
+			videoPanel.addStyleName(RESULT_STYLE);
 			
 			Image img = new Image(youTubeSearchResult.getThumbnailUrl());
 			img.setStyleName(THUMBNAIL_STYLE);

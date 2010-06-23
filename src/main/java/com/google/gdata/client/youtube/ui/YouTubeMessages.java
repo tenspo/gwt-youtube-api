@@ -49,4 +49,6 @@ public interface YouTubeMessages extends Messages {
 	String previous();
 	
 	String search();
+	
+	String close();
 }

@@ -3,8 +3,6 @@
 	<inherits name='com.google.gwt.user.theme.standard.Standard'/>
 	
 	<stylesheet src="styles/youtube-gwt.css" />
-	<stylesheet src="styles/youtube-showcase.css" />
 	
-	<entry-point class="com.google.gdata.client.youtube.showcase.YouTube"/>
-	
+	<entry-point class="com.google.youtube.client.showcase.ChromelessPlayerShowcase"/>	
 </module>

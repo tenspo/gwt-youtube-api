@@ -4,10 +4,12 @@ import com.google.gdata.data.Color;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.youtube.client.api.YouTubePlayer;
+import com.google.youtube.client.js.YouTubePlayerWrapper;
 
 /**
- * @author fat
- *
+ * @author psimun
+ * 
  */
 public class YouTubeEmbeddedPlayer extends Widget {
 
@@ -293,14 +295,14 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	public void setFullScreen(Boolean fs) {
 		this.fs = fs;
 	}
-	
+
 	public boolean isFullScreen() {
 		if (this.fs == null) {
 			return false;
 		}
 		return fs;
 	}
-	
+
 	/**
 	 * Values: 0 or 1. Default is 0. Setting to 1 enables HD playback by default. This has no effect on the Chromeless
 	 * Player. This also has no effect if an HD version of the video is not available. If you enable this option, keep
@@ -312,14 +314,14 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	public void setHd(Boolean hd) {
 		this.hd = hd;
 	}
-	
+
 	public boolean isHd() {
 		if (this.hd == null) {
 			return false;
 		}
 		return hd;
 	}
-	
+
 	/**
 	 * Values: 0 or 1. Default is 1. Setting to 0 disables the search box from displaying when the video is minimized.
 	 * Note that if the rel parameter is set to 0 then the search box will also be disabled, regardless of the value of
@@ -330,14 +332,14 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	public void setShowsearch(Boolean showsearch) {
 		this.showsearch = showsearch;
 	}
-	
+
 	public boolean getShowsearch() {
 		if (showsearch == null) {
 			return true;
 		}
 		return showsearch;
 	}
-	
+
 	/**
 	 * Values: 0 or 1. Default is 1. Setting to 0 causes the player to not display information like the video title and
 	 * rating before the video starts playing.
@@ -347,11 +349,11 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	public void setShowinfo(Boolean showinfo) {
 		this.showinfo = showinfo;
 	}
-	
+
 	public boolean isShowinfo() {
 		return showinfo;
 	}
-	
+
 	/**
 	 * Values: 1 or 3. Default is 1. Setting to 1 will cause video annotations to be shown by default, whereas setting
 	 * to 3 will cause video annotation to not be shown by default.
@@ -360,13 +362,13 @@ public class YouTubeEmbeddedPlayer extends Widget {
 
 	public static enum VideoAnnotation {
 		ANNOATIONS_ON(1), ANNOTATIONS_OFF(3);
-		
+
 		private int value;
-		
+
 		VideoAnnotation(int value) {
 			this.value = value;
 		}
-		
+
 		public int getValue() {
 			return value;
 		}
@@ -392,23 +394,41 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	public void setShowCaptions(boolean showCaptions) {
 		this.cc_load_policy = showCaptions;
 	}
-	
+
 	public boolean getShowCaptions() {
 		return this.cc_load_policy;
 	}
-	
+
+	private Integer version;
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public Integer getVersion() {
+		return this.version;
+	}
+
 	private String videoId;
 
-	private Element embedElment;
+	private Element embedElement;
 
 	public YouTubeEmbeddedPlayer(String videoId) {
 		setElement(Document.get().createObjectElement());
-		embedElment = Document.get().createElement("embed");
+		embedElement = Document.get().createElement("embed");
 		this.videoId = videoId;
 	}
 
+	public YouTubePlayer getPlayer() {
+		if (enablejsapi == null || enablejsapi == false) {
+			throw new RuntimeException(
+					"You are not allowed to use javascript player withou setting enablejsapi parameter. Please, set this parameter to 'true' value.");
+		}
+		return new YouTubePlayer((YouTubePlayerWrapper) embedElement.cast());
+	}
+
 	private boolean embeded = false;
-	
+
 	public void embed() {
 		if (!embeded) {
 			appendMovieParameter();
@@ -416,7 +436,7 @@ public class YouTubeEmbeddedPlayer extends Widget {
 			appendRelatedParameters();
 		}
 	}
-	
+
 	@Override
 	protected void onLoad() {
 		super.onLoad();
@@ -428,13 +448,31 @@ public class YouTubeEmbeddedPlayer extends Widget {
 			Element paramElement = Document.get().createElement("param");
 			paramElement.setAttribute("name", "allowFullScreen");
 			paramElement.setAttribute("value", "true");
+			getElement().appendChild(paramElement);
+		}
+		
+		if (enablejsapi != null) {
+			Element paramElement = Document.get().createElement("param");
+			if (enablejsapi == true) {
+				paramElement.setAttribute("allowScriptAccess", "always");
+			} else {
+				paramElement.setAttribute("allowScriptAccess", "never");
+			}
+			getElement().appendChild(paramElement);
 		}
 	}
-	
+
 	private void appendEmbedElement() {
-		embedElment.setAttribute("src", getURL());
-		embedElment.setAttribute("type", "application/x-shockwave-flash");
-		getElement().appendChild(embedElment);
+		embedElement.setAttribute("src", getURL());
+		embedElement.setAttribute("type", "application/x-shockwave-flash");
+		if (enablejsapi != null) {
+			if (enablejsapi == true) {
+				embedElement.setAttribute("allowScriptAccess", "always");
+			} else {
+				embedElement.setAttribute("allowScriptAccess", "never");
+			}
+		}
+		getElement().appendChild(embedElement);
 	}
 
 	private void appendMovieParameter() {
@@ -447,13 +485,13 @@ public class YouTubeEmbeddedPlayer extends Widget {
 	@Override
 	public void setWidth(String width) {
 		super.setWidth(width);
-		embedElment.setAttribute("width", width);
+		embedElement.setAttribute("width", width);
 	}
 
 	@Override
 	public void setHeight(String height) {
 		super.setHeight(height);
-		embedElment.setAttribute("height", height);
+		embedElement.setAttribute("height", height);
 	}
 
 	private String getURL() {
@@ -472,9 +510,13 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		params = addBooleanParam(rel, "rel", params);
 		params = addBooleanParam(autoplay, "autoplay", params);
 		params = addBooleanParam(loop, "loop", params);
-		params = addBooleanParam(enablejsapi, "enablejsapi", params);
 
+		params = addBooleanParam(enablejsapi, "enablejsapi", params);
 		params = addStringParam(playerapiid, "playerapiid", params);
+		if (enablejsapi != null && enablejsapi == true) {
+			version = 3;
+		}
+		params = addIntegerParam(version, "version", params);
 
 		params = addBooleanParam(disablekb, "disablekb", params);
 		params = addBooleanParam(egm, "egm", params);
@@ -489,7 +531,9 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		params = addBooleanParam(hd, "hd", params);
 		params = addBooleanParam(showsearch, "showsearch", params);
 		params = addBooleanParam(showinfo, "showinfo", params);
-		params = addIntegerParam(iv_load_policy.getValue(), "iv_load_policy", params);
+		if (iv_load_policy != null) {
+			params = addIntegerParam(iv_load_policy.getValue(), "iv_load_policy", params);
+		}
 		params = addBooleanParam(cc_load_policy, "cc_load_policy", params, "1", "1");
 
 		return params;
@@ -499,6 +543,10 @@ public class YouTubeEmbeddedPlayer extends Widget {
 		if (params != null && params.length() > 0 && paramValue != null) {
 			return params + "&" + paramName + "=";
 		}
+		if (paramValue != null) {
+			return paramName + "=";
+		}
+
 		return params;
 	}
 

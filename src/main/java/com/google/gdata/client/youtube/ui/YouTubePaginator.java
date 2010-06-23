@@ -10,16 +10,16 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class YouTubePaginator extends Composite {
+public class YouTubePaginator extends CustomizableUIComposite {
 
 	private QueryPage queryPage = null;
 
 	public static final int MAX_OFFSET = 3;
+	private int offset = MAX_OFFSET;
 	
 	private static final YouTubeMessages messages = GWT.create(YouTubeMessages.class);
 	
@@ -31,7 +31,7 @@ public class YouTubePaginator extends Composite {
 	public static interface PagingHandler<T> extends EventHandler {
 		void onPage(PagingEvent<T> event);
 	}
-
+	
 	public static class PagingEvent<T> extends GwtEvent<PagingHandler<T>> {
 
 		private static Type<PagingHandler<?>> TYPE;
@@ -77,12 +77,12 @@ public class YouTubePaginator extends Composite {
 	}
 	
 	protected Button createButton(String label, boolean disabled) {
-		Button button = new Button(label);
+		Button button = ensureUIConstructor().constructButton(label);
 		if (disabled) {
 			button.setEnabled(false);
-			button.setStyleName(BUTTON_STYLE + "-disabled");
+			button.addStyleName(BUTTON_STYLE + "-disabled");
 		} else {
-			button.setStyleName(BUTTON_STYLE);
+			button.addStyleName(BUTTON_STYLE);
 		}
 		return button;
 	}
@@ -92,7 +92,7 @@ public class YouTubePaginator extends Composite {
 		initWidget(panel);
 	}
 
-	private Widget addEventHandler(HasClickHandlers w, final int pageIndex) {
+	protected Widget addEventHandler(HasClickHandlers w, final int pageIndex) {
 		w.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -108,6 +108,10 @@ public class YouTubePaginator extends Composite {
 		this.queryPage = queryPage;
 	}
 	
+	public void setMaxOffset(int offset) {
+		this.offset = offset;
+	}
+
 	public void showPagingButtons() {
 		
 		int pageIndex = ((queryPage.getStartIndex() - 1) / queryPage.getItemsPerPage()) + 1;
@@ -121,9 +125,9 @@ public class YouTubePaginator extends Composite {
 			panel.add(addEventHandler(createLabel(messages.previous()), pageIndex-1));
 		}
 		
-		int min = Math.max(1, pageIndex-MAX_OFFSET);
+		int min = Math.max(1, pageIndex-offset);
 		
-		for (int i = min; (i < min + 2 * MAX_OFFSET + 1) && (maxPageIndex == Query.UNDEFINED || i <= maxPageIndex); i++) {
+		for (int i = min; (i < min + 2 * offset + 1) && (maxPageIndex == Query.UNDEFINED || i <= maxPageIndex); i++) {
 			panel.add(addEventHandler(createButton(String.valueOf(i), i == pageIndex), i));
 		}
 

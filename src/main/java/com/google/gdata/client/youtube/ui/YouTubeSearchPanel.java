@@ -7,21 +7,21 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class YouTubeSearchPanel extends Composite {
+public class YouTubeSearchPanel extends CustomizableUIComposite {
 
 	public static final String SEARCH_BOX_STYLE = "youtube-search-box";
 	public static final String SEARCH_BUTTON_STYLE = "youtube-search-button";
+	public static final String SEARCH_PANEL_STYLE = "youtube-search-panel";
 
 	private static final YouTubeMessages youTubeMessages = GWT.create(YouTubeMessages.class);
 
 	private FlowPanel flowPanel;
 
 	private TextBox textBox;
-
+	
 	public static interface SearchHandler extends EventHandler {
 		void onPage(SearchEvent event);
 	}
@@ -66,6 +66,7 @@ public class YouTubeSearchPanel extends Composite {
 	public YouTubeSearchPanel() {
 		flowPanel = new FlowPanel();
 		initWidget(flowPanel);
+		flowPanel.setStyleName(SEARCH_PANEL_STYLE);
 		prepareUI();
 	}
 
@@ -77,14 +78,21 @@ public class YouTubeSearchPanel extends Composite {
 		this.textBox.setText(text);
 	}
 
+	protected TextBox constructTextBox() {
+		return new TextBox();
+	}
+	
+	protected Button constructButton(String label) {
+		return ensureUIConstructor().constructButton(label);
+	}
+	
 	public void prepareUI() {
-		textBox = new TextBox();
+		textBox = constructTextBox();
 		textBox.setStyleName(SEARCH_BOX_STYLE);
 		flowPanel.add(textBox);
 
-		Button search = new Button();
-		search.setStyleName(SEARCH_BUTTON_STYLE);
-		search.setText(youTubeMessages.search());
+		Button search = constructButton(youTubeMessages.search());
+		search.addStyleName(SEARCH_BUTTON_STYLE);
 
 		search.addClickHandler(new ClickHandler() {
 

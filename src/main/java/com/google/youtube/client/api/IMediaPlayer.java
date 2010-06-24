@@ -10,23 +10,15 @@ public interface IMediaPlayer {
 
 	void pauseMedia();
 
-	double getMediaDuration();
+	int getMediaDuration();
 
-	double getPlayPosition();
+	int getPlayPosition();
 
-	void setPlayPosition(double position);
+	void setPlayPosition(int position);
 
-	double getVolume();
+	int getVolume();
 
-	void setVolume(double volume);
-
-	void setControllerVisible(boolean show);
-
-	boolean isControllerVisible();
-
-	void setLoopCount(int loop);
-
-	int getLoopCount();
+	void setVolume(int volume);
 
 	int getVideoHeight();
 

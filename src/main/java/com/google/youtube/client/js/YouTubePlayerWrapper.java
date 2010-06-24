@@ -1,13 +1,17 @@
 package com.google.youtube.client.js;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.youtube.client.YouTubePlayer;
 
 public class YouTubePlayerWrapper extends JavaScriptObject {
 
 	protected YouTubePlayerWrapper() {
 	}
-
+	
 	/**
 	 * Loads the specified video's thumbnail and prepares the player to play the video. The player does not request the
 	 * FLV until playVideo() or seekTo() is called.
@@ -314,4 +318,69 @@ public class YouTubePlayerWrapper extends JavaScriptObject {
 	public final native String getVideoEmbedCode() /*-{
 		return this.getVideoEmbedCode();
 	}-*/;
+
+	private static Map<String, String> handlersCache = new HashMap<String, String>();
+
+	private static final String STATE_CHANGED_METHOD_NAME = "StateChanged";
+	private static final String PLAYBACK_QUALITY_METHOD_NAME = "PlaybackQualityChanged";
+	private static final String ERROR_METHOD_NAME = "Error";
+
+	private String getHandlerMethod(String videoId, String methodName) {
+		int i = 0;
+
+		while (!handlersCache.containsKey(videoId + "_" + methodName + "_" + i)) {
+			i++;
+		}
+
+		return videoId + "_" + methodName + "_" + i;
+	}
+
+	/**
+	 * This event is fired whenever the player's state changes. Possible values are unstarted (-1), ended (0), playing
+	 * (1), paused (2), buffering (3), video cued (5). When the SWF is first loaded it will broadcast an unstarted (-1)
+	 * event. When the video is cued and ready to play it will broadcast a video cued event (5).
+	 */
+	private final native void registerStateChangedHandler(YouTubePlayer player, String methodName) /*-{
+		$wnd[methodName] = function(changeCode) {
+			player.@com.google.youtube.client.YouTubePlayer::onStateChanged(I)(changeCode);
+		};
+		this.addEventListener("onStateChange", methodName);
+	}-*/;
+
+	/**
+	 * This event is fired when an error in the player occurs. The possible error codes are 100, 101, and 150. The 100
+	 * error code is broadcast when the video requested is not found. This occurs when a video has been removed (for any
+	 * reason), or it has been marked as private. The 101 error code is broadcast when the video requested does not
+	 * allow playback in the embedded players. The error code 150 is the same as 101, it's just 101 in disguise!
+	 */
+	private final native void registerErrorHandler(YouTubePlayer player, String methodName) /*-{
+		$wnd[methodName] = function(changeCode) {
+			player.@com.google.youtube.client.YouTubePlayer::onError(I)(errorCode);
+		};
+		this.addEventListener("onError", methodName);
+	}-*/;
+
+	/**
+	 * This event is fired whenever the video playback quality changes. For example, if you call the
+	 * setPlaybackQuality(suggestedQuality) function, this event will fire if the playback quality actually changes.
+	 * Your code should respond to the event and should not assume that the quality will automatically change when the
+	 * setPlaybackQuality(suggestedQuality) function is called. Similarly, your code should not assume that playback
+	 * quality will only change as a result of an explicit call to setPlaybackQuality or any other function that allows
+	 * you to set a suggested playback quality. <br/>
+	 * <br/>
+	 * The value that the event broadcasts is the new playback quality. Possible values are "small", "medium", "large"
+	 * and "hd720".
+	 */
+	private final native void registerPlaybackQualityHandler(YouTubePlayer player, String methodName) /*-{
+		$wnd[methodName] = function(changeCode) {
+			player.@com.google.youtube.client.YouTubePlayer::onPlaybackQualityChanged(Ljava/lang/String;)(quality);
+		};
+		this.addEventListener("onPlaybackQualityChange", methodName);
+	}-*/;
+
+	public final void registerHandlers(YouTubePlayer player) {
+		registerStateChangedHandler(player, getHandlerMethod(player.getVideoId(), STATE_CHANGED_METHOD_NAME));
+		registerErrorHandler(player, getHandlerMethod(player.getVideoId(), ERROR_METHOD_NAME));
+		registerPlaybackQualityHandler(player, getHandlerMethod(player.getVideoId(), PLAYBACK_QUALITY_METHOD_NAME));
+	};
 }

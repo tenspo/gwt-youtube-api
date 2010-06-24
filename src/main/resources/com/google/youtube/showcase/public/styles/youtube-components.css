@@ -1,0 +1,27 @@
+.youtube-pause-button, .youtube-play-button, .youtube-stop-button {
+	float: left;
+}
+
+.youtube-play-button {
+
+}
+
+.youtube-stop-button {
+
+}
+
+.youtube-pause-button {
+	
+}
+
+.youtube-position-panel {
+	border: 1px solid black;
+}
+
+.youtube-position-played-panel {
+	background-color: red;
+}
+
+.youtube-position-rest-panel {
+	background-color: gray;
+}

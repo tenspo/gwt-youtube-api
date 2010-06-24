@@ -19,6 +19,17 @@ import sk.seges.acris.json.client.annotation.Field;
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionPoint;
 
+/**
+ * Duration class.
+ *
+ * This completes the duration field in
+ * {@link com.google.gdata.data.media.mediarss.MediaContent} and is
+ * useful when there is no MediaContent.
+ *
+ * This tag should go inside MediaGroup, next to {@code media:player}
+ *
+ * 
+ */
 @JsonObject(group = YouTubeNamespace.PREFIX, value = "duration")
 public class YtDuration extends ExtensionPoint {
 	

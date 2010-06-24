@@ -116,7 +116,7 @@ public class Query {
 	private boolean strict = false;
 
 	private boolean callback = false;
-	
+
 	/**
 	 * The list of custom parameters associated with the query.
 	 */
@@ -135,9 +135,9 @@ public class Query {
 
 	protected void useCallbackFunction() {
 		callback = true;
-		overwriteCustomParameter(GDataProtocol.Query.ALT, "json-in-script");
+		overwriteCustomParameter(GDataProtocol.Query.ALT, ResultFormat.JSON_IN_SCRIPT.paramValue);
 	}
-	
+
 	/**
 	 * Returns the feed URL of this query.
 	 * 
@@ -181,7 +181,6 @@ public class Query {
 		return queryString;
 	}
 
-	
 	/**
 	 * The CategoryFilter class is used to define sets of category conditions that must be met in order for an entry to
 	 * match.
@@ -491,18 +490,18 @@ public class Query {
 	public int getMaxResults() {
 		return this.maxResults;
 	}
-	
+
 	/**
-	 * Sets the maximum number of results and start index for query results. See setMaxResuls and setStartIndex for
-	 * more details
+	 * Sets the maximum number of results and start index for query results. See setMaxResuls and setStartIndex for more
+	 * details
+	 * 
 	 * @param queryPage
-	 * 			data structure for holding max results and start query index
+	 *            data structure for holding max results and start query index
 	 */
 	public void setQueryPage(QueryPage queryPage) {
 		setMaxResults(queryPage.getItemsPerPage());
 		setStartIndex(queryPage.getStartIndex());
 	}
-	
 
 	/**
 	 * Sets the expected query result format.
@@ -612,7 +611,7 @@ public class Query {
 		}
 		return matchList;
 	}
-	
+
 	protected void overwriteCustomParameter(String name, String value) {
 		List<CustomParameter> customParams = getCustomParameters();
 

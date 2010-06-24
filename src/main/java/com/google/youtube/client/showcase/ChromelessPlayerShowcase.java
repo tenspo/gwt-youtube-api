@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.youtube.client.ChromelessYouTubePlayer;
 import com.google.youtube.client.YouTubePlayer;
 import com.google.youtube.client.ui.DefaultCustomPlayerComponentsFactory;
+import com.google.youtube.client.ui.DefaultCustomPlayerComponentsFactory.IPositionWidget;
 
 /**
  * @author PSimun
@@ -49,6 +50,10 @@ public class ChromelessPlayerShowcase implements EntryPoint {
 		container.add(componentsFactory.createPlayWidget(youTubePlayer));
 		container.add(componentsFactory.createPauseWidget(youTubePlayer));
 		container.add(componentsFactory.createStopWidget(youTubePlayer));
+		IPositionWidget positionWidget = componentsFactory.createPositionWidget(youTubePlayer);
+		positionWidget.setWidth("300px");
+		positionWidget.setHeight("10px");
+		container.add((Widget)positionWidget);
 		container.add((Widget)componentsFactory.createSeekToWidget(youTubePlayer));
 	}
 }

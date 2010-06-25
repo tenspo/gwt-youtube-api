@@ -8,8 +8,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.youtube.client.ChromelessYouTubePlayer;
 import com.google.youtube.client.YouTubePlayer;
-import com.google.youtube.client.ui.DefaultCustomPlayerComponentsFactory;
-import com.google.youtube.client.ui.DefaultCustomPlayerComponentsFactory.IPositionWidget;
+import com.google.youtube.client.ui.components.api.IPositionWidget;
+import com.google.youtube.client.ui.components.factory.DefaultCustomPlayerComponentsFactory;
 
 /**
  * @author PSimun

@@ -3,25 +3,38 @@
 }
 
 .youtube-play-button {
-
 }
 
 .youtube-stop-button {
-
 }
 
 .youtube-pause-button {
-	
 }
 
 .youtube-position-panel {
 	border: 1px solid black;
+	float: left;
+	overflow: hidden;
 }
 
 .youtube-position-played-panel {
 	background-color: red;
+	float: left;
 }
 
 .youtube-position-rest-panel {
 	background-color: gray;
+	float: left;
+}
+
+.youtube-time-panel {
+	float: left;
+}
+
+.youtube-current-time-panel {
+	float: left;
+}
+
+.youtube-duration-panel {
+	float: left;
 }

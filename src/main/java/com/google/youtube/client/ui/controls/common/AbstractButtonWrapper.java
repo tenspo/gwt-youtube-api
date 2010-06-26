@@ -1,4 +1,4 @@
-package com.google.youtube.client.ui.components;
+package com.google.youtube.client.ui.controls.common;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

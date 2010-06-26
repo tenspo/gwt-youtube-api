@@ -1,6 +1,10 @@
 package com.google.youtube.client.showcase;
 
+import com.google.gdata.client.youtube.YouTubeManager;
+import com.google.gdata.data.youtube.VideoFeed;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -8,8 +12,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.youtube.client.ChromelessYouTubePlayer;
 import com.google.youtube.client.YouTubePlayer;
-import com.google.youtube.client.ui.components.api.IPositionWidget;
-import com.google.youtube.client.ui.components.factory.DefaultCustomPlayerComponentsFactory;
+import com.google.youtube.client.ui.controls.api.IPlayerControler;
+import com.google.youtube.client.ui.controls.builder.DefaultPlayerControlerBuilder;
+import com.google.youtube.client.ui.controls.builder.EOperations;
+import com.google.youtube.client.ui.controls.factory.DefaultPlayerControlsFactory;
+import com.google.youtube.client.ui.controls.manager.PlayerControlsManager;
 
 /**
  * @author PSimun
@@ -24,7 +31,7 @@ public class ChromelessPlayerShowcase implements EntryPoint {
 		HorizontalPanel panelHolder = new HorizontalPanel();
 		RootPanel.get().add(panelHolder);
 		
-		VerticalPanel container = new VerticalPanel();
+		final VerticalPanel container = new VerticalPanel();
 		panelHolder.add(container);
 		
 		Label label = new Label("YouTube Player Demo");
@@ -45,15 +52,31 @@ public class ChromelessPlayerShowcase implements EntryPoint {
 		label = new Label("Player controls");
 		container.add(label);
 		
-		DefaultCustomPlayerComponentsFactory componentsFactory = new DefaultCustomPlayerComponentsFactory();
+		DefaultPlayerControlsFactory componentsFactory = new DefaultPlayerControlsFactory();
+		DefaultPlayerControlerBuilder defaultPlayerControlerBuilder = new DefaultPlayerControlerBuilder(componentsFactory);
+		final IPlayerControler controler = defaultPlayerControlerBuilder.createPlayerComponents(new EOperations[] {EOperations.PLAY, EOperations.PAUSE, EOperations.STOP, EOperations.SEEK, EOperations.TIME});
+//		positionWidget.setWidth("300px");
+//		positionWidget.setHeight("10px");
 		
-		container.add(componentsFactory.createPlayWidget(youTubePlayer));
-		container.add(componentsFactory.createPauseWidget(youTubePlayer));
-		container.add(componentsFactory.createStopWidget(youTubePlayer));
-		IPositionWidget positionWidget = componentsFactory.createPositionWidget(youTubePlayer);
-		positionWidget.setWidth("300px");
-		positionWidget.setHeight("10px");
-		container.add((Widget)positionWidget);
-		container.add((Widget)componentsFactory.createSeekToWidget(youTubePlayer));
+		YouTubeManager youTubeManager = new YouTubeManager();
+		youTubeManager.retrieveVideo(DEMO_VIDEO_ID, new AsyncCallback<VideoFeed>() {
+			
+			@Override
+			public void onSuccess(VideoFeed result) {
+				if (result != null && result.getEntries() != null && result.getEntries().get(0) != null) {
+					controler.initializeFromEntry(result.getEntries().get(0));
+					container.add((Widget)controler);
+					PlayerControlsManager playerControlsManager = new PlayerControlsManager(controler, youTubePlayer);
+					playerControlsManager.manageEvents();
+				} else {
+					GWT.log("Video " + DEMO_VIDEO_ID + " does not exists", null);
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				GWT.log("Unable to load video " + DEMO_VIDEO_ID, caught);
+			}
+		});
 	}
 }

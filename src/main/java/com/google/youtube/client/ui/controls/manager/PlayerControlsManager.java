@@ -1,20 +1,22 @@
-package com.google.youtube.client.ui.components;
+package com.google.youtube.client.ui.controls.manager;
 
 import com.google.youtube.client.api.IMediaPlayer;
+import com.google.youtube.client.event.chromeless.ChangeMediaSeekTimeEvent;
 import com.google.youtube.client.event.chromeless.PauseMediaEvent;
 import com.google.youtube.client.event.chromeless.PlayMediaEvent;
 import com.google.youtube.client.event.chromeless.StopMediaEvent;
+import com.google.youtube.client.event.chromeless.handler.ChangeMediaSeekTimeHandler;
 import com.google.youtube.client.event.chromeless.handler.PauseMediaHandler;
 import com.google.youtube.client.event.chromeless.handler.PlayMediaHandler;
 import com.google.youtube.client.event.chromeless.handler.StopMediaHandler;
-import com.google.youtube.client.ui.components.api.ICustomPlayerComponents;
+import com.google.youtube.client.ui.controls.api.IPlayerControler;
 
-public class PlayerComponentsManager {
+public class PlayerControlsManager {
 
-	private final ICustomPlayerComponents playerComponents;
+	private final IPlayerControler playerComponents;
 	private final IMediaPlayer mediaPlayer;
 
-	public PlayerComponentsManager(ICustomPlayerComponents playerComponents, final IMediaPlayer mediaPlayer) {
+	public PlayerControlsManager(IPlayerControler playerComponents, final IMediaPlayer mediaPlayer) {
 		this.playerComponents = playerComponents;
 		this.mediaPlayer = mediaPlayer;
 	}
@@ -41,6 +43,14 @@ public class PlayerComponentsManager {
 			@Override
 			public void onPause(PauseMediaEvent event) {
 				mediaPlayer.pauseMedia();
+			}
+		});
+		
+		playerComponents.addChangeMediaSeekTimeHandler(new ChangeMediaSeekTimeHandler() {
+			
+			@Override
+			public void onChangeSeekTime(ChangeMediaSeekTimeEvent event) {
+				mediaPlayer.setPlayPosition(event.getPosition());
 			}
 		});
 	}

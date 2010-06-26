@@ -1,13 +1,14 @@
-package com.google.youtube.client.ui.components;
+package com.google.youtube.client.ui.controls;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
 import com.google.youtube.client.event.chromeless.PlayMediaEvent;
 import com.google.youtube.client.event.chromeless.handler.PlayMediaHandler;
-import com.google.youtube.client.ui.components.api.IPlayWidget;
+import com.google.youtube.client.ui.controls.api.IPlayControl;
+import com.google.youtube.client.ui.controls.common.AbstractButtonWrapper;
 
-public class PlayButton extends AbstractButtonWrapper implements IPlayWidget {
+public class PlayButton extends AbstractButtonWrapper implements IPlayControl {
 
 	public PlayButton(Button button) {
 		super(button);

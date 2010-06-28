@@ -1,4 +1,4 @@
-package com.google.youtube.client.ui.controls.panel;
+package com.google.youtube.client.ui.controls.panel.basic;
 
 import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -140,6 +140,9 @@ public class DefaultPlayerControler extends FlowPanel implements IDefaultPlayerC
 				public void onStop(StopMediaEvent event) {
 					playTimer.cancel();
 					currentTime = 0;
+					if (seekTimeControl != null) {
+						seekTimeControl.setSeekTime(0);
+					}
 				}
 			});
 		}

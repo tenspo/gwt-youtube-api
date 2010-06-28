@@ -58,6 +58,8 @@ public class SeekTimeControl extends FlowPanel implements ISeekTimeControl {
 				
 				currentTime = ((xCoord - x) * duration) / widthInt;
 				calculateSizes();
+				
+				ChangeMediaSeekTimeEvent.fire(SeekTimeControl.this, (int)currentTime);
 			}
 		});
 		super.onLoad();

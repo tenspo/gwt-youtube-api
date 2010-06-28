@@ -2,8 +2,8 @@ package com.google.youtube.client.ui.controls.builder;
 
 import com.google.youtube.client.ui.controls.api.IPlayerControler;
 import com.google.youtube.client.ui.controls.factory.IDefaultPlayerControlsFactory;
-import com.google.youtube.client.ui.controls.panel.DefaultPlayerControler;
-import com.google.youtube.client.ui.controls.panel.IDefaultPlayerControler;
+import com.google.youtube.client.ui.controls.panel.basic.DefaultPlayerControler;
+import com.google.youtube.client.ui.controls.panel.basic.IDefaultPlayerControler;
 
 public class DefaultPlayerControlerBuilder {
 	

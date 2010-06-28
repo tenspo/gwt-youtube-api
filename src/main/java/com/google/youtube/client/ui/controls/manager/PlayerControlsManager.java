@@ -34,6 +34,7 @@ public class PlayerControlsManager {
 
 			@Override
 			public void onStop(StopMediaEvent event) {
+				mediaPlayer.setPlayPosition(0);
 				mediaPlayer.stopMedia();
 			}
 		});

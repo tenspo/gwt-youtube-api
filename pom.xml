@@ -10,6 +10,7 @@
 	<properties>
 		<gwt.client.module>com.acme.Mygwtyoutube</gwt.client.module>
 		<gwt.client.html>Mygwtyoutube.html</gwt.client.html>
+		<gwt.version>2.0.0</gwt.version>
 	</properties>
 
 	<build>
@@ -69,6 +70,23 @@
 
 
 		<!-- GWT dependencies -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
+
+		<!-- Youtube dependencies -->
 		<dependency>
 			<groupId>com.google</groupId>
 			<artifactId>gwt-youtube-api</artifactId>

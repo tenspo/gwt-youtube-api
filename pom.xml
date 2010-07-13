@@ -66,6 +66,17 @@
 			</releases>
 		</repository>
 		<repository>
+			<id>YouTubeSnapshots</id>
+			<url>http://gwt-youtube-api.googlecode.com/svn/snapshots-repository
+			</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
 			<id>JBoss</id>
 			<url>http://repository.jboss.org/maven2</url>
 			<releases>

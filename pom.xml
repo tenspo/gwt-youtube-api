@@ -65,10 +65,15 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
+		<repository>
+			<id>JBoss</id>
+			<url>http://repository.jboss.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
 	</repositories>
 	<dependencies>
-
-
 		<!-- GWT dependencies -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>

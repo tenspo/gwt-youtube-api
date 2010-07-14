@@ -16,39 +16,30 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>1.2</version>
-
+				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
-					<gwtVersion>2.0.0</gwtVersion>
-					<logLevel>INFO</logLevel>
-					<port>8890</port>
-					<module>${gwt.client.module}</module>
-					<runTarget>${gwt.client.module}/${gwt.client.html}</runTarget>
+					<additionalBuildcommands>
+						<buildCommand>
+							<name>com.google.gdt.eclipse.core.webAppProjectValidator</name>
+						</buildCommand>
+						<buildCommand>
+							<name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
+						</buildCommand>
+					</additionalBuildcommands>
 
-					<!-- style>DETAILED</style--><!-- use OBF for prod -->
-					<style>OBF</style><!-- use OBF for prod -->
-					<noServer>false</noServer>
-					<extraJvmArgs>-Xmx724M -Xss16M -Dfile.encoding=utf-8
-						</extraJvmArgs>
-					<debugPort>8990</debugPort>
-					<shellServletMappingURL>/gwt-shell-servlet
-						</shellServletMappingURL>
-					<mergedWebXml>war/WEB-INF/web.xml</mergedWebXml>
-					<webappDirectory>war</webappDirectory>
-					<soyc>false</soyc>
-					<disableCastChecking>true</disableCastChecking>
+					<additionalProjectnatures>
+						<projectnature>com.google.gdt.eclipse.core.webAppNature</projectnature>
+						<projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
+					</additionalProjectnatures>
+
+					<classpathContainers>
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
+						<classpathContainer>com.google.gwt.eclipse.core.GWT_CONTAINER</classpathContainer>
+					</classpathContainers>
+
+					<buildOutputDirectory>war/WEB-INF/classes</buildOutputDirectory>
+					<wtpversion>2.0</wtpversion>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>mergewebxml</goal>
-							<!--goal>generateAsync</goal-->
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

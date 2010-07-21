@@ -11,7 +11,7 @@
 	<inherits name="com.google.youtube.Player" />
 
 	<!-- Specify the app entry point class. -->
-	<entry-point class='com.google.gdata.client.YouTubePage' />
+	<entry-point class='com.google.gdata.showcase.client.YouTubePage' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />

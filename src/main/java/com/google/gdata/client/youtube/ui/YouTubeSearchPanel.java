@@ -47,10 +47,9 @@ public class YouTubeSearchPanel extends CustomizableUIComposite {
 			this.search = search;
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public final Type<SearchHandler> getAssociatedType() {
-			return (Type) TYPE;
+			return (Type<SearchHandler>) TYPE;
 		}
 
 		public String getSearch() {

@@ -26,10 +26,9 @@ public class YouTubeErrorEvent extends GwtEvent<YouTubeErrorHandler> {
 		this.error = error;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public final Type<YouTubeErrorHandler> getAssociatedType() {
-		return (Type) TYPE;
+		return (Type<YouTubeErrorHandler>) TYPE;
 	}
 
 	public YouTubeError getError() {

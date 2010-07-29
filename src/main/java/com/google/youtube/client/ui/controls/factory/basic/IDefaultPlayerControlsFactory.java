@@ -1,4 +1,4 @@
-package com.google.youtube.client.ui.controls.factory;
+package com.google.youtube.client.ui.controls.factory.basic;
 
 import com.google.youtube.client.ui.controls.api.IPauseControl;
 import com.google.youtube.client.ui.controls.api.IPlayControl;

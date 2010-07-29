@@ -26,10 +26,9 @@ public class YouTubePlaybackQualityChangedEvent extends GwtEvent<YouTubePlayback
 		this.quality = quality;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public final Type<YouTubePlaybackQualityChangedHandler> getAssociatedType() {
-		return (Type) TYPE;
+		return (Type<YouTubePlaybackQualityChangedHandler>) TYPE;
 	}
 
 	public YouTubeVideoQuality getQuality() {

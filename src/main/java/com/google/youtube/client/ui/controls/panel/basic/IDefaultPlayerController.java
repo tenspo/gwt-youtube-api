@@ -2,12 +2,12 @@ package com.google.youtube.client.ui.controls.panel.basic;
 
 import com.google.youtube.client.ui.controls.api.IPauseControl;
 import com.google.youtube.client.ui.controls.api.IPlayControl;
-import com.google.youtube.client.ui.controls.api.IPlayerControler;
+import com.google.youtube.client.ui.controls.api.IPlayerController;
 import com.google.youtube.client.ui.controls.api.ISeekTimeControl;
 import com.google.youtube.client.ui.controls.api.IStopControl;
 import com.google.youtube.client.ui.controls.api.ITimeControl;
 
-public interface IDefaultPlayerControler extends IPlayerControler {
+public interface IDefaultPlayerController extends IPlayerController {
 	
 	void addPlayControl(IPlayControl playControl);
 

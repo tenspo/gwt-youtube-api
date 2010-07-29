@@ -26,10 +26,9 @@ public class YouTubeStateChangedEvent extends GwtEvent<YouTubeStateChangedHandle
 		this.state = state;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public final Type<YouTubeStateChangedHandler> getAssociatedType() {
-		return (Type) TYPE;
+		return (Type<YouTubeStateChangedHandler>) TYPE;
 	}
 
 	public YouTubeVideoState getState() {

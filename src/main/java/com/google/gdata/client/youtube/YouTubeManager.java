@@ -46,7 +46,7 @@ public class YouTubeManager {
 			query.setQueryPage(queryPage);
 		}
 
-		service.query(query, VideoFeed.class, new YouTubeJSONRequestHandler() {
+		service.query(query, new YouTubeJSONRequestHandler() {
 			
 			@Override
 			public void onRequestComplete(VideoFeed videoFeed) {

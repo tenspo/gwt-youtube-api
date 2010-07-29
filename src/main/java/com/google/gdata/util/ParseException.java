@@ -22,6 +22,8 @@ package com.google.gdata.util;
  */
 public class ParseException extends Exception {
 
+	private static final long serialVersionUID = -2919150211386808848L;
+
 	public ParseException(String message) {
 		super(message);
 	}

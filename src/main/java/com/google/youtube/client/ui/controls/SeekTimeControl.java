@@ -33,6 +33,8 @@ public class SeekTimeControl extends FlowPanel implements ISeekTimeControl {
 
 		DOM.setStyleAttribute(played.getElement(), "height", "100%");
 		DOM.setStyleAttribute(rest.getElement(), "height", "100%");
+		add(played);
+		add(rest);
 	}
 
 	public double getCurrentTime() {
@@ -43,28 +45,39 @@ public class SeekTimeControl extends FlowPanel implements ISeekTimeControl {
         return addDomHandler(handler, ClickEvent.getType());
     }
 
+    private HandlerRegistration clickHandlerRegistration;
+    
 	@Override
 	protected void onLoad() {
-		add(played);
-		add(rest);
-		addClickHandler(new ClickHandler() {
+		clickHandlerRegistration = addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				int x = getElement().getAbsoluteLeft();
-				int xCoord = event.getNativeEvent().getClientX();
-				
-				Integer widthInt = getStringDimension(width);
-				
-				currentTime = ((xCoord - x) * duration) / widthInt;
-				calculateSizes();
-				
-				ChangeMediaSeekTimeEvent.fire(SeekTimeControl.this, (int)currentTime);
+				updateTime(event.getNativeEvent().getClientX());
 			}
 		});
+
 		super.onLoad();
 	}
 
+	protected void updateTime(int xPosition) {
+		int x = getElement().getAbsoluteLeft();
+		
+		Integer widthInt = getStringDimension(width);
+		
+		currentTime = ((xPosition - x) * duration) / widthInt;
+		calculateSizes();
+		
+		ChangeMediaSeekTimeEvent.fire(SeekTimeControl.this, (int)currentTime);
+	}
+	
+	@Override
+	protected void onUnload() {
+		clickHandlerRegistration.removeHandler();
+		clickHandlerRegistration = null;
+		super.onUnload();
+	}
+	
 	private void calculateSizes() {
 		double ratio = currentTime == 0 ? 0 : (duration / (currentTime));
 

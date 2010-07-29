@@ -392,10 +392,6 @@ public class YouTubeQuery extends Query {
 			throw new IllegalStateException("Not ordering by relevance. Please" + " check with getOrderBy() first");
 		}
 
-		if (stringValue == null) {
-			return null;
-		}
-
 		Matcher matcher = Pattern.compile(RELEVANCE_LANGUAGE_PATTERN).matcher(stringValue);
 		if (matcher.find()) {
 			int start = matcher.start();

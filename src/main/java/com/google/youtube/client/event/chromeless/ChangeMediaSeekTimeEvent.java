@@ -29,10 +29,9 @@ public class ChangeMediaSeekTimeEvent extends GwtEvent<ChangeMediaSeekTimeHandle
 		return position;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public final Type<ChangeMediaSeekTimeHandler> getAssociatedType() {
-		return (Type) TYPE;
+		return (Type<ChangeMediaSeekTimeHandler>) TYPE;
 	}
 
 	@Override

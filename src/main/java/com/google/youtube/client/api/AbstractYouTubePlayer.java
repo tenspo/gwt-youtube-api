@@ -1,18 +1,16 @@
 package com.google.youtube.client.api;
 
 import com.google.gdata.data.Color;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.youtube.client.YouTubePlayer;
 import com.google.youtube.client.js.YouTubePlayerWrapper;
 
-public abstract class AbstractYouTubePlayer extends Widget {
-	
+public abstract class AbstractYouTubePlayer extends FlashPlayer {
+
 	/**
-	 * Values: 0 or 1. Default is 1. Sets whether the player should load related videos once playback of the initial
-	 * video starts. Related videos are displayed in the "genie menu" when the menu button is pressed. The player search
-	 * functionality will be disabled if rel is set to 0.
+	 * Values: 0 or 1. Default is 1. Sets whether the player should load related
+	 * videos once playback of the initial video starts. Related videos are
+	 * displayed in the "genie menu" when the menu button is pressed. The player
+	 * search functionality will be disabled if rel is set to 0.
 	 */
 	private Boolean rel;
 
@@ -28,7 +26,8 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 0. Sets whether or not the initial video will autoplay when the player loads.
+	 * Values: 0 or 1. Default is 0. Sets whether or not the initial video will
+	 * autoplay when the player loads.
 	 */
 	private Boolean autoplay;
 
@@ -44,9 +43,10 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 0. In the case of a single video player, a setting of 1 will cause the player to play
-	 * the initial video again and again. In the case of a playlist player (or custom player), the player will play the
-	 * entire playlist and then start again at the first video.
+	 * Values: 0 or 1. Default is 0. In the case of a single video player, a
+	 * setting of 1 will cause the player to play the initial video again and
+	 * again. In the case of a playlist player (or custom player), the player
+	 * will play the entire playlist and then start again at the first video.
 	 */
 	private Boolean loop;
 
@@ -63,7 +63,8 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 0. Setting this to 1 will enable the Javascript API.
+	 * Values: 0 or 1. Default is 0. Setting this to 1 will enable the
+	 * Javascript API.
 	 */
 	private Boolean enablejsapi;
 
@@ -79,7 +80,8 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Value can be any alphanumeric string. This setting is used in conjunction with the JavaScript API.
+	 * Value can be any alphanumeric string. This setting is used in conjunction
+	 * with the JavaScript API.
 	 */
 	private String playerapiid;
 
@@ -92,9 +94,11 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 0. Setting to 1 will disable the player keyboard controls. Keyboard controls are as
-	 * follows: Spacebar: Play / Pause Arrow Left: Jump back 10% in the current video Arrow Right: Jump ahead 10% in the
-	 * current video Arrow Up: Volume up Arrow Down: Volume Down
+	 * Values: 0 or 1. Default is 0. Setting to 1 will disable the player
+	 * keyboard controls. Keyboard controls are as follows: Spacebar: Play /
+	 * Pause Arrow Left: Jump back 10% in the current video Arrow Right: Jump
+	 * ahead 10% in the current video Arrow Up: Volume up Arrow Down: Volume
+	 * Down
 	 */
 	private Boolean disablekb;
 
@@ -110,9 +114,10 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 0. Setting to 1 enables the "Enhanced Genie Menu". This behavior causes the genie menu
-	 * (if present) to appear when the user's mouse enters the video display area, as opposed to only appearing when the
-	 * menu button is pressed.
+	 * Values: 0 or 1. Default is 0. Setting to 1 enables the
+	 * "Enhanced Genie Menu". This behavior causes the genie menu (if present)
+	 * to appear when the user's mouse enters the video display area, as opposed
+	 * to only appearing when the menu button is pressed.
 	 */
 	private Boolean egm;
 
@@ -128,8 +133,9 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 0. Setting to 1 enables a border around the entire video player. The border's primary
-	 * color can be set via the color1 parameter, and a secondary color can be set by the color2 parameter.
+	 * Values: 0 or 1. Default is 0. Setting to 1 enables a border around the
+	 * entire video player. The border's primary color can be set via the color1
+	 * parameter, and a secondary color can be set by the color2 parameter.
 	 */
 	private Boolean border;
 
@@ -145,8 +151,9 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: Any RGB value in hexadecimal format. color1 is the primary border color, and color2 is the video control
-	 * bar background color and secondary border color.
+	 * Values: Any RGB value in hexadecimal format. color1 is the primary border
+	 * color, and color2 is the video control bar background color and secondary
+	 * border color.
 	 */
 	private Color color1;
 	private Color color2;
@@ -167,7 +174,8 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	 * @param v
 	 *            Value (Brightness) - valid range is 0-100
 	 * @throws java.lang.Exception
-	 *             A general exception if the Hue, Saturation, or Value variables are out of range.
+	 *             A general exception if the Hue, Saturation, or Value
+	 *             variables are out of range.
 	 */
 	public void setBorderHSVColor1(int h, int s, int v) throws Exception {
 		this.color1 = new Color();
@@ -182,7 +190,8 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	 * @param b
 	 *            Blue - valid range is 0-255
 	 * @throws java.lang.Exception
-	 *             Exception if the Red, Green or Blue variables are out of range.
+	 *             Exception if the Red, Green or Blue variables are out of
+	 *             range.
 	 */
 	public void setBorderColor1(int r, int g, int b) throws Exception {
 		this.color1 = new Color();
@@ -193,9 +202,11 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	 * Sets the hexadecimal representation of Red, Green and Blue.
 	 * 
 	 * @param hex
-	 *            The hexadecimal string notation. It must be 6 letters long and consist of the characters 0-9 and A-F.
+	 *            The hexadecimal string notation. It must be 6 letters long and
+	 *            consist of the characters 0-9 and A-F.
 	 * @throws java.lang.Exception
-	 *             Exception if the hexadecimal string cannot be parsed into its Red, Green, and Blue components.
+	 *             Exception if the hexadecimal string cannot be parsed into its
+	 *             Red, Green, and Blue components.
 	 */
 	public void setBorderColor1(String hexColor) throws Exception {
 		this.color1 = new Color();
@@ -218,7 +229,8 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	 * @param v
 	 *            Value (Brightness) - valid range is 0-100
 	 * @throws java.lang.Exception
-	 *             A general exception if the Hue, Saturation, or Value variables are out of range.
+	 *             A general exception if the Hue, Saturation, or Value
+	 *             variables are out of range.
 	 */
 	public void setBorderHSVColor2(int h, int s, int v) throws Exception {
 		this.color2 = new Color();
@@ -233,7 +245,8 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	 * @param b
 	 *            Blue - valid range is 0-255
 	 * @throws java.lang.Exception
-	 *             Exception if the Red, Green or Blue variables are out of range.
+	 *             Exception if the Red, Green or Blue variables are out of
+	 *             range.
 	 */
 	public void setBorderColor2(int r, int g, int b) throws Exception {
 		this.color2 = new Color();
@@ -244,9 +257,11 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	 * Sets the hexadecimal representation of Red, Green and Blue.
 	 * 
 	 * @param hex
-	 *            The hexadecimal string notation. It must be 6 letters long and consist of the characters 0-9 and A-F.
+	 *            The hexadecimal string notation. It must be 6 letters long and
+	 *            consist of the characters 0-9 and A-F.
 	 * @throws java.lang.Exception
-	 *             Exception if the hexadecimal string cannot be parsed into its Red, Green, and Blue components.
+	 *             Exception if the hexadecimal string cannot be parsed into its
+	 *             Red, Green, and Blue components.
 	 */
 	public void setBorderColor21(String hexColor) throws Exception {
 		this.color2 = new Color();
@@ -254,10 +269,12 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: A positive integer. This parameter causes the player to begin playing the video at the given number of
-	 * seconds from the start of the video. Note that similar to the seekTo function, the player will look for the
-	 * closest keyframe to the time you specify. This means sometimes the play head may seek to just before the
-	 * requested time, usually no more than ~2 seconds.
+	 * Values: A positive integer. This parameter causes the player to begin
+	 * playing the video at the given number of seconds from the start of the
+	 * video. Note that similar to the seekTo function, the player will look for
+	 * the closest keyframe to the time you specify. This means sometimes the
+	 * play head may seek to just before the requested time, usually no more
+	 * than ~2 seconds.
 	 */
 	private Integer start;
 
@@ -270,9 +287,10 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 0. Setting to 1 enables the fullscreen button. This has no effect on the Chromeless
-	 * Player. Note that you must include some extra arguments to your embed code for this to work. The bolded parts of
-	 * the below example enable fullscreen functionality:
+	 * Values: 0 or 1. Default is 0. Setting to 1 enables the fullscreen button.
+	 * This has no effect on the Chromeless Player. Note that you must include
+	 * some extra arguments to your embed code for this to work. The bolded
+	 * parts of the below example enable fullscreen functionality:
 	 * 
 	 * <pre>
 	 * <object width="425" height="344"> 
@@ -300,10 +318,12 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 0. Setting to 1 enables HD playback by default. This has no effect on the Chromeless
-	 * Player. This also has no effect if an HD version of the video is not available. If you enable this option, keep
-	 * in mind that users with a slower connection may have an sub-optimal experience unless they turn off HD. You
-	 * should ensure your player is large enough to display the video in its native resolution.
+	 * Values: 0 or 1. Default is 0. Setting to 1 enables HD playback by
+	 * default. This has no effect on the Chromeless Player. This also has no
+	 * effect if an HD version of the video is not available. If you enable this
+	 * option, keep in mind that users with a slower connection may have an
+	 * sub-optimal experience unless they turn off HD. You should ensure your
+	 * player is large enough to display the video in its native resolution.
 	 */
 	private Boolean hd;
 
@@ -319,9 +339,10 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 1. Setting to 0 disables the search box from displaying when the video is minimized.
-	 * Note that if the rel parameter is set to 0 then the search box will also be disabled, regardless of the value of
-	 * showsearch.
+	 * Values: 0 or 1. Default is 1. Setting to 0 disables the search box from
+	 * displaying when the video is minimized. Note that if the rel parameter is
+	 * set to 0 then the search box will also be disabled, regardless of the
+	 * value of showsearch.
 	 */
 	private Boolean showsearch;
 
@@ -337,8 +358,9 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 0 or 1. Default is 1. Setting to 0 causes the player to not display information like the video title and
-	 * rating before the video starts playing.
+	 * Values: 0 or 1. Default is 1. Setting to 0 causes the player to not
+	 * display information like the video title and rating before the video
+	 * starts playing.
 	 */
 	private Boolean showinfo;
 
@@ -351,8 +373,9 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 1 or 3. Default is 1. Setting to 1 will cause video annotations to be shown by default, whereas setting
-	 * to 3 will cause video annotation to not be shown by default.
+	 * Values: 1 or 3. Default is 1. Setting to 1 will cause video annotations
+	 * to be shown by default, whereas setting to 3 will cause video annotation
+	 * to not be shown by default.
 	 */
 	private VideoAnnotation iv_load_policy;
 
@@ -382,8 +405,9 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	}
 
 	/**
-	 * Values: 1. Default is based on user preference. Setting to 1 will cause closed captions to be shown by default,
-	 * even if the user has turned captions off.
+	 * Values: 1. Default is based on user preference. Setting to 1 will cause
+	 * closed captions to be shown by default, even if the user has turned
+	 * captions off.
 	 */
 	private Boolean cc_load_policy;
 
@@ -407,33 +431,37 @@ public abstract class AbstractYouTubePlayer extends Widget {
 
 	private String videoId;
 
-	private Element embedElement;
-
 	public AbstractYouTubePlayer(String videoId) {
-		setElement(Document.get().createObjectElement());
-		embedElement = Document.get().createElement("embed");
+		super();
 		this.videoId = videoId;
 	}
 
 	public String getVideoId() {
 		return videoId;
 	}
-	
+
 	public YouTubePlayer getPlayer() {
 		if (enablejsapi == null || enablejsapi == false) {
 			throw new RuntimeException(
 					"You are not allowed to use javascript player withou setting enablejsapi parameter. Please, set this parameter to 'true' value.");
 		}
-		return new YouTubePlayer(videoId, (YouTubePlayerWrapper) embedElement.cast());
+		return new YouTubePlayer(videoId,
+				(YouTubePlayerWrapper) embedElement.cast());
 	}
 
 	private boolean embeded = false;
 
 	public void embed() {
 		if (!embeded) {
-			appendMovieParameter();
-			appendEmbedElement();
-			appendRelatedParameters();
+			
+			setUrl(getURL());
+
+			if (enablejsapi != null) {
+				setAllowScriptAccess(enablejsapi ? ScriptAccess.ALWAYS : ScriptAccess.NEVER);
+			}
+			if (fs != null) {
+				setFullScreen(fs);
+			}
 		}
 	}
 
@@ -441,57 +469,6 @@ public abstract class AbstractYouTubePlayer extends Widget {
 	protected void onLoad() {
 		super.onLoad();
 		embed();
-	}
-
-	private void appendRelatedParameters() {
-		if (fs != null && fs == true) {
-			Element paramElement = Document.get().createElement("param");
-			paramElement.setAttribute("name", "allowFullScreen");
-			paramElement.setAttribute("value", "true");
-			getElement().appendChild(paramElement);
-		}
-		
-		if (enablejsapi != null) {
-			Element paramElement = Document.get().createElement("param");
-			if (enablejsapi == true) {
-				paramElement.setAttribute("allowScriptAccess", "always");
-			} else {
-				paramElement.setAttribute("allowScriptAccess", "never");
-			}
-			getElement().appendChild(paramElement);
-		}
-	}
-
-	private void appendEmbedElement() {
-		embedElement.setAttribute("src", getURL());
-		embedElement.setAttribute("type", "application/x-shockwave-flash");
-		if (enablejsapi != null) {
-			if (enablejsapi == true) {
-				embedElement.setAttribute("allowScriptAccess", "always");
-			} else {
-				embedElement.setAttribute("allowScriptAccess", "never");
-			}
-		}
-		getElement().appendChild(embedElement);
-	}
-
-	private void appendMovieParameter() {
-		Element paramElement = Document.get().createElement("param");
-		paramElement.setAttribute("name", "movie");
-		paramElement.setAttribute("value", getURL());
-		getElement().appendChild(paramElement);
-	}
-
-	@Override
-	public void setWidth(String width) {
-		super.setWidth(width);
-		embedElement.setAttribute("width", width);
-	}
-
-	@Override
-	public void setHeight(String height) {
-		super.setHeight(height);
-		embedElement.setAttribute("height", height);
 	}
 
 	protected abstract String getURL();
@@ -524,14 +501,17 @@ public abstract class AbstractYouTubePlayer extends Widget {
 		params = addBooleanParam(showsearch, "showsearch", params);
 		params = addBooleanParam(showinfo, "showinfo", params);
 		if (iv_load_policy != null) {
-			params = addIntegerParam(iv_load_policy.getValue(), "iv_load_policy", params);
+			params = addIntegerParam(iv_load_policy.getValue(),
+					"iv_load_policy", params);
 		}
-		params = addBooleanParam(cc_load_policy, "cc_load_policy", params, "1", "1");
+		params = addBooleanParam(cc_load_policy, "cc_load_policy", params, "1",
+				"1");
 
 		return params;
 	}
 
-	protected String appendParam(Object paramValue, String paramName, String params) {
+	protected String appendParam(Object paramValue, String paramName,
+			String params) {
 		if (params != null && params.length() > 0 && paramValue != null) {
 			return params + "&" + paramName + "=";
 		}
@@ -542,27 +522,33 @@ public abstract class AbstractYouTubePlayer extends Widget {
 		return params;
 	}
 
-	protected String addBooleanParam(Boolean booleanParam, String paramName, String params) {
+	protected String addBooleanParam(Boolean booleanParam, String paramName,
+			String params) {
 		return addBooleanParam(booleanParam, paramName, params, "1", "0");
 	}
 
-	protected String addBooleanParam(Boolean booleanParam, String paramName, String params, String trueValue,
-			String falseValue) {
+	protected String addBooleanParam(Boolean booleanParam, String paramName,
+			String params, String trueValue, String falseValue) {
 		params = appendParam(booleanParam, paramName, params);
-		return params + (booleanParam == null ? "" : booleanParam ? trueValue : falseValue);
+		return params
+				+ (booleanParam == null ? "" : booleanParam ? trueValue
+						: falseValue);
 	}
 
-	protected String addStringParam(String stringParam, String paramName, String params) {
+	protected String addStringParam(String stringParam, String paramName,
+			String params) {
 		params = appendParam(stringParam, paramName, params);
 		return params + (stringParam == null ? "" : stringParam);
 	}
 
-	protected String addIntegerParam(Integer integerParam, String paramName, String params) {
+	protected String addIntegerParam(Integer integerParam, String paramName,
+			String params) {
 		params = appendParam(integerParam, paramName, params);
 		return params + (integerParam == null ? "" : integerParam);
 	}
 
-	protected String addColorParam(Color colorParam, String paramName, String params) {
+	protected String addColorParam(Color colorParam, String paramName,
+			String params) {
 		params = appendParam(colorParam, paramName, params);
 		return params + (colorParam == null ? "" : "#" + colorParam.getHex());
 	}

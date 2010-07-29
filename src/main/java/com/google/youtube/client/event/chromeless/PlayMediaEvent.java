@@ -22,10 +22,9 @@ public class PlayMediaEvent extends GwtEvent<PlayMediaHandler> {
 	protected PlayMediaEvent() {
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public final Type<PlayMediaHandler> getAssociatedType() {
-		return (Type) TYPE;
+		return (Type<PlayMediaHandler>) TYPE;
 	}
 
 	@Override

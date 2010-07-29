@@ -10,7 +10,7 @@ public class YouTubeService extends Service {
 	public YouTubeService() {
 	}
 
-	public <T> void query(Query query, Class<T> clazz, JSONRequestHandler handler) {
+	public <T> void query(Query query, JSONRequestHandler handler) {
 		JSONRequest jsonRequest = new JSONRequest();
 		jsonRequest.get(query.getUrl(), handler);
 	}

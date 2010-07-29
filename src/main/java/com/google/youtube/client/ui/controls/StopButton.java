@@ -2,15 +2,15 @@ package com.google.youtube.client.ui.controls;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.youtube.client.event.chromeless.StopMediaEvent;
 import com.google.youtube.client.event.chromeless.handler.StopMediaHandler;
 import com.google.youtube.client.ui.controls.api.IStopControl;
-import com.google.youtube.client.ui.controls.common.AbstractButtonWrapper;
+import com.google.youtube.client.ui.controls.common.AbstractButtonBaseWrapper;
 
-public class StopButton extends AbstractButtonWrapper implements IStopControl {
+public class StopButton extends AbstractButtonBaseWrapper implements IStopControl {
 
-	public StopButton(Button button) {
+	public StopButton(ButtonBase button) {
 		super(button);
 	}
 

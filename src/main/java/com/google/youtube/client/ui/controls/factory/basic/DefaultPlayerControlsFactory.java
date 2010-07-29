@@ -1,4 +1,4 @@
-package com.google.youtube.client.ui.controls.factory;
+package com.google.youtube.client.ui.controls.factory.basic;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
@@ -23,9 +23,9 @@ public class DefaultPlayerControlsFactory extends CustomizableUIComponent implem
 
 	private static YouTubeVideoComponents youTubeVideoComponents = GWT.create(YouTubeVideoComponents.class);
 
-	private static final String PAUSE_BUTTON_STYLE_NAME = "youtube-pause-button";
-	private static final String PLAY_BUTTON_STYLE_NAME = "youtube-play-button";
-	private static final String STOP_BUTTON_STYLE_NAME = "youtube-stop-button";
+	private static final String PAUSE_BUTTON_STYLE_NAME = "default-pause-button";
+	private static final String PLAY_BUTTON_STYLE_NAME = "default-play-button";
+	private static final String STOP_BUTTON_STYLE_NAME = "default-stop-button";
 
 	public IPlayControl createPlayControl() {
 		Button button = ensureUIConstructor().constructButton(youTubeVideoComponents.play());

@@ -22,10 +22,9 @@ public class StopMediaEvent extends GwtEvent<StopMediaHandler> {
 	protected StopMediaEvent() {
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public final Type<StopMediaHandler> getAssociatedType() {
-		return (Type) TYPE;
+		return (Type<StopMediaHandler>) TYPE;
 	}
 
 	@Override

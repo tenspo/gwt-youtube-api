@@ -29,6 +29,7 @@ import com.google.gdata.client.Service;
  */
 public class ContentType implements Serializable {
 
+	private static final long serialVersionUID = -9131525185520974559L;
 	/**
 	 * Name of the attribute that contains the encoding character set for the content type.
 	 * 

@@ -9,14 +9,14 @@ import com.google.youtube.client.event.chromeless.handler.ChangeMediaSeekTimeHan
 import com.google.youtube.client.event.chromeless.handler.PauseMediaHandler;
 import com.google.youtube.client.event.chromeless.handler.PlayMediaHandler;
 import com.google.youtube.client.event.chromeless.handler.StopMediaHandler;
-import com.google.youtube.client.ui.controls.api.IPlayerControler;
+import com.google.youtube.client.ui.controls.api.IPlayerController;
 
 public class PlayerControlsManager {
 
-	private final IPlayerControler playerComponents;
+	private final IPlayerController playerComponents;
 	private final IMediaPlayer mediaPlayer;
 
-	public PlayerControlsManager(IPlayerControler playerComponents, final IMediaPlayer mediaPlayer) {
+	public PlayerControlsManager(IPlayerController playerComponents, final IMediaPlayer mediaPlayer) {
 		this.playerComponents = playerComponents;
 		this.mediaPlayer = mediaPlayer;
 	}

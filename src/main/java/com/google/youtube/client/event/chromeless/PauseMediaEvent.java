@@ -22,10 +22,9 @@ public class PauseMediaEvent extends GwtEvent<PauseMediaHandler> {
 	protected PauseMediaEvent() {
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public final Type<PauseMediaHandler> getAssociatedType() {
-		return (Type) TYPE;
+		return (Type<PauseMediaHandler>) TYPE;
 	}
 
 	@Override

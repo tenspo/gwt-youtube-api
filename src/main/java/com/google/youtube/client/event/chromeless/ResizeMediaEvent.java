@@ -33,10 +33,9 @@ public class ResizeMediaEvent extends GwtEvent<ResizeMediaHandler> {
 		return resizeType;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public final Type<ResizeMediaHandler> getAssociatedType() {
-		return (Type) TYPE;
+		return (Type<ResizeMediaHandler>) TYPE;
 	}
 
 	@Override

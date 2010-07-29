@@ -1,25 +1,25 @@
 package com.google.youtube.client.ui.controls.builder;
 
-import com.google.youtube.client.ui.controls.api.IPlayerControler;
-import com.google.youtube.client.ui.controls.factory.IDefaultPlayerControlsFactory;
-import com.google.youtube.client.ui.controls.panel.basic.DefaultPlayerControler;
-import com.google.youtube.client.ui.controls.panel.basic.IDefaultPlayerControler;
+import com.google.youtube.client.ui.controls.api.IPlayerController;
+import com.google.youtube.client.ui.controls.factory.basic.IDefaultPlayerControlsFactory;
+import com.google.youtube.client.ui.controls.panel.basic.DefaultPlayerController;
+import com.google.youtube.client.ui.controls.panel.basic.IDefaultPlayerController;
 
-public class DefaultPlayerControlerBuilder {
+public class DefaultPlayerControllerBuilder {
 	
 	private IDefaultPlayerControlsFactory defaultPlayerControlsFactory;
 	
-	public DefaultPlayerControlerBuilder(IDefaultPlayerControlsFactory defaultPlayerControlsFactory) {
+	public DefaultPlayerControllerBuilder(IDefaultPlayerControlsFactory defaultPlayerControlsFactory) {
 		this.defaultPlayerControlsFactory = defaultPlayerControlsFactory;
 	}
 	
-	protected IDefaultPlayerControler createDefaultComponentsPanel() {
-		return new DefaultPlayerControler();
+	protected IDefaultPlayerController createDefaultComponentsPanel() {
+		return new DefaultPlayerController();
 	}
 
-	public IPlayerControler createPlayerComponents(EOperations[] operations) {
+	public IPlayerController createPlayerComponents(EOperations[] operations) {
 		
-		IDefaultPlayerControler customPlayerComponents = createDefaultComponentsPanel();
+		IDefaultPlayerController customPlayerComponents = createDefaultComponentsPanel();
 
 		for (EOperations supportedOperation : operations) {
 			switch (supportedOperation) {

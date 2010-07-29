@@ -1,4 +1,4 @@
-package com.google.youtube.client.ui.controls.panel.basic;
+package com.google.youtube.client.ui.controls.panel;
 
 import com.google.gdata.data.youtube.VideoEntry;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -8,18 +8,20 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.youtube.client.event.chromeless.ChangeMediaSeekTimeEvent;
 import com.google.youtube.client.event.chromeless.PauseMediaEvent;
 import com.google.youtube.client.event.chromeless.PlayMediaEvent;
-import com.google.youtube.client.event.chromeless.StopMediaEvent;
 import com.google.youtube.client.event.chromeless.handler.ChangeMediaSeekTimeHandler;
 import com.google.youtube.client.event.chromeless.handler.PauseMediaHandler;
 import com.google.youtube.client.event.chromeless.handler.PlayMediaHandler;
-import com.google.youtube.client.event.chromeless.handler.StopMediaHandler;
 import com.google.youtube.client.ui.controls.api.IPauseControl;
 import com.google.youtube.client.ui.controls.api.IPlayControl;
 import com.google.youtube.client.ui.controls.api.ISeekTimeControl;
-import com.google.youtube.client.ui.controls.api.IStopControl;
 import com.google.youtube.client.ui.controls.api.ITimeControl;
 
-public class DefaultPlayerControler extends FlowPanel implements IDefaultPlayerControler {
+public class AbstractPlayerController extends FlowPanel {
+	
+	protected IPlayControl playControl;
+	protected IPauseControl pauseControl;
+	protected ISeekTimeControl seekTimeControl;
+	protected ITimeControl timeControl;
 
 	protected class PlayTimer extends Timer {
 		
@@ -42,21 +44,24 @@ public class DefaultPlayerControler extends FlowPanel implements IDefaultPlayerC
 		}		
 	};
 
-	private PlayTimer playTimer = new PlayTimer();
+	protected PlayTimer playTimer = new PlayTimer();
 
-	private IPlayControl playControl;
-	private IStopControl stopControl;
-	private IPauseControl pauseControl;
-	private ISeekTimeControl seekTimeControl;
-	private ITimeControl timeControl;
-	
-	private int currentTime = 0;
-	private int duration = 0;
-	
-	public DefaultPlayerControler() {
+	protected int currentTime = 0;
+	protected int duration = 0;
+
+	public HandlerRegistration addPlayHandler(PlayMediaHandler handler) {
+		return playControl.addPlayHandler(handler);
 	}
-	
-	private void handleWidgetType(Object widget, String name) {
+
+	public HandlerRegistration addPauseHandler(PauseMediaHandler handler) {
+		return pauseControl.addPauseHandler(handler);
+	}
+
+	public HandlerRegistration addChangeMediaSeekTimeHandler(ChangeMediaSeekTimeHandler handler) {
+		return seekTimeControl.addChangeMediaSeekTimeHandler(handler);
+	}
+
+	protected void handleWidgetType(Object widget, String name) {
 		if (!(widget instanceof Widget)) {
 			throw new RuntimeException(name + " control is not a regular GWT Widget. " + name + " control should extends Widget component.");
 		}
@@ -68,52 +73,23 @@ public class DefaultPlayerControler extends FlowPanel implements IDefaultPlayerC
 		add((Widget)playControl);
 	}
 
-	@Override
-	public HandlerRegistration addPlayHandler(PlayMediaHandler handler) {
-		return playControl.addPlayHandler(handler);
-	}
-
-	public void addStopControl(IStopControl stopControl) {
-		handleWidgetType(stopControl, "Stop");
-		this.stopControl = stopControl;
-		add((Widget)stopControl);
-	}
-
-	@Override
-	public HandlerRegistration addStopHandler(StopMediaHandler handler) {
-		return stopControl.addStopHandler(handler);
-	}
-
 	public void addPauseControl(IPauseControl pauseControl) {
 		handleWidgetType(pauseControl, "Pause");
 		this.pauseControl = pauseControl;
 		add((Widget)pauseControl);
 	}
 
-	@Override
-	public HandlerRegistration addPauseHandler(PauseMediaHandler handler) {
-		return pauseControl.addPauseHandler(handler);
-	}
-
-	@Override
 	public void addSeekTimeControl(ISeekTimeControl positionControl) {
 		handleWidgetType(positionControl, "Position");
 		this.seekTimeControl = positionControl;
 		add((Widget)positionControl);
 	}
 
-	@Override
-	public HandlerRegistration addChangeMediaSeekTimeHandler(ChangeMediaSeekTimeHandler handler) {
-		return seekTimeControl.addChangeMediaSeekTimeHandler(handler);
-	}
-
-	@Override
 	public void setSeekTime(int time) {
 		seekTimeControl.setSeekTime(time);
 		timeControl.setCurrentTime(time);
 	}
 
-	@Override
 	public void addTimeControl(ITimeControl timeControl) {
 		handleWidgetType(timeControl, "Time");
 		this.timeControl = timeControl;
@@ -132,21 +108,7 @@ public class DefaultPlayerControler extends FlowPanel implements IDefaultPlayerC
 				}
 			});
 		}
-		
-		if (stopControl != null) {
-			stopControl.addStopHandler(new StopMediaHandler() {
 				
-				@Override
-				public void onStop(StopMediaEvent event) {
-					playTimer.cancel();
-					currentTime = 0;
-					if (seekTimeControl != null) {
-						seekTimeControl.setSeekTime(0);
-					}
-				}
-			});
-		}
-		
 		if (pauseControl != null){ 
 			pauseControl.addPauseHandler(new PauseMediaHandler() {
 				
@@ -174,7 +136,6 @@ public class DefaultPlayerControler extends FlowPanel implements IDefaultPlayerC
 		super.onUnload();
 	}
 
-	@Override
 	public void initializeFromEntry(VideoEntry entry) {
 		this.duration = entry.getMediaGroup().getDuration().intValue();
 		if (seekTimeControl != null) {

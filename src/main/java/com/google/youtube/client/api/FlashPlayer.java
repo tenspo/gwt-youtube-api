@@ -358,7 +358,7 @@ public class FlashPlayer extends Widget {
 
 		/**
 		 * the SWF file cannot communicate with any HTML page. Using this value is deprecated and not recommended, and
-		 * shouldn’t be necessary if you don’t serve untrusted SWF files from your own domain. If you do need to serve
+		 * shouldn't be necessary if you don't serve untrusted SWF files from your own domain. If you do need to serve
 		 * untrusted SWF files, Adobe recommends that you create a distinct subdomain and place all untrusted content
 		 * there.
 		 */

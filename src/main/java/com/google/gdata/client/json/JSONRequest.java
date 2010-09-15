@@ -10,7 +10,7 @@ public class JSONRequest {
 
 	public native void setup(JSONRequestHandler obj, String callback) /*-{
 		window[callback] = function(data) {
-		  obj.@sk.seges.acris.json.client.request.JSONRequestHandler::onRequestComplete(Lcom/google/gwt/core/client/JavaScriptObject;)(data);
+		  obj.@com.google.gdata.client.json.JSONRequestHandler::onRequestComplete(Lcom/google/gwt/core/client/JavaScriptObject;)(data);
 		}
 	}-*/;
 

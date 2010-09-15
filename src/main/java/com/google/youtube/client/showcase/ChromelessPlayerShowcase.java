@@ -18,7 +18,6 @@ import com.google.youtube.client.ui.controls.builder.EOperations;
 import com.google.youtube.client.ui.controls.builder.YouTubePlayerControllerBuilder;
 import com.google.youtube.client.ui.controls.factory.youtube.YouTubePlayerControlsFactory;
 import com.google.youtube.client.ui.controls.manager.PlayerControlsManager;
-import com.philbeaudoin.gwtp.mvp.client.DelayedBindRegistry;
 
 /**
  * @author PSimun
@@ -27,14 +26,8 @@ public class ChromelessPlayerShowcase implements EntryPoint {
 
 	private static final String DEMO_VIDEO_ID = "hqXUKxJiDls";
 
-	public final ChromelessShowcaseGinjector ginjector = GWT.create(ChromelessShowcaseGinjector.class);
-
 	@Override
 	public void onModuleLoad() {
-
-		DelayedBindRegistry.bind(ginjector);
-
-		ginjector.getPlaceManager().revealCurrentPlace();
 
 		HorizontalPanel panelHolder = new HorizontalPanel();
 		RootPanel.get().add(panelHolder);

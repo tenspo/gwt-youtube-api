@@ -4,7 +4,7 @@
 	<inherits name="com.google.gwt.json.JSON" /> 
 	<inherits name="com.googlecode.gwtx.Java" />
 	<inherits name="org.gwttime.Time" />
-	<inherits name="com.googlecode.gwt.math.Math" />
+	<inherits name="net.zschech.gwt.math.Math" />
 	
 	<source path='client' />
 	<source path='data' />

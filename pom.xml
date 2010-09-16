@@ -13,7 +13,7 @@
 		<uml-graph.version>4.6</uml-graph.version>
 		<gwtx.version>1.5.3</gwtx.version>
 		<gwt-time.version>1.0.0-SNAPSHOT</gwt-time.version>
-		<gwt-math.version>2.1</gwt-math.version>
+		<gwt-math.version>1.0.9</gwt-math.version>
 		<gwt-dnd.version>3.0.0</gwt-dnd.version>
 		<gwt.version>2.0.0</gwt.version>
 		
@@ -232,8 +232,8 @@
 			<version>${gwt-time.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-math</artifactId>
+			<groupId>net.zschech.gwt</groupId>
+			<artifactId>gwt-java-math</artifactId>			
 			<version>${gwt-math.version}</version>
 		</dependency>
 		<dependency>

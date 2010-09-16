@@ -48,6 +48,14 @@
 		<jdk.version>1.6</jdk.version>
 	</properties>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>YouTubeSnapshots</id>
+			<name>YouTubeSnapshots</name>
+			<url>https://gwt-youtube-api.googlecode.com/svn/snapshots-repository</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -144,6 +152,19 @@
 					</docletArtifact>
 					<additionalparam>${umlgraph.javadoc.settings}</additionalparam>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

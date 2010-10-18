@@ -12,7 +12,7 @@ public class FlashPlayer extends Widget {
 	public FlashPlayer() {
 		setElement(Document.get().createObjectElement());
 		embedElement = Document.get().createElement("embed");
-		getElement().appendChild(embedElement);
+//		getElement().appendChild(embedElement);
 		embedElement.setAttribute("type", "application/x-shockwave-flash");
 	}
 

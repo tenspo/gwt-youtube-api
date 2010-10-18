@@ -200,10 +200,18 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 	}
 
 	public void showResults(String textQuery) {
-		showResults(textQuery, DEFAULT_QUERY_PAGE);
+		showResults(textQuery, true, DEFAULT_QUERY_PAGE);
+	}
+
+	public void showResults(String textQuery, boolean allowPlay) {
+		showResults(textQuery, allowPlay, DEFAULT_QUERY_PAGE);
 	}
 
 	public void showResults(final String textQuery, final QueryPage pageQuery) {
+		showResults(textQuery, pageQuery);
+	}
+	
+	public void showResults(final String textQuery, boolean allowPlay, final QueryPage pageQuery) {
 
 		YouTubeManager youTubeManager = new YouTubeManager();
 
@@ -224,6 +232,10 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 	}
 
 	private void showResults(final String textQuery, final QueryPage pageQuery, final VideoFeed feed) {
+		showResults(textQuery, true, pageQuery, feed);
+	}
+	
+	private void showResults(final String textQuery, final boolean allowPlay, final QueryPage pageQuery, final VideoFeed feed) {
 		
 		if (feed == null || feed.getEntries() == null) {
 			return;
@@ -239,13 +251,13 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 		}
 		
 		container.clear();
-		container.add(prepareUI(searchResult));
+		container.add(prepareUI(searchResult, allowPlay));
 		YouTubePaginator youTubePaginator = constructPaginator();
 		youTubePaginator.addPagingHandler(new YouTubePaginator.PagingHandler<YouTubePaginator>() {
 			
 			@Override
 			public void onPage(PagingEvent<YouTubePaginator> event) {
-				showResults(textQuery, new QueryPage((event.getPageIndex() - 1) * pageQuery.getItemsPerPage() + 1, pageQuery.getItemsPerPage(), feed.getTotalResults()));
+				showResults(textQuery, allowPlay, new QueryPage((event.getPageIndex() - 1) * pageQuery.getItemsPerPage() + 1, pageQuery.getItemsPerPage(), feed.getTotalResults()));
 			}
 		});
 		
@@ -260,16 +272,18 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 		return youTubePaginator;
 	}
 		
-	private Label createTitle(final String title, final String videoId) {
+	private Label createTitle(final String title, final String videoId, boolean allowPlay) {
 		Label label = new Label(title);
 		label.setStyleName(TITLE_STYLE);
-		label.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				playVideo(title, videoId);
-			}
-		});
+		if (allowPlay) {
+			label.addClickHandler(new ClickHandler() {
+	
+				@Override
+				public void onClick(ClickEvent event) {
+					playVideo(title, videoId);
+				}
+			});
+		}
 		return label;
 	}
 
@@ -341,7 +355,7 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 		return new HorizontalPanel();
 	}
 	
-	protected FlowPanel prepareUI(Set<YouTubeSearchResult> youTubeSearchResults) {
+	protected FlowPanel prepareUI(Set<YouTubeSearchResult> youTubeSearchResults, boolean allowPlay) {
 		FlowPanel flowPanel = new FlowPanel();
 
 		for (YouTubeSearchResult youTubeSearchResult : youTubeSearchResults) {
@@ -353,7 +367,7 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 			videoPanel.add(img);
 
 			VerticalPanel descriptionPanel = new VerticalPanel();
-			descriptionPanel.add(createTitle(youTubeSearchResult.getTitle(), youTubeSearchResult.getVideoId()));
+			descriptionPanel.add(createTitle(youTubeSearchResult.getTitle(), youTubeSearchResult.getVideoId(), allowPlay));
 			descriptionPanel.add(createDescription(youTubeSearchResult.getDescription()));
 			HorizontalPanel horizontalPanel = new HorizontalPanel();
 

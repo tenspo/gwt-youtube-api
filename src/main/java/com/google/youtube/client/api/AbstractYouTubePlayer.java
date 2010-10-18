@@ -462,6 +462,7 @@ public abstract class AbstractYouTubePlayer extends FlashPlayer {
 			if (fs != null) {
 				setFullScreen(fs);
 			}
+			getElement().appendChild(embedElement);
 		}
 	}
 

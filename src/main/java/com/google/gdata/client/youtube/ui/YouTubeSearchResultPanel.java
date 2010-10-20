@@ -208,10 +208,10 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 	}
 
 	public void showResults(final String textQuery, final QueryPage pageQuery) {
-		showResults(textQuery, pageQuery);
+		showResults(textQuery, true, pageQuery);
 	}
 	
-	public void showResults(final String textQuery, boolean allowPlay, final QueryPage pageQuery) {
+	public void showResults(final String textQuery, final boolean allowPlay, final QueryPage pageQuery) {
 
 		YouTubeManager youTubeManager = new YouTubeManager();
 
@@ -224,17 +224,13 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 
 			@Override
 			public void onSuccess(VideoFeed feed) {
-				showResults(textQuery, new QueryPage(feed.getStartIndex(), feed.getItemsPerPage(), feed.getTotalResults()), feed);
+				showResults(textQuery, allowPlay, new QueryPage(feed.getStartIndex(), feed.getItemsPerPage(), feed.getTotalResults()), feed);
 			}
 		};
 
 		youTubeManager.retrieveVideo(textQuery, pageQuery, callback);
 	}
 
-	private void showResults(final String textQuery, final QueryPage pageQuery, final VideoFeed feed) {
-		showResults(textQuery, true, pageQuery, feed);
-	}
-	
 	private void showResults(final String textQuery, final boolean allowPlay, final QueryPage pageQuery, final VideoFeed feed) {
 		
 		if (feed == null || feed.getEntries() == null) {

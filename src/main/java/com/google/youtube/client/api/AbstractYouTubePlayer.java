@@ -453,7 +453,6 @@ public abstract class AbstractYouTubePlayer extends FlashPlayer {
 
 	public void embed() {
 		if (!embeded) {
-			
 			setUrl(getURL());
 
 			if (enablejsapi != null) {
@@ -462,7 +461,15 @@ public abstract class AbstractYouTubePlayer extends FlashPlayer {
 			if (fs != null) {
 				setFullScreen(fs);
 			}
-			getElement().appendChild(embedElement);
+			if (objectMode) {
+				objectElement.appendChild(embedElement);
+				getElement().appendChild(objectElement);
+			} else {
+				String outer = objectElement.getString();
+				String inner = embedElement.getString();
+				String result = outer.replace("</object>", "").replace("</OBJECT>", "") + inner + "</object>";
+				getElement().setInnerHTML(result);
+			}
 		}
 	}
 

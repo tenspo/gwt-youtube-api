@@ -3,16 +3,26 @@ package com.google.youtube.client.api;
 import com.google.gdata.data.Color;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.SimplePanel;
 
-public class FlashPlayer extends Widget {
+public class FlashPlayer extends SimplePanel {
 
+	protected Element objectElement;
 	protected Element embedElement;
 
+	/**
+	 * Set to true to use JavaScript for appending elements, or set to false to use Strings (for IE).
+	 */
+	protected boolean objectMode;
+	
 	public FlashPlayer() {
-		setElement(Document.get().createObjectElement());
+		this(false);
+	}
+	
+	public FlashPlayer(boolean objectMode) {
+		this.objectMode = objectMode;
+		objectElement = Document.get().createObjectElement();
 		embedElement = Document.get().createElement("embed");
-//		getElement().appendChild(embedElement);
 		embedElement.setAttribute("type", "application/x-shockwave-flash");
 	}
 
@@ -42,7 +52,7 @@ public class FlashPlayer extends Widget {
 		Element paramElement = Document.get().createElement("param");
 		paramElement.setAttribute("name", name);
 		paramElement.setAttribute("value", value);
-		getElement().appendChild(paramElement);
+		objectElement.appendChild(paramElement);
 	}
 
 	/**
@@ -81,7 +91,7 @@ public class FlashPlayer extends Widget {
 	 * be referenced using a scripting language.
 	 */
 	public void setId(String id) {
-		getElement().setAttribute("id", id);
+		objectElement.setAttribute("id", id);
 	}
 
 	/**
@@ -217,7 +227,7 @@ public class FlashPlayer extends Widget {
 	 * </p>
 	 */
 	public void setAlign(Align align) {
-		getElement().setAttribute("align", align.getName());
+		objectElement.setAttribute("align", align.getName());
 		setEmbedAttribute("align", align.getName());
 	}
 

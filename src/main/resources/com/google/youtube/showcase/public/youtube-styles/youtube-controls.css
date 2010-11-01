@@ -38,7 +38,7 @@
 }
 
 .youtube-volume-slider-panel {
-	background-image: url('../images/sound_slider_background.png');
+	background-image: url('../youtube-images/sound_slider_background.png');
 	background-repeat: repeat-x;
 	position: relative;
 	width: 29px;
@@ -53,7 +53,7 @@
 	height: 51px;
 	margin-left: 5px;
 	margin-top:4px;
-	background-image: url('../images/sound_slider_panel_background.png');
+	background-image: url('../youtube-images/sound_slider_panel_background.png');
 	background-repeat: repeat-y;
 	background-position: 7px 0px;
 }
@@ -71,7 +71,7 @@
 }
 
 .youtube-time-position-panel {
-	background-image: url('../images/time_background.png');
+	background-image: url('../youtube-images/time_background.png');
 	background-repeat: repeat-x;
 	border-left: 1px solid #0f0808;
 	border-top: 1px solid #b1b1b1;
@@ -81,7 +81,7 @@
 }
 
 .youtube-time-position-slider-panel {
-	background-image: url('../images/time_box_background.png');
+	background-image: url('../youtube-images/time_box_background.png');
 	background-repeat: repeat-x;
 	background-position: 0px 4px;
 	margin-left: 5px;

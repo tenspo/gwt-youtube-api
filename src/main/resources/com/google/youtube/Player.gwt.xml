@@ -1,5 +1,6 @@
 <module>
 	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.allen_sauer.gwt.dnd.gwt-dnd'/>
 	<inherits name="net.zschech.gwt.math.Math" />
 	<inherits name="com.google.gdata.YouTubeAPI" />
 	<inherits name="sk.seges.acris.Widgets" />

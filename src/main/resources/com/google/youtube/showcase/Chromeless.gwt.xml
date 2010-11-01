@@ -1,7 +1,6 @@
 <module>
 	<inherits name="com.google.youtube.Player" />
 	<inherits name='com.google.gwt.user.theme.standard.Standard'/>
-	<inherits name='com.allen_sauer.gwt.dnd.gwt-dnd'/>
 	
 	<stylesheet src="youtube-styles/youtube-gwt.css" />
 	<stylesheet src="youtube-styles/youtube-controls.css" />

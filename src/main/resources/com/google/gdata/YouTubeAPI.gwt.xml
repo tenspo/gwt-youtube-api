@@ -1,10 +1,11 @@
 <module>
 	<inherits name='sk.seges.acris.JSON' />
+	<inherits name='sk.seges.acris.Widgets' />
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name="com.google.gwt.json.JSON" /> 
+	<inherits name='com.google.youtube.Player' />
 	<inherits name="com.googlecode.gwtx.Java" />
 	<inherits name="org.gwttime.Time" />
-	<inherits name="net.zschech.gwt.math.Math" />
 	
 	<source path='client' />
 	<source path='data' />

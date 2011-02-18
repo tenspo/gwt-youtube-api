@@ -9,7 +9,7 @@
 
 	<properties>
 		<!-- Dependencies versions -->
-		<acris-os.version>1.1.0</acris-os.version>
+		<acris-os.version>1.1.1-SNAPSHOT</acris-os.version>
 		<uml-graph.version>4.6</uml-graph.version>
 		<gwtx.version>1.5.3</gwtx.version>
 		<gwt-time.version>1.0.0-SNAPSHOT</gwt-time.version>
@@ -44,6 +44,13 @@
 			org.eclipse.jdt.apt.genSrcDir=${jsr269.generated.dir}
 			org.eclipse.jdt.apt.reconcileEnabled=true
 		</apt.preferencies>
+		<jdt.preferencies>
+			eclipse.preferences.version=1
+			org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
+			org.eclipse.jdt.core.compiler.compliance=1.6
+			org.eclipse.jdt.core.compiler.processAnnotations=enabled
+			org.eclipse.jdt.core.compiler.source=1.6
+		</jdt.preferencies>
 		<umlgraph.output.directory>${basedir}/../wiki/API/</umlgraph.output.directory>
 		<jdk.version>1.6</jdk.version>
 	</properties>
@@ -167,27 +174,19 @@
 					<additionalConfig>
 						<file>
 							<name>.factorypath</name>
-							<content><![CDATA[
-							<factorypath>
-								<factorypathentry kind="VARJAR"
-									id="M2_REPO/sk/seges/acris/acris-json/${acris-os.version}/acris-json-${acris-os.version}.jar"
-									enabled="true" runInBatchMode="false" />
-								<factorypathentry kind="VARJAR"
-									id="M2_REPO/sk/seges/acris/acris-client-core/${acris-os.version}/acris-client-core-${acris-os.version}.jar"
-									enabled="true" runInBatchMode="false" />
-							</factorypath>]]>
+							<content><![CDATA[<factorypath>
+									<factorypathentry kind="VARJAR" id="M2_REPO/sk/seges/sesam/sesam-core/${sesam-os.version}/sesam-core-${sesam-os.version}.jar" enabled="true" runInBatchMode="false" />
+									<factorypathentry kind="VARJAR" id="M2_REPO/sk/seges/sesam/sesam-annotations-support/${sesam-os.version}/sesam-annotations-support-${sesam-os.version}.jar" enabled="true" runInBatchMode="false" />
+						        	<factorypathentry kind="VARJAR" id="M2_REPO/sk/seges/acris/acris-json/${acris-os.version}/acris-json-${acris-os.version}.jar" enabled="true" runInBatchMode="false" />
+							  	</factorypath>
+		  					]]>
 							</content>
 						</file>
 						<file>
-							<name>.settings/com.google.gdt.eclipse.core.prefs</name>
-							<content><![CDATA[
-								eclipse.preferences.version=1
-								jarsExcludedFromWebInfLib=
-								warSrcDir=target/${artifactId}-${version}
-								warSrcDirIsOutput=true
-								]]>
-							</content>
-						</file>
+                        	<name>.settings/org.eclipse.jdt.core.prefs</name>
+                            <content><![CDATA[${jdt.preferencies}]]>
+                            </content>
+                        </file>
 						<file>
 							<name>.settings/org.eclipse.jdt.apt.core.prefs</name>
 							<content><![CDATA[${apt.preferencies}]]>

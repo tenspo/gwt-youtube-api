@@ -16,7 +16,6 @@ public class FlashPlayer extends SimplePanel {
 	protected boolean objectMode;
 	
 	public FlashPlayer() {
-		this(false);
 	}
 	
 	public FlashPlayer(boolean objectMode) {
@@ -48,6 +47,13 @@ public class FlashPlayer extends SimplePanel {
 		embedElement.setAttribute(name, value);
 	}
 
+	protected void setEmbedParam(String name, String value) {
+		Element paramElement = Document.get().createElement("param");
+		paramElement.setAttribute("name", name);
+		paramElement.setAttribute("value", value);
+		embedElement.appendChild(paramElement);
+	}
+	
 	protected void setObjectAttribute(String name, String value) {
 		Element paramElement = Document.get().createElement("param");
 		paramElement.setAttribute("name", name);

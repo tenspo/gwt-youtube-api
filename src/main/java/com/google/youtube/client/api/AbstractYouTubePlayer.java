@@ -432,7 +432,7 @@ public abstract class AbstractYouTubePlayer extends FlashPlayer {
 	private String videoId;
 
 	public AbstractYouTubePlayer(String videoId) {
-		super();
+		super(false);
 		this.videoId = videoId;
 	}
 
@@ -449,10 +449,10 @@ public abstract class AbstractYouTubePlayer extends FlashPlayer {
 				(YouTubePlayerWrapper) embedElement.cast());
 	}
 
-	private boolean embeded = false;
+	private boolean embedded = false;
 
 	public void embed() {
-		if (!embeded) {
+		if (!embedded) {
 			setUrl(getURL());
 
 			if (enablejsapi != null) {

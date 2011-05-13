@@ -70,11 +70,11 @@
 			<name>YouTubeSnapshots</name>
 			<url>https://gwt-youtube-api.googlecode.com/svn/snapshots-repository</url>
 		</snapshotRepository>
-		<snapshotRepository>
+		<repository>
 			<id>YouTubeReleases</id>
 			<name>YouTubeReleases</name>
 			<url>https://gwt-youtube-api.googlecode.com/svn/releases-repository</url>
-		</snapshotRepository>
+		</repository>
 	</distributionManagement>
 
 	<scm>

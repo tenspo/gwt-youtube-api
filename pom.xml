@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.google</groupId>
 	<artifactId>gwt-youtube-api</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>GWT-youtube-api</name>
 
@@ -298,9 +298,9 @@
 	</reporting>
 
 	<scm>
-		<connection>scm:svn:http://gwt-youtube-api.googlecode.com/svn/tags/gwt-youtube-api-1.0.3</connection>
-		<developerConnection>scm:svn:https://gwt-youtube-api.googlecode.com/svn/tags/gwt-youtube-api-1.0.3</developerConnection>
-		<url>http://gwt-youtube-api.googlecode.com/svn/tags/gwt-youtube-api-1.0.3</url>
+		<connection>scm:svn:http://gwt-youtube-api.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://gwt-youtube-api.googlecode.com/svn/trunk</developerConnection>
+		<url>http://gwt-youtube-api.googlecode.com/svn/trunk</url>
 	</scm>
 
 	<dependencies>

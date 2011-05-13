@@ -63,13 +63,25 @@
 		<jdk.version>1.6</jdk.version>
 	</properties>
 
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>YouTubeSnapshots</id>
 			<name>YouTubeSnapshots</name>
 			<url>https://gwt-youtube-api.googlecode.com/svn/snapshots-repository</url>
 		</snapshotRepository>
+		<snapshotRepository>
+			<id>YouTubeReleases</id>
+			<name>YouTubeReleases</name>
+			<url>https://gwt-youtube-api.googlecode.com/svn/releases-repository</url>
+		</snapshotRepository>
 	</distributionManagement>
+
+	<scm>
+		<connection>scm:svn:http://gwt-youtube-api.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://gwt-youtube-api.googlecode.com/svn/trunk</developerConnection>
+		<url>http://gwt-youtube-api.googlecode.com/svn/trunk</url>
+	</scm>
 
 	<build>
 		<resources>
@@ -298,14 +310,7 @@
 		</plugins>
 	</reporting>
 
-	<scm>
-		<connection>scm:svn:http://gwt-youtube-api.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://gwt-youtube-api.googlecode.com/svn/trunk</developerConnection>
-		<url>http://gwt-youtube-api.googlecode.com/svn/trunk</url>
-	</scm>
-
 	<dependencies>
-
 		<!-- GWT dependencies -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>

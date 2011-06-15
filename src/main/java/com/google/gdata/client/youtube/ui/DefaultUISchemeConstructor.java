@@ -1,6 +1,6 @@
 package com.google.gdata.client.youtube.ui;
 
-import sk.seges.acris.widget.client.IconButton;
+import sk.seges.acris.widget.client.form.IconButton;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Button;

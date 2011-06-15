@@ -1,6 +1,6 @@
 package com.google.youtube.client.ui.controls.factory.youtube;
 
-import sk.seges.acris.widget.client.IconButton;
+import sk.seges.acris.widget.client.form.IconButton;
 
 import com.allen_sauer.gwt.dnd.client.PickupDragController;
 import com.google.gwt.core.client.GWT;

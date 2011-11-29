@@ -6,9 +6,15 @@
 	<packaging>jar</packaging>
 	<name>GWT-youtube-api</name>
 
+	<parent>
+		<groupId>sk.seges.acris</groupId>
+		<artifactId>acris-os-parent</artifactId>
+		<version>1.2.1-SNAPSHOT</version>
+	</parent> 
+	
 	<properties>
 		<!-- Dependencies versions -->
-		<acris-os.version>1.1.3-SNAPSHOT</acris-os.version>
+		<acris-os.version>1.2.1-SNAPSHOT</acris-os.version>
 
 		<uml-graph.version>4.6</uml-graph.version>
 		<gwtx.version>1.5.3</gwtx.version>
@@ -103,47 +109,6 @@
 					<compilerArgument>-proc:none</compilerArgument>
 				</configuration>
 			</plugin>
-			<!-- JSR-269 Annotation Processing -->
-			<plugin>
-				<groupId>org.bsc.maven</groupId>
-				<artifactId>maven-processor-plugin</artifactId>
-				<version>${maven-processor-plugin.version}</version>
-				<configuration>
-					<!-- source output directory -->
-					<outputDirectory>${jsr269.generated.dir}</outputDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<id>process</id>
-						<goals>
-							<goal>process</goal>
-						</goals>
-						<phase>generate-sources</phase>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>${build-helper-maven-plugin.version}</version>
-				<configuration>
-					<sources>
-						<source>${jsr269.generated.dir}</source>
-					</sources>
-				</configuration>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<compilerArguments>${compiler.arguments}</compilerArguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>${maven-resources-plugin.version}</version>
@@ -165,60 +130,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>${maven-eclipse-plugin.version}</version>
-				<configuration>
-					<excludes>
-						<exclude>com.google.gwt:gwt-dev</exclude>
-					</excludes>
-					<additionalBuildcommands>
-						<buildCommand>
-							<name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
-						</buildCommand>
-						<buildCommand>
-							<name>com.google.gdt.eclipse.core.webAppProjectValidator</name>
-						</buildCommand>
-					</additionalBuildcommands>
-
-					<additionalProjectnatures>
-						<projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
-						<projectnature>com.google.gdt.eclipse.core.webAppNature</projectnature>
-					</additionalProjectnatures>
-
-					<classpathContainers>
-						<classpathContainer>com.google.gwt.eclipse.core.GWT_CONTAINER</classpathContainer>
-						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
-					</classpathContainers>
-
-					<additionalConfig>
-						<file>
-							<name>.factorypath</name>
-							<content><![CDATA[<factorypath>
-									<factorypathentry kind="VARJAR" id="M2_REPO/sk/seges/sesam/sesam-core/${sesam-os.version}/sesam-core-${sesam-os.version}.jar" enabled="true" runInBatchMode="false" />
-									<factorypathentry kind="VARJAR" id="M2_REPO/sk/seges/sesam/sesam-annotations-support/${sesam-os.version}/sesam-annotations-support-${sesam-os.version}.jar" enabled="true" runInBatchMode="false" />
-						        	<factorypathentry kind="VARJAR" id="M2_REPO/sk/seges/acris/acris-json/${acris-os.version}/acris-json-${acris-os.version}.jar" enabled="true" runInBatchMode="false" />
-							  	</factorypath>
-		  					]]>
-							</content>
-						</file>
-						<file>
-                        	<name>.settings/org.eclipse.jdt.core.prefs</name>
-                            <content><![CDATA[${jdt.preferencies}]]>
-                            </content>
-                        </file>
-						<file>
-							<name>.settings/org.eclipse.jdt.apt.core.prefs</name>
-							<content><![CDATA[${apt.preferencies}]]>
-							</content>
-						</file>
-					</additionalConfig>
-
-					<buildOutputDirectory>target/${project.artifactId}-${project.version}/WEB-INF/classes</buildOutputDirectory>
-					<wtpversion>2.0</wtpversion>
-				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
@@ -310,6 +221,39 @@
 		</plugins>
 	</reporting>
 
+	<dependencyManagement>
+		<dependencies>
+			<!-- AcrIS dependency -->
+			<dependency>
+				<groupId>sk.seges.acris</groupId>
+				<artifactId>acris-client-core</artifactId>
+				<version>${acris-os.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>sk.seges.acris</groupId>
+				<artifactId>acris-json</artifactId>
+				<version>${acris-os.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>sk.seges.acris</groupId>
+				<artifactId>acris-json</artifactId>
+				<version>${acris-os.version}</version>
+				<classifier>sources</classifier>
+			</dependency>
+			<dependency>
+				<groupId>sk.seges.acris</groupId>
+				<artifactId>acris-widgets</artifactId>
+				<version>${acris-os.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>sk.seges.acris</groupId>
+				<artifactId>acris-widgets</artifactId>
+				<version>${acris-os.version}</version>
+				<classifier>sources</classifier>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
 		<!-- GWT dependencies -->
 		<dependency>
@@ -349,28 +293,23 @@
 		<dependency>
 			<groupId>sk.seges.acris</groupId>
 			<artifactId>acris-client-core</artifactId>
-			<version>${acris-os.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sk.seges.acris</groupId>
 			<artifactId>acris-json</artifactId>
-			<version>${acris-os.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sk.seges.acris</groupId>
 			<artifactId>acris-json</artifactId>
-			<version>${acris-os.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>sk.seges.acris</groupId>
 			<artifactId>acris-widgets</artifactId>
-			<version>${acris-os.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sk.seges.acris</groupId>
 			<artifactId>acris-widgets</artifactId>
-			<version>${acris-os.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 	</dependencies>

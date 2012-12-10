@@ -4,8 +4,6 @@
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name="com.google.gwt.json.JSON" /> 
 	<inherits name='com.google.youtube.Player' />
-	<inherits name="com.googlecode.gwtx.Java" />
-	<inherits name="org.gwttime.Time" />
 	
 	<source path='client' />
 	<source path='data' />

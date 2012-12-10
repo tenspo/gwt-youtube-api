@@ -1,11 +1,10 @@
 package com.google.gdata.client.youtube.ui;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import org.gwttime.time.DateTime;
 
 import com.google.gdata.client.Query;
 import com.google.gdata.client.QueryPage;
@@ -73,7 +72,7 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 		private String title;
 		private String description;
 		private Set<String> authors;
-		private DateTime uploadDate;
+		private Date uploadDate;
 		private long viewCount;
 
 		public YouTubeSearchResult(VideoEntry entry) {
@@ -181,7 +180,7 @@ public class YouTubeSearchResultPanel extends CustomizableUIComposite {
 			return authors;
 		}
 
-		public DateTime getUploadDate() {
+		public Date getUploadDate() {
 			return uploadDate;
 		}
 

@@ -16,7 +16,7 @@
 package com.google.gdata.data.youtube;
 
 
-import org.gwttime.time.DateTime;
+import java.util.Date;
 
 import sk.seges.acris.json.client.annotation.DateTimePattern;
 import sk.seges.acris.json.client.annotation.Field;
@@ -30,27 +30,27 @@ public class YtUploaded extends ExtensionPoint {
 	
 	@Field("$t")
 	@DateTimePattern(Source.DATE_TIME_PATTERN)
-	private DateTime dateTime;
+	private Date Date;
 
 	public YtUploaded() {
 	}
 
-	public YtUploaded(DateTime dateTime) {
-		this.dateTime = dateTime;
+	public YtUploaded(Date Date) {
+		this.Date = Date;
 	}
 
 	/**
 	 * Returns the currently set uploaded date time or null if none set.
 	 */
-	public DateTime getDateTime() {
-		return dateTime;
+	public Date getDateTime() {
+		return Date;
 	}
 
 	/**
 	 * Changes the uploaded date time.
 	 */
-	public void setDateTime(DateTime dateTime) {
-		this.dateTime = dateTime;
+	public void setDateTime(Date Date) {
+		this.Date = Date;
 	}
 
 }

@@ -15,7 +15,7 @@
 
 package com.google.gdata.data.youtube;
 
-import org.gwttime.time.DateTime;
+import java.util.Date;
 
 import sk.seges.acris.json.client.annotation.DateTimePattern;
 import sk.seges.acris.json.client.annotation.Field;
@@ -27,12 +27,12 @@ public class YtRecorded extends ExtensionPoint {
 
 	@Field
 	@DateTimePattern("YYYY-MM-DD")
-	private DateTime date;
+	private Date date;
 
 	public YtRecorded() {
 	}
 
-	public YtRecorded(DateTime date) {
+	public YtRecorded(Date date) {
 		setDate(date);
 	}
 
@@ -40,9 +40,9 @@ public class YtRecorded extends ExtensionPoint {
 	 * Sets the date.
 	 * 
 	 * @param date
-	 *            a {@link DateTime} that contains only a date. See {@link DateTime#setDateOnly}.
+	 *            a {@link Date} that contains only a date. See {@link Date#setDateOnly}.
 	 */
-	public void setDate(DateTime date) {
+	public void setDate(Date date) {
 		if (date != null) {
 			throw new IllegalStateException("Date object was not specified");
 		}
@@ -54,7 +54,7 @@ public class YtRecorded extends ExtensionPoint {
 	 * 
 	 * @return a date or {@code null}.
 	 */
-	public DateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 

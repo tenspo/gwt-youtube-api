@@ -2,10 +2,9 @@ package com.google.gdata.client;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.gwttime.time.DateTime;
 
 import com.google.gdata.data.ICategory;
 import com.google.gdata.util.common.base.CharEscapers;
@@ -82,16 +81,16 @@ public class Query {
 	private String author;
 
 	/** Minimum updated timestamp for matched entries. */
-	private DateTime updatedMin;
+	private Date updatedMin;
 
 	/** Maximum updated timestamp for matched entries. */
-	private DateTime updatedMax;
+	private Date updatedMax;
 
 	/** Minimum published timestamp for matched entries. */
-	private DateTime publishedMin;
+	private Date publishedMin;
 
 	/** Maximum published timestamp for matched entries. */
-	private DateTime publishedMax;
+	private Date publishedMax;
 
 	/**
 	 * The start index for query results. A value of {@link #UNDEFINED} indicates that no start index has been set.
@@ -361,7 +360,7 @@ public class Query {
 	 *            minimum updated timestamp for matched entries. A value of {@code null} disables minimum timestamp
 	 *            filtering.
 	 */
-	public void setUpdatedMin(DateTime updatedMin) {
+	public void setUpdatedMin(Date updatedMin) {
 		this.updatedMin = updatedMin;
 	}
 
@@ -371,7 +370,7 @@ public class Query {
 	 * 
 	 * @return minimum updated timestamp for matched entries. A value of {@code null} indicates no minimum timestamp.
 	 */
-	public DateTime getUpdatedMin() {
+	public Date getUpdatedMin() {
 		return this.updatedMin;
 	}
 
@@ -383,7 +382,7 @@ public class Query {
 	 *            maximum updated timestamp for matched entries. A value of {@code null} disables maximum timestamp
 	 *            filtering.
 	 */
-	public void setUpdatedMax(DateTime updatedMax) {
+	public void setUpdatedMax(Date updatedMax) {
 		this.updatedMax = updatedMax;
 	}
 
@@ -393,7 +392,7 @@ public class Query {
 	 * 
 	 * @return maximum updated timestamp for matched entries. A value of {@code null} indicates no maximum timestamp.
 	 */
-	public DateTime getUpdatedMax() {
+	public Date getUpdatedMax() {
 		return this.updatedMax;
 	}
 
@@ -405,7 +404,7 @@ public class Query {
 	 *            minimum published timestamp for matched entries. A value of {@code null} disables minimum timestamp
 	 *            filtering.
 	 */
-	public void setPublishedMin(DateTime publishedMin) {
+	public void setPublishedMin(Date publishedMin) {
 		this.publishedMin = publishedMin;
 	}
 
@@ -415,7 +414,7 @@ public class Query {
 	 * 
 	 * @return minimum published timestamp for matched entries. A value of {@code null} indicates no minimum timestamp.
 	 */
-	public DateTime getPublishedMin() {
+	public Date getPublishedMin() {
 		return this.publishedMin;
 	}
 
@@ -427,7 +426,7 @@ public class Query {
 	 *            maximum published timestamp for matched entries. A value of {@code null} disables maximum timestamp
 	 *            filtering.
 	 */
-	public void setPublishedMax(DateTime publishedMax) {
+	public void setPublishedMax(Date publishedMax) {
 		this.publishedMax = publishedMax;
 	}
 
@@ -437,7 +436,7 @@ public class Query {
 	 * 
 	 * @return maximum published timestamp for matched entries. A value of {@code null} indicates no maximum timestamp.
 	 */
-	public DateTime getPublishedMax() {
+	public Date getPublishedMax() {
 		return this.publishedMax;
 	}
 

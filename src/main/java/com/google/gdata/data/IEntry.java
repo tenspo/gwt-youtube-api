@@ -16,7 +16,9 @@
 
 package com.google.gdata.data;
 
-import org.gwttime.time.DateTime;
+import java.util.Date;
+
+import org.apache.james.mime4j.field.datetime.DateTime;
 
 /**
  * Shared interface for model and data BaseEntry to implement.
@@ -29,25 +31,24 @@ public interface IEntry extends IJSON {
    * Get a {@link DateTime} instance representing the last time this entry was
    * edited.  Represents the app:edited element.
    */
-  public DateTime getEdited();
+  public Date getEdited();
 
   /**
    * Set the last time this entry was edited using the app:edited element.
    */
-  public void setEdited(DateTime edited);
+  public void setEdited(Date edited);
 
   /**
    * Get a {@link DateTime} instance representing the time that this entry was
    * created.  Represents the atom:published element.
    */
-  public DateTime getPublished();
+  public Date getPublished();
 
   /**
    * Sets the date of publishing for this entry.  Used on the server to specify
    * when the entry was created.
    */
-  public void setPublished(DateTime published);
-
+  public void setPublished(Date published);
 
   /**
    * Returns {@code true} if the entry can be modified by a client.

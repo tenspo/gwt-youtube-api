@@ -1,9 +1,10 @@
 package com.google.gdata.data;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.gwttime.time.DateTime;
+import org.apache.james.mime4j.field.datetime.DateTime;
 
 import com.google.gdata.client.Service;
 
@@ -32,12 +33,12 @@ public interface IJSON {
 	   * Get a {@link DateTime} instance representing the last time this resource
 	   * was updated.  Represents the atom:updated element.
 	   */
-	  public DateTime getUpdated();
+	  public Date getUpdated();
 
 	  /**
 	   * Sets the last time this resource was updated.
 	   */
-	  public void setUpdated(DateTime updated);
+	  public void setUpdated(Date updated);
 
 	  /**
 	   * Returns a list of atom:link elements on this resource.  If there are no

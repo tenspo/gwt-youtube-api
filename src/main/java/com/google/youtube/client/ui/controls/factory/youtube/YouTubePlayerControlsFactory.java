@@ -2,7 +2,6 @@ package com.google.youtube.client.ui.controls.factory.youtube;
 
 import sk.seges.acris.widget.client.form.IconButton;
 
-import com.allen_sauer.gwt.dnd.client.PickupDragController;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
@@ -23,7 +22,6 @@ import com.google.youtube.client.ui.controls.api.ITimeControl;
 import com.google.youtube.client.ui.controls.api.IVolumeControl;
 import com.google.youtube.client.ui.controls.common.MouseAwareFlowPanel;
 import com.google.youtube.client.ui.controls.resources.YouTubeImageBundle;
-import com.google.youtube.client.ui.controls.youtube.PositionControl;
 import com.google.youtube.client.ui.controls.youtube.VolumeControl;
 
 /**
@@ -93,9 +91,10 @@ public class YouTubePlayerControlsFactory extends CustomizableUIComponent implem
 		dragPanel.setStyleName(styleName);
 		sliderPanel.add(dragPanel);
 		dragPanel.add(slider);
-		PickupDragController dragController = new PickupDragController(dragPanel, true);
-		dragController.setBehaviorConstrainedToBoundaryPanel(true);
-		dragController.makeDraggable(slider);
+//TODO make it dragable
+//		PickupDragController dragController = new PickupDragController(dragPanel, true);
+//		dragController.setBehaviorConstrainedToBoundaryPanel(true);
+//		dragController.makeDraggable(slider);
 		return sliderPanel;
 	}
 	

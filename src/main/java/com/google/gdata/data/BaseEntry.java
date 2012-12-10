@@ -1,13 +1,12 @@
 package com.google.gdata.data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import org.gwttime.time.DateTime;
 
 import sk.seges.acris.json.client.annotation.DateTimePattern;
 import sk.seges.acris.json.client.annotation.Field;
@@ -116,17 +115,17 @@ public abstract class BaseEntry extends ExtensionPoint implements IEntry {
 		/** Creation timestamp. Ignored on updates. */
 		@Field
 		@DateTimePattern(Source.DATE_TIME_PATTERN)
-		public DateTime published;
+		public Date published;
 
 		/** Last updated timestamp. */
 		@Field
 		@DateTimePattern(Source.DATE_TIME_PATTERN)
-		public DateTime updated;
+		public Date updated;
 
 		/** Last edit timestamp */
 		@Field
 		@DateTimePattern(Source.DATE_TIME_PATTERN)
-		public DateTime edited;
+		public Date edited;
 
 		/** Categories of entry. */
 		@Field("category")
@@ -302,27 +301,27 @@ public abstract class BaseEntry extends ExtensionPoint implements IEntry {
 		state.kind = v;
 	}
 
-	public DateTime getPublished() {
+	public Date getPublished() {
 		return state.published;
 	}
 
-	public void setPublished(DateTime v) {
+	public void setPublished(Date v) {
 		state.published = v;
 	}
 
-	public DateTime getUpdated() {
+	public Date getUpdated() {
 		return state.updated;
 	}
 
-	public void setUpdated(DateTime v) {
+	public void setUpdated(Date v) {
 		state.updated = v;
 	}
 
-	public DateTime getEdited() {
+	public Date getEdited() {
 		return state.edited;
 	}
 
-	public void setEdited(DateTime v) {
+	public void setEdited(Date v) {
 		state.edited = v;
 	}
 

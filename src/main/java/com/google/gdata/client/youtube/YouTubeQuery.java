@@ -7,8 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.google.gdata.client.GDataProtocol;
 import com.google.gdata.client.Query;
@@ -20,15 +18,15 @@ public class YouTubeQuery extends Query {
 	private static final String FORMAT = "format";
 	private static final String ORDERBY = "orderby";
 	private static final String LANGUAGE_RESTRICT = "lr";
-	private static final String RESTRICTION = "restriction";
+//	private static final String RESTRICTION = "restriction";
 	private static final String LOCATION = "location";
 	private static final String LOCATION_RADIUS = "location-radius";
 	private static final String SAFE_SEARCH = "safeSearch";
 	private static final String UPLOADER = "uploader";
 
-	private static final String COUNTRY_CODE_PATTERN = "[a-zA-Z]{2}";
-	private static final String IP_V4_PATTERN = "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}";
-	private static final String LOCATION_RADIUS_PATTERN = "\\d+(ft|mi|m|km)";
+//	private static final String COUNTRY_CODE_PATTERN = "[a-zA-Z]{2}";
+//	private static final String IP_V4_PATTERN = "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}";
+//	private static final String LOCATION_RADIUS_PATTERN = "\\d+(ft|mi|m|km)";
 
 	public static enum Time {
 		TODAY("today"), THIS_WEEK("this_week"), THIS_MONTH("this_month"), ALL_TIME("all_time");
@@ -380,27 +378,27 @@ public class YouTubeQuery extends Query {
 	 * @throws IllegalStateException
 	 *             if ordering is not set to relevance
 	 */
-	public String getOrderByRelevanceForLanguage() {
-		String stringValue = getCustomParameterValue(ORDERBY);
-
-		if (stringValue == null) {
-			// Default: order by relevance, no specific language
-			return null;
-		}
-
-		if (getOrderby() != OrderBy.RELEVANCE) {
-			throw new IllegalStateException("Not ordering by relevance. Please" + " check with getOrderBy() first");
-		}
-
-		Matcher matcher = Pattern.compile(RELEVANCE_LANGUAGE_PATTERN).matcher(stringValue);
-		if (matcher.find()) {
-			int start = matcher.start();
-			int end = matcher.end();
-
-			return stringValue.substring(start, end);
-		}
-		return null;
-	}
+//	public String getOrderByRelevanceForLanguage() {
+//		String stringValue = getCustomParameterValue(ORDERBY);
+//
+//		if (stringValue == null) {
+//			// Default: order by relevance, no specific language
+//			return null;
+//		}
+//
+//		if (getOrderby() != OrderBy.RELEVANCE) {
+//			throw new IllegalStateException("Not ordering by relevance. Please" + " check with getOrderBy() first");
+//		}
+//
+//		Matcher matcher = Pattern.compile(RELEVANCE_LANGUAGE_PATTERN).matcher(stringValue);
+//		if (matcher.find()) {
+//			int start = matcher.start();
+//			int end = matcher.end();
+//
+//			return stringValue.substring(start, end);
+//		}
+//		return null;
+//	}
 
 	/**
 	 * Gets the value of the {@code safeSearch} parameter.
@@ -467,12 +465,12 @@ public class YouTubeQuery extends Query {
 	 * @throws InvalidArgumentException
 	 *             if the given string is not a properly formatted location radius.
 	 */
-	public void setLocationRadius(String locationRadius) {
-		if (locationRadius != null && !Pattern.matches(LOCATION_RADIUS_PATTERN, locationRadius)) {
-			throw new IllegalArgumentException("Invalid location radius: " + locationRadius);
-		}
-		overwriteCustomParameter(LOCATION_RADIUS, locationRadius);
-	}
+//	public void setLocationRadius(String locationRadius) {
+//		if (locationRadius != null && !Pattern.matches(LOCATION_RADIUS_PATTERN, locationRadius)) {
+//			throw new IllegalArgumentException("Invalid location radius: " + locationRadius);
+//		}
+//		overwriteCustomParameter(LOCATION_RADIUS, locationRadius);
+//	}
 
 	/**
 	 * Sets the value of the {@code location-radius} parameter. Format is "100km". Valid units of measurement are "ft",
@@ -531,14 +529,14 @@ public class YouTubeQuery extends Query {
 	 * 
 	 * @see #getIpRestriction()
 	 */
-	public String getCountryRestriction() {
-		String restriction = getCustomParameterValue(RESTRICTION);
-		if (restriction == null) {
-			return null;
-		}
-
-		return Pattern.matches(COUNTRY_CODE_PATTERN, restriction) ? restriction : null;
-	}
+//	public String getCountryRestriction() {
+//		String restriction = getCustomParameterValue(RESTRICTION);
+//		if (restriction == null) {
+//			return null;
+//		}
+//
+//		return Pattern.matches(COUNTRY_CODE_PATTERN, restriction) ? restriction : null;
+//	}
 
 	/**
 	 * Sets the {@code restriction} parameter to a country code.
@@ -553,13 +551,13 @@ public class YouTubeQuery extends Query {
 	 * @throws IllegalArgumentException
 	 *             if the given country code is not a well formated two letter country code.
 	 */
-	public void setCountryRestriction(String countryCode) {
-		if (countryCode != null && !Pattern.matches(COUNTRY_CODE_PATTERN, countryCode)) {
-			throw new IllegalArgumentException("Invalid country code: " + countryCode);
-		}
-
-		overwriteCustomParameter(RESTRICTION, countryCode);
-	}
+//	public void setCountryRestriction(String countryCode) {
+//		if (countryCode != null && !Pattern.matches(COUNTRY_CODE_PATTERN, countryCode)) {
+//			throw new IllegalArgumentException("Invalid country code: " + countryCode);
+//		}
+//
+//		overwriteCustomParameter(RESTRICTION, countryCode);
+//	}
 
 	/**
 	 * Retrieves the IP restriction set on the current query, if any.
@@ -568,14 +566,14 @@ public class YouTubeQuery extends Query {
 	 * 
 	 * @see #getCountryRestriction()
 	 */
-	public String getIpRestriction() {
-		String restriction = getCustomParameterValue(RESTRICTION);
-		if (restriction == null) {
-			return null;
-		}
-
-		return Pattern.matches(IP_V4_PATTERN, restriction) ? restriction : null;
-	}
+//	public String getIpRestriction() {
+//		String restriction = getCustomParameterValue(RESTRICTION);
+//		if (restriction == null) {
+//			return null;
+//		}
+//
+//		return Pattern.matches(IP_V4_PATTERN, restriction) ? restriction : null;
+//	}
 
 	/**
 	 * Sets the {@code restriction} parameter to an IP v4 address.
@@ -591,13 +589,13 @@ public class YouTubeQuery extends Query {
 	 * @throws IllegalArgumentException
 	 *             if the given address is not a well formated IP v4 address.
 	 */
-	public void setIpRestriction(String ip) {
-		if (ip != null && !Pattern.matches(IP_V4_PATTERN, ip)) {
-			throw new IllegalArgumentException("Invalid IP v4 address: " + ip);
-		}
-
-		overwriteCustomParameter(RESTRICTION, ip);
-	}
+//	public void setIpRestriction(String ip) {
+//		if (ip != null && !Pattern.matches(IP_V4_PATTERN, ip)) {
+//			throw new IllegalArgumentException("Invalid IP v4 address: " + ip);
+//		}
+//
+//		overwriteCustomParameter(RESTRICTION, ip);
+//	}
 
 	String getCustomParameterValue(String parameterName) {
 		List<CustomParameter> customParams = getCustomParameters(parameterName);

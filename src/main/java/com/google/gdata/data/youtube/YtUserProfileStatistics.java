@@ -15,7 +15,7 @@
 
 package com.google.gdata.data.youtube;
 
-import org.gwttime.time.DateTime;
+import java.util.Date;
 
 import sk.seges.acris.json.client.annotation.DateTimePattern;
 import sk.seges.acris.json.client.annotation.Field;
@@ -40,7 +40,7 @@ public class YtUserProfileStatistics extends ExtensionPoint {
 	
 	@Field
 	@DateTimePattern(Source.DATE_TIME_PATTERN)
-	private DateTime lastWebAccess;
+	private Date lastWebAccess;
 
 	/**
 	 * Returns how many times this channel/profile has been viewed.
@@ -71,11 +71,11 @@ public class YtUserProfileStatistics extends ExtensionPoint {
 		subscriberCount = sc;
 	}
 
-	public DateTime getLastWebAccess() {
+	public Date getLastWebAccess() {
 		return lastWebAccess;
 	}
 
-	public void setLastWebAccess(DateTime lastWebAccess) {
+	public void setLastWebAccess(Date lastWebAccess) {
 		this.lastWebAccess = lastWebAccess;
 	}
 }

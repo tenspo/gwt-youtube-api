@@ -15,7 +15,7 @@
 
 package com.google.gdata.data.media;
 
-import org.gwttime.time.DateTime;
+import java.util.Date;
 
 /**
  * The MediaSource interface provides a model for accessing media content sent by the GData client or returned by a
@@ -58,7 +58,7 @@ public interface MediaSource {
 	/**
 	 * Returns the last modification time of the media content or {@code null} if unknown.
 	 */
-	public DateTime getLastModified();
+	public Date getLastModified();
 
 	/**
 	 * Returns the entity tag (etag) value associated with the media content or {@code null} if unknown.

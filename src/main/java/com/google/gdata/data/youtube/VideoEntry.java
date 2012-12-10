@@ -15,9 +15,8 @@
 
 package com.google.gdata.data.youtube;
 
+import java.util.Date;
 import java.util.List;
-
-import org.gwttime.time.DateTime;
 
 import sk.seges.acris.json.client.annotation.JsonObject;
 import sk.seges.acris.json.client.extension.ExtensionProfile;
@@ -121,7 +120,7 @@ public class VideoEntry extends MediaEntry implements IEntry {
 	  }
 
 	  /** Sets the value of the yt:recorded tag. */
-	  public void setRecorded(DateTime date) {
+	  public void setRecorded(Date date) {
 	    if (date == null) {
 	      removeExtension(YtRecorded.class);
 	    } else {
@@ -130,7 +129,7 @@ public class VideoEntry extends MediaEntry implements IEntry {
 	  }
 
 	  /** Gets the value of the yt:recorded tag. */
-	  public DateTime getRecorded() {
+	  public Date getRecorded() {
 	    YtRecorded recorded = getExtension(YtRecorded.class);
 	    return recorded == null ? null : recorded.getDate();
 	  }

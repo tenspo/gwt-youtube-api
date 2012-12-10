@@ -1,13 +1,12 @@
 package com.google.gdata.data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import org.gwttime.time.DateTime;
 
 import sk.seges.acris.json.client.annotation.DateTimePattern;
 import sk.seges.acris.json.client.annotation.Field;
@@ -28,7 +27,7 @@ public class Source extends ExtensionPoint {
 		/** Last updated timestamp. */
 		@Field
 		@DateTimePattern(Source.DATE_TIME_PATTERN)
-		public DateTime updated;
+		public Date updated;
 
 		/** Categories. */
 		@Field("category")
@@ -100,11 +99,11 @@ public class Source extends ExtensionPoint {
 		srcState.id = v;
 	}
 
-	public DateTime getUpdated() {
+	public Date getUpdated() {
 		return srcState.updated;
 	}
 
-	public void setUpdated(DateTime v) {
+	public void setUpdated(Date v) {
 		srcState.updated = v;
 	}
 

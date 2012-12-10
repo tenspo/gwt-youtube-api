@@ -17,11 +17,13 @@
 package com.google.gdata.data.youtube;
 
 import java.util.AbstractList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.gwttime.time.DateTime;
+import sk.seges.acris.json.client.annotation.JsonObject;
+import sk.seges.acris.json.client.extension.ExtensionProfile;
 
 import com.google.gdata.data.media.mediarss.MediaCategory;
 import com.google.gdata.data.media.mediarss.MediaContent;
@@ -35,9 +37,6 @@ import com.google.gdata.data.media.mediarss.MediaRestriction;
 import com.google.gdata.data.media.mediarss.MediaRssNamespace;
 import com.google.gdata.data.media.mediarss.MediaThumbnail;
 import com.google.gdata.data.media.mediarss.MediaTitle;
-
-import sk.seges.acris.json.client.annotation.JsonObject;
-import sk.seges.acris.json.client.extension.ExtensionProfile;
 
 @JsonObject(group=MediaRssNamespace.PREFIX, value="group")
 public class YouTubeMediaGroup extends MediaGroup {
@@ -89,7 +88,7 @@ public class YouTubeMediaGroup extends MediaGroup {
    * 
    * @since 2.0
    */
-  public DateTime getUploaded() {
+  public Date getUploaded() {
     YtUploaded uploadTime = getExtension(YtUploaded.class);
     return uploadTime != null ? uploadTime.getDateTime() : null;
   }
@@ -99,11 +98,11 @@ public class YouTubeMediaGroup extends MediaGroup {
    *
    * @since 2.0
    */
-  public void setUploaded(DateTime dateTime) {
-    if (dateTime == null) {
+  public void setUploaded(Date Date) {
+    if (Date == null) {
       removeExtension(YtUploaded.class);
     } else {
-      setExtension(new YtUploaded(dateTime));
+      setExtension(new YtUploaded(Date));
     }
   }
 

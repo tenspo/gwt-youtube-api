@@ -251,7 +251,7 @@
 				<groupId>sk.seges.acris</groupId>
 				<artifactId>acris-json-processor</artifactId>
 				<version>${acris-os.version}</version>
-				<scope>provded</scope>
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -301,7 +301,7 @@
 		<dependency>
 			<groupId>sk.seges.acris</groupId>
 			<artifactId>acris-json-processor</artifactId>
-			<scope>provded</scope>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
